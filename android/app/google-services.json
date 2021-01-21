@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "512862635913",
+    "project_id": "bell-delivery-hub",
+    "storage_bucket": "bell-delivery-hub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512862635913:android:96bc96d9d088cf8068c358",
+        "android_client_info": {
+          "package_name": "com.bell_delivery_hub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512862635913-eu6hupqiqhvt8suuhe81jtl5c6e9knj3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjcASj4CboklnUw9zOKMW20WgFMgUOUdU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512862635913-eu6hupqiqhvt8suuhe81jtl5c6e9knj3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
