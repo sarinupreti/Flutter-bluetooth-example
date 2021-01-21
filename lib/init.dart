@@ -1,4 +1,6 @@
 import 'package:bell_delivery_hub/authentication_bloc/authentication_bloc.dart';
+import 'package:bell_delivery_hub/authentication_bloc/authentication_event.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +19,7 @@ class AppInit {
     await HiveSetup.initHive;
     await _externalSetup();
     await inject<ThemeCubit>().fetchTheme();
-    inject<AuthenticationBloc>().add(AuthenticationEvent.isSignedIn());
+    inject<AuthenticationBloc>().add(IsLoggedIn());
   }
 
   /// Startup initialization

@@ -1,10 +1,9 @@
-import 'package:bell_delivery_hub/authentication_bloc/authentication_bloc.dart';
 import 'package:bell_delivery_hub/components/Button.dart';
-import 'package:bell_delivery_hub/components/permissions/permission_checker.dart';
 import 'package:bell_delivery_hub/globals/throttle.dart';
-import 'package:bell_delivery_hub/theme/app_icons.dart';
+import 'package:bell_delivery_hub/login_bloc/login_event.dart';
 import 'package:bell_delivery_hub/utils/dependency_injection.dart';
 import 'package:bell_delivery_hub/utils/theme.dart';
+import 'package:clippy_flutter/clippy_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +11,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:bell_delivery_hub/extensions/context_extension.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
+import 'authentication_bloc/authentication_bloc.dart';
+import 'package:bell_delivery_hub/authentication_bloc/authentication_state.dart';
+
+import 'login_bloc/login_bloc.dart';
 
 class ConnectStoreScreen extends StatefulWidget {
   final bool fromManageWebsite;
@@ -27,15 +30,16 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController websiteUrlController = TextEditingController(text: "");
-  TextEditingController consumerKeyController = TextEditingController(text: "");
-  TextEditingController consumerSecretController =
-      TextEditingController(text: "");
+  TextEditingController consumerKeyController = TextEditingController(
+      text: "ck_0233d338cf92b9ec840d1664d46621d76d8dc243");
+  TextEditingController consumerSecretController = TextEditingController(
+      text: "cs_ff69fc654869452f0a9738a2eed2d9cc7ca78d7a");
 
   FocusNode websiteUrlFocusNode = FocusNode();
   FocusNode consumerKeyFocusNode = FocusNode();
   FocusNode consumerSecretFocusNode = FocusNode();
 
-  bool switchValue = false;
+  bool switchValue = true;
   bool passwordVisible = false;
 
   final String https = 'https://';
@@ -87,49 +91,48 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
               return SingleChildScrollView(
                   child: Container(
                 width: MediaQuery.of(context).size.width,
-                color: context.theme.surface,
+                decoration: BoxDecoration(color: context.theme.background
+                    // image: DecorationImage(
+                    //     alignment: Alignment.topCenter,
+                    //     image: AssetImage(
+                    //       "assets/images/login.png",
+                    //     ))
+                    ),
                 child: Form(
                   key: _formKey,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      50.verticalSpace,
-                      widget.fromManageWebsite
-                          ? GestureDetector(
-                              onTap: () => Navigator.pop(context),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: CircleAvatar(
-                                  backgroundColor: context.theme.themeType
-                                      ? context.theme.corePalatte.greyColor
-                                          .withOpacity(0.4)
-                                      : Colors.grey[200],
-                                  child: Icon(
-                                    Icons.arrow_back,
-                                    color: Colors.grey[400],
-                                  ),
-                                ),
-                              ),
-                            )
-                          : SizedBox(),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            top: widget.fromManageWebsite
-                                ? screenHeight / 20.flexibleFontSize
-                                : screenHeight / 8.flexibleFontSize,
-                            left: 20,
-                            right: 20),
-                        child: Center(
-                            child: context.theme.themeType
-                                ? Image.asset("assets/images/connect_dark.png")
-                                : Image.asset(
-                                    "assets/images/connect_light.png")),
+                      Stack(
+                        children: [
+                          Arc(
+                              arcType: ArcType.CONVEX,
+                              edge: Edge.BOTTOM,
+                              height: 100,
+                              child: Container(
+                                height: 250,
+                                width: screenWidth,
+                                decoration: BoxDecoration(
+                                    color: AppColors.primaryColor,
+                                    image: DecorationImage(
+                                        alignment: Alignment.topCenter,
+                                        image: AssetImage(
+                                          "assets/images/login.png",
+                                        ))),
+                              )),
+                          Positioned(
+                              bottom: -20,
+                              left: 0,
+                              right: 0,
+                              child: CircleAvatar(
+                                minRadius: 50,
+                              )),
+                        ],
                       ),
-                      30.verticalSpace,
+                      50.verticalSpace,
                       Center(
-                        child: Text("Let’s connect your WooCommerce store.",
+                        child: Text("Welcome to BelaOryx.",
                             textAlign: TextAlign.center,
                             style: Theme.of(context)
                                 .textTheme
@@ -137,16 +140,10 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
                                 .copyWith(
                                     color: context.theme.textColor,
                                     fontSize: 25.flexibleFontSize,
-                                    fontWeight: FontWeight.w600)),
+                                    fontWeight: FontWeight.w500)),
                       ),
                       30.verticalSpace,
-                      networkSwitch(screenWidth),
-                      20.verticalSpace,
-                      // name(),
-                      // 20.verticalSpace,
-                      // email(),
-                      // 20.verticalSpace,
-                      websiteUrl(),
+                      // websiteUrl(),
                       20.verticalSpace,
                       consumerKey(),
                       20.verticalSpace,
@@ -201,44 +198,21 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
   connectButton(AuthenticationState state) {
     final _throttle = Throttling(duration: Duration(seconds: 2));
 
-    websiteUrlController.addListener(() {
-      if (websiteUrlController.text.startsWith("https://")) {
-        final value = websiteUrlController.text.replaceAll("https://", "");
-
-        websiteUrlController.clear();
-
-        setState(() {
-          websiteUrlController.text = value;
-        });
-      }
-    });
-
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Hero(
         tag: "home",
         child: Button(
-          isLoading: state.isLoading,
-          message: "Connect",
+          // isLoading: state.isLoading,
+          message: "Login",
           style: AppTextTheme.normal15Text,
           onPressed: () async {
             if (_formKey.currentState.validate()) {
-              final websiteValidatedUrl = websiteUrlController.text
-                          .substring(websiteUrlController.text.length - 1) ==
-                      "/"
-                  ? websiteUrlController.text
-                  : websiteUrlController.text + "/";
-
-              _throttle.throttle(() => inject<AuthenticationBloc>().add(
-                    AuthenticationEvent.connectAWebsite(
-                      // name: nameController.text,
-                      // email: emailController.text,
-                      websiteUrl: https + websiteValidatedUrl,
+              _throttle.throttle(() => inject<LoginBloc>().add(
+                    LoginInWithEmailButtonPressed(
+                      websiteUrl: "https://demo.swipecomm.com/",
                       consumerKey: consumerKeyController.text,
                       consumerSecret: consumerSecretController.text,
-                      isLegacy: switchValue,
-                      isFromManageWebsite: widget.fromManageWebsite,
-                      context: context,
                     ),
                   ));
             }
@@ -246,144 +220,6 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
             // _showCupertinoAlert();
           },
         ),
-      ),
-    );
-  }
-
-  networkSwitch(double width) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Text("Legacy login",
-                      style: Theme.of(context).textTheme.subtitle1.copyWith(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.flexibleFontSize)),
-                  5.horizontalSpace,
-                  Icon(
-                    Icons.info,
-                    color: context.theme.corePalatte.greyColor,
-                  ),
-                ],
-              ),
-              4.verticalSpace,
-              SizedBox(
-                width: width / 1.5,
-                child: Text(
-                    "Enable this only when you have  WordPress version below 5.5",
-                    style: Theme.of(context).textTheme.subtitle1.copyWith(
-                        fontWeight: FontWeight.normal,
-                        color: context.theme.corePalatte.greyColor,
-                        fontSize: 14.flexibleFontSize)),
-              ),
-            ],
-          ),
-          Switch.adaptive(
-            value: switchValue,
-            onChanged: (value) {
-              setState(() {
-                switchValue = !switchValue;
-              });
-            },
-            activeColor: context.theme.corePalatte.primaryColor,
-          )
-        ],
-      ),
-    );
-  }
-
-  websiteUrl() {
-    final urlPattern =
-        r'^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("Website URL",
-              style: Theme.of(context).textTheme.subtitle1.copyWith(
-                  fontWeight: FontWeight.w500, fontSize: 14.flexibleFontSize)),
-          4.verticalSpace,
-          Text(
-            "Enter your website URL",
-            style: Theme.of(context).textTheme.subtitle1.copyWith(
-                fontSize: 13.flexibleFontSize,
-                color: AppColors.greyColor,
-                fontWeight: FontWeight.normal),
-          ),
-          SizedBox(
-            height: 6,
-          ),
-          TextFormField(
-            controller: websiteUrlController,
-            focusNode: websiteUrlFocusNode,
-            style: Theme.of(context).textTheme.subtitle1.copyWith(
-                fontWeight: FontWeight.normal, fontSize: 15.flexibleFontSize),
-            validator: (String value) {
-              if (value.isEmpty) {
-                return 'website url cannot be empty.';
-              } else if (RegExp(urlPattern, caseSensitive: false)
-                      .firstMatch(https + value) ==
-                  null) {
-                return "Invalid url. ";
-              } else
-                return null;
-            },
-            onFieldSubmitted: (value) {
-              websiteUrlFocusNode.unfocus();
-              FocusScope.of(context).requestFocus(consumerKeyFocusNode);
-            },
-            textInputAction: TextInputAction.next,
-            inputFormatters: [FilteringTextInputFormatter.deny(" ")],
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: InputDecoration(
-              prefixText: websiteUrlController.text.isNotEmpty
-                  ? https
-                  : websiteUrlController.text.isEmpty && !hasHint
-                      ? https
-                      : "",
-              prefixStyle: Theme.of(context).textTheme.subtitle2.copyWith(
-                  color: websiteUrlController.text.isEmpty && hasHint
-                      ? context.theme.corePalatte.greyColor
-                      : context.theme.corePalatte.seaGreenColor),
-              prefixIcon: Padding(
-                padding: const EdgeInsets.only(left: 10, bottom: 5),
-                child: Icon(Icons.lock,
-                    size: 18.flexibleFontSize,
-                    color: websiteUrlController.text.isEmpty && hasHint
-                        ? context.theme.corePalatte.greyColor
-                        : context.theme.corePalatte.seaGreenColor),
-              ),
-              prefixIconConstraints: BoxConstraints(minWidth: 0, minHeight: 0),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.primaryColor)),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      width: 2, color: AppColors.primaryColorAccent)),
-              focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.primaryColor)),
-              hintText: websiteUrlController.text.isEmpty && !hasHint
-                  ? "example.com"
-                  : !hasHint
-                      ? "example.com"
-                      : "https://example.com",
-              hintStyle: Theme.of(context).textTheme.subtitle2.copyWith(
-                  color: websiteUrlController.text.isNotEmpty && hasHint
-                      ? context.theme.corePalatte.seaGreenColor
-                      : AppColors.greyColor),
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -396,17 +232,12 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(!switchValue ? "Username" : "Consumer Key",
                   style: Theme.of(context).textTheme.subtitle1.copyWith(
                       fontWeight: FontWeight.w500,
                       fontSize: 14.flexibleFontSize)),
-              Text(
-                "Where to find?",
-                style: AppTextTheme.normal12Text
-                    .copyWith(color: AppColors.primaryColor),
-              ),
             ],
           ),
           6.verticalSpace,
@@ -434,17 +265,9 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
             textInputAction: TextInputAction.next,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: InputDecoration(
-              suffixIcon: !switchValue
-                  ? SizedBox.shrink()
-                  : IconButton(
-                      onPressed: () async {
-                        onQrScannerPressed(context);
-                      },
-                      icon: Icon(
-                        AppIcons.scan,
-                        color: AppColors.primaryColor,
-                      ),
-                    ),
+              hintText: 'Enter consumer Key',
+              hintStyle: AppTextTheme.normal15Text
+                  .copyWith(color: AppColors.greyColor),
               disabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: context.theme.corePalatte.greyColor,
@@ -458,11 +281,6 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
                       width: 2, color: AppColors.primaryColorAccent)),
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: AppColors.primaryColor)),
-              hintText: !switchValue
-                  ? "Enter your WordPress username"
-                  : 'Type or scan your consumer Key',
-              hintStyle: AppTextTheme.normal15Text
-                  .copyWith(color: AppColors.greyColor),
             ),
           ),
         ],
@@ -478,17 +296,12 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(!switchValue ? "Application Password" : "Consumer Secret",
                   style: Theme.of(context).textTheme.subtitle1.copyWith(
                       fontWeight: FontWeight.w500,
                       fontSize: 14.flexibleFontSize)),
-              Text(
-                "Where to find?",
-                style: AppTextTheme.normal12Text
-                    .copyWith(color: AppColors.primaryColor),
-              ),
             ],
           ),
           SizedBox(
@@ -523,30 +336,6 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             obscureText: switchValue ? false : !passwordVisible,
             decoration: InputDecoration(
-              suffixIcon: !switchValue
-                  ? IconButton(
-                      icon: Icon(
-                        passwordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: context.theme.corePalatte.primaryColor,
-                        size: 20.flexibleFontSize,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          passwordVisible = !passwordVisible;
-                        });
-                      },
-                    )
-                  : IconButton(
-                      onPressed: () async {
-                        onQrScannerPressed(context);
-                      },
-                      icon: Icon(
-                        Icons.scanner,
-                        color: AppColors.primaryColor,
-                      ),
-                    ),
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: AppColors.primaryColor)),
               enabledBorder: OutlineInputBorder(
@@ -554,9 +343,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
                       width: 2, color: AppColors.primaryColorAccent)),
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: AppColors.primaryColor)),
-              hintText: !switchValue
-                  ? "Enter your application password"
-                  : 'Type or scan your consumer Key',
+              hintText: 'Type or scan your consumer Key',
               hintStyle: AppTextTheme.normal15Text
                   .copyWith(color: AppColors.greyColor),
             ),
@@ -564,37 +351,5 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
         ],
       ),
     );
-  }
-
-  onQrScannerPressed(BuildContext context) async {
-    await SystemChannels.textInput.invokeMethod('TextInput.hide');
-
-    final bool hasCameraPermission =
-        await PermissionChecker.hasCameraPermission(context);
-
-    if (hasCameraPermission) {
-      // final result = await ExtendedNavigator.of(context).push(
-      //   Routes.qRScannerPage,
-      // );
-
-      // if (result != null) {
-      //   final qrData = result as String;
-
-      //   if (qrData.contains("ck_") && qrData.contains("cs_")) {
-      //     final List<String> keys = qrData.split("|");
-      //     setState(() {
-      //       consumerKeyController.text = keys[0];
-      //       consumerSecretController.text = keys[1];
-      //     });
-      //   } else {
-      //     context.showStatusBar(
-      //         icon: Icon(
-      //           Icons.error,
-      //           color: context.theme.error,
-      //         ),
-      //         message: "The scanned qr code does not matches the format.");
-      //   }
-      // }
-    }
   }
 }

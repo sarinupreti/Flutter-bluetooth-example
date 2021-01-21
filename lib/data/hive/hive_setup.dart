@@ -1,4 +1,17 @@
 import 'package:bell_delivery_hub/data/hive/hive_const.dart';
+import 'package:bell_delivery_hub/modal/products/product_category.dart';
+import 'package:bell_delivery_hub/modal/products/product_category_collection.dart';
+import 'package:bell_delivery_hub/modal/products/product_category_image.dart';
+import 'package:bell_delivery_hub/modal/products/product_category_self.dart';
+import 'package:bell_delivery_hub/modal/products/product_default_attribute.dart';
+import 'package:bell_delivery_hub/modal/products/product_dimension.dart';
+import 'package:bell_delivery_hub/modal/products/product_download.dart';
+import 'package:bell_delivery_hub/modal/products/product_image.dart';
+import 'package:bell_delivery_hub/modal/products/product_item_attribute.dart';
+import 'package:bell_delivery_hub/modal/products/product_item_tag.dart';
+import 'package:bell_delivery_hub/modal/products/product_meta_data.dart';
+import 'package:bell_delivery_hub/modal/products/products.dart';
+import 'package:bell_delivery_hub/modal/temp_login_creds.dart';
 import 'package:bell_delivery_hub/modal/user.dart';
 import 'package:bell_delivery_hub/modal/website_data.dart';
 import 'package:hive/hive.dart';
@@ -23,42 +36,42 @@ class HiveSetup {
 
     Hive.init(appDocumentDir.path);
 
-    // Hive.registerAdapter(UserAdapter());
-    // Hive.registerAdapter(WebsiteDataAdapter());
-    // Hive.registerAdapter(TempLoginCredsAdapter());
-    // Hive.registerAdapter(ProductsAdapter());
-    // Hive.registerAdapter(ProductDownloadAdapter());
-    // Hive.registerAdapter(ProductDimensionAdapter());
-    // Hive.registerAdapter(ProductCategoryAdapter());
-    // Hive.registerAdapter(ProductItemTagAdapter());
-    // Hive.registerAdapter(ProductImageAdapter());
-    // Hive.registerAdapter(ProductItemAttributeAdapter());
-    // Hive.registerAdapter(ProductDefaultAttributeAdapter());
-    // Hive.registerAdapter(MetaDataAdapter());
-    // Hive.registerAdapter(ProductCategorySelfAdapter());
-    // Hive.registerAdapter(ProductCategoryCollectionAdapter());
-    // Hive.registerAdapter(ProductCategoryImageAdapter());
+    Hive.registerAdapter(UserAdapter());
+    Hive.registerAdapter(WebsiteDataAdapter());
+    Hive.registerAdapter(TempLoginCredsAdapter());
+    Hive.registerAdapter(ProductsAdapter());
+    Hive.registerAdapter(ProductDownloadAdapter());
+    Hive.registerAdapter(ProductDimensionAdapter());
+    Hive.registerAdapter(ProductCategoryAdapter());
+    Hive.registerAdapter(ProductItemTagAdapter());
+    Hive.registerAdapter(ProductImageAdapter());
+    Hive.registerAdapter(ProductItemAttributeAdapter());
+    Hive.registerAdapter(ProductDefaultAttributeAdapter());
+    Hive.registerAdapter(MetaDataAdapter());
+    Hive.registerAdapter(ProductCategorySelfAdapter());
+    Hive.registerAdapter(ProductCategoryCollectionAdapter());
+    Hive.registerAdapter(ProductCategoryImageAdapter());
     //
     //
   }
 }
 
 Future<void> clearHive() async {
-  // await Hive.deleteBoxFromDisk(HIVE_AUTH_BOX);
-  // await Hive.deleteBoxFromDisk(HIVE_USER_BOX);
-  // await Hive.deleteBoxFromDisk(HIVE_TEMP_CREDS);
-  // await Hive.deleteBoxFromDisk(HIVE_PRODUCTS);
-  // await Hive.deleteBoxFromDisk(HIVE_PRODUCT_DOWNLOAD);
-  // await Hive.deleteBoxFromDisk(HIVE_PRODUCT_DIMENSION);
-  // await Hive.deleteBoxFromDisk(HIVE_PRODUCT_CATEGORY);
-  // await Hive.deleteBoxFromDisk(HIVE_PRODUCT_IMAGE);
-  // await Hive.deleteBoxFromDisk(HIVE_PRODUCT_ITEM_ATTRIBUTE);
-  // await Hive.deleteBoxFromDisk(HIVE_PRODUCT_DEFAULT_ATTRIBUTE);
-  // await Hive.deleteBoxFromDisk(HIVE_META_DATA);
-  // await Hive.deleteBoxFromDisk(HIVE_PRODUCT_CATEGORY_IMAGE);
-  // await Hive.deleteBoxFromDisk(HIVE_PRODUCT_CATEGORY_LINKS);
-  // await Hive.deleteBoxFromDisk(HIVE_CATEGORY_SELF);
-  // await Hive.deleteBoxFromDisk(HIVE_CATEGORY_COLLECTIONS);
+  await Hive.deleteBoxFromDisk(HIVE_AUTH_BOX);
+  await Hive.deleteBoxFromDisk(HIVE_USER_BOX);
+  await Hive.deleteBoxFromDisk(HIVE_TEMP_CREDS);
+  await Hive.deleteBoxFromDisk(HIVE_PRODUCTS);
+  await Hive.deleteBoxFromDisk(HIVE_PRODUCT_DOWNLOAD);
+  await Hive.deleteBoxFromDisk(HIVE_PRODUCT_DIMENSION);
+  await Hive.deleteBoxFromDisk(HIVE_PRODUCT_CATEGORY);
+  await Hive.deleteBoxFromDisk(HIVE_PRODUCT_IMAGE);
+  await Hive.deleteBoxFromDisk(HIVE_PRODUCT_ITEM_ATTRIBUTE);
+  await Hive.deleteBoxFromDisk(HIVE_PRODUCT_DEFAULT_ATTRIBUTE);
+  await Hive.deleteBoxFromDisk(HIVE_META_DATA);
+  await Hive.deleteBoxFromDisk(HIVE_PRODUCT_CATEGORY_IMAGE);
+  await Hive.deleteBoxFromDisk(HIVE_PRODUCT_CATEGORY_LINKS);
+  await Hive.deleteBoxFromDisk(HIVE_CATEGORY_SELF);
+  await Hive.deleteBoxFromDisk(HIVE_CATEGORY_COLLECTIONS);
 }
 
 Future<void> clearHiveBox(String boxName) async {

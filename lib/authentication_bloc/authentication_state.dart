@@ -1,34 +1,34 @@
-part of 'authentication_bloc.dart';
+import 'package:bell_delivery_hub/modal/website_data.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
-enum AuthenticationStatus {
-  fetching,
-  authenticated,
-  unauthenticated,
-  connectedWebsites,
-  isFirstTime,
-  isEmailVerified,
-  selectADefaultWebsite,
-  isLogin,
-  isSignUp,
-  isResetPassword,
-  passwordChanged,
-  manageWebsite
+abstract class AuthenticationState extends Equatable {
+  const AuthenticationState();
+
+  @override
+  List<Object> get props => [];
 }
 
-@freezed
-abstract class AuthenticationState with _$AuthenticationState {
-  const factory AuthenticationState({
-    AuthenticationStatus status,
-    User auth,
-    bool isLoading,
-    WebsiteData currentWebsiteData,
-    bool isFirstTime,
-    int currentDateTime,
-    String errorMessageSignUp,
-    String errorMessageLogin,
-    String errorMessageResetPassword,
-    String errorMessageChangePassword,
-    int currentTime,
-    // PanExist panExist,
-  }) = _AuthenticationState;
+class AuthenticationInitial extends AuthenticationState {}
+
+class AuthenticationLoading extends AuthenticationState {}
+
+class AuthenticationNotAuthenticated extends AuthenticationState {}
+
+class AuthenticationAuthenticated extends AuthenticationState {
+  final WebsiteData websiteData;
+
+  AuthenticationAuthenticated({@required this.websiteData});
+
+  @override
+  List<Object> get props => [websiteData];
+}
+
+class AuthenticationFailure extends AuthenticationState {
+  final String message;
+
+  AuthenticationFailure({@required this.message});
+
+  @override
+  List<Object> get props => [message];
 }

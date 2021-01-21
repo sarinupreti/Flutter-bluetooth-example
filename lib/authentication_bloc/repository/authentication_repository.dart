@@ -34,6 +34,8 @@ class AuthenticationRepository {
   Future<ApiResponseStatus<List<Products>>> connectWebsiteData(
       WebsiteData creds) async {
     try {
+      await _localDataSource.cacheAuth(creds, false);
+
       final readResponse = await _networkApi.getProducts(1, 10);
 
       if (readResponse != null) {
@@ -45,7 +47,6 @@ class AuthenticationRepository {
           await _networkApi.deleteProduct(writeResponse.id);
         }
       }
-      // print(writeResponse);
       return ApiResponseStatus(
         data: [],
         isSuccessful: true,

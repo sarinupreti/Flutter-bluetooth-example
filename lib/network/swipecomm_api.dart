@@ -15,7 +15,7 @@ const DEFAULT_RECEIVE_TIMEOUT = const Duration(seconds: 10);
 
 CancelToken cancelToken = CancelToken();
 
-@RestApi(baseUrl: baseUrl)
+@RestApi(baseUrl: "https://demo.swipecomm.com/")
 abstract class SwipeCommApi {
   factory SwipeCommApi(Dio dio, {String baseUrl}) = _SwipeCommApi;
 
@@ -73,9 +73,6 @@ Dio buildDio() {
             final auth = await localDataSource.getAuthFromLocal(false);
 
             request.baseUrl = auth?.websiteUrl;
-
-            // final decruptedCK = await auth.consumerKey.decryptString();
-            // final decruptedCS = await auth.consumerSecret.decryptString();
 
             final decruptedCK = auth.consumerKey;
             final decruptedCS = auth.consumerSecret;

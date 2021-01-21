@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 part 'network_exceptions.freezed.dart';
 
@@ -119,15 +118,6 @@ abstract class NetworkExceptions with _$NetworkExceptions {
               networkExceptions = NetworkExceptions.sendTimeout();
               break;
           }
-        } else if (error is FirebaseAuthException) {
-          print(error);
-          if (error.code == "too-many-requests") {
-            networkExceptions = NetworkExceptions.defaultError(error.message);
-          } else if (error.code == "user-not-found") {
-            networkExceptions = NetworkExceptions.defaultError(error.message);
-          } else
-            networkExceptions =
-                NetworkExceptions.woocommerceLoginError(error.message);
         } else if (error is SocketException) {
           networkExceptions = NetworkExceptions.noInternetConnection();
         } else {
