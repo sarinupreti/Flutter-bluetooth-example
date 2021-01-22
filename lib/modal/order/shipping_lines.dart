@@ -1,39 +1,44 @@
 import 'package:bell_delivery_hub/data/hive/hive_const.dart';
-import 'package:bell_delivery_hub/modal/order/order_fee_line_tax.dart';
 import 'package:bell_delivery_hub/modal/products/product_meta_data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
-part 'order_fine_line.g.dart';
+part 'shipping_lines.g.dart';
 
-@HiveType(typeId: HIVE_ORDER_FINE_LINE_TYPE_ID)
+@HiveType(typeId: HIVE_SHIPPING_LINES_BOX_TYPE_ID)
 @JsonSerializable()
 // ignore: must_be_immutable
-class OrderFeeLine extends HiveObject implements Equatable {
+class ShippingLines extends HiveObject implements Equatable {
   @HiveField(0)
-  final String name;
+  int id;
   @HiveField(1)
-  final String taxClass;
+  String methodTitle;
   @HiveField(2)
-  final String taxStatus;
+  String methodId;
   @HiveField(3)
-  final String total;
+  String total;
   @HiveField(4)
-  final String totalTax;
+  String totalTax;
   @HiveField(5)
-  final List<FeeLineTax> taxes;
+  List<Taxes> taxes;
   @HiveField(6)
-  final List<MetaData> metaData;
-  @HiveField(7)
-  final int id;
+  List<MetaData> metaData;
 
-  OrderFeeLine(this.id, this.name, this.taxClass, this.taxStatus, this.totalTax,
-      this.taxes, this.metaData, this.total);
+  ShippingLines(
+      {this.id,
+      this.methodTitle,
+      this.methodId,
+      this.total,
+      this.totalTax,
+      this.taxes,
+      this.metaData});
 
   @override
+  // TODO: implement props
   List<Object> get props => throw UnimplementedError();
 
   @override
+  // TODO: implement stringify
   bool get stringify => throw UnimplementedError();
 }

@@ -75,5 +75,20 @@ const int HIVE_COLLECTION_BOX_TYPE_ID = 23;
 const String HIVE_SELF_BOX = 'hSelfBox';
 const int HIVE_SELF_BOX_TYPE_ID = 24;
 
+const String HIVE_LINK_BOX = 'hLinkBox';
+const int HIVE_LINK_BOX_TYPE_ID = 25;
+
+const String HIVE_SHIPPING_LINES_BOX = 'hShppingLinesBox';
+const int HIVE_SHIPPING_LINES_BOX_TYPE_ID = 26;
+
+const String HIVE_TAX_LINES_BOX = 'hTaxLinesBox';
+const int HIVE_TAX_LINES_BOX_TYPE_ID = 27;
+
+const String HIVE_TAXES_BOX = 'hTaxBox';
+const int HIVE_TAXES_BOX_TYPE_ID = 28;
+
+const String HIVE_LINE_ITEMS_BOX = 'hLineItemBox';
+const int HIVE_LINE_ITEMS_BOX_TYPE_ID = 29;
+
 const String HIVE_USER_BOX = 'hUserBox';
 const int HIVE_USER_BOX_TYPE_ID = 100;
