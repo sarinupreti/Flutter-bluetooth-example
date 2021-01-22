@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bell_delivery_hub/data/local_data_source.dart';
+import 'package:bell_delivery_hub/modal/order/order.dart';
 import 'package:bell_delivery_hub/modal/products/products.dart';
 import 'package:bell_delivery_hub/modal/website_data.dart';
 import 'package:bell_delivery_hub/network/urls.dart';
@@ -43,6 +44,9 @@ abstract class SwipeCommApi {
 
   @GET("$getAllProducts")
   Future<List<Products>> searchProductsBySKU(@Query("sku") String sku);
+
+  @GET("$getAllOrdersList")
+  Future<List<Order>> getAllOrders();
 }
 
 Dio buildDio() {

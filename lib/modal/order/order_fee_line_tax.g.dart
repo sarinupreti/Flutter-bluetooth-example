@@ -24,7 +24,7 @@ class FeeLineTaxAdapter extends TypeAdapter<FeeLineTax> {
       fields[4] as bool,
       fields[5] as String,
       fields[6] as String,
-      (fields[7] as List)?.cast<dynamic>(),
+      (fields[7] as List)?.cast<MetaDataType>(),
     );
   }
 
@@ -74,7 +74,10 @@ FeeLineTax _$FeeLineTaxFromJson(Map<String, dynamic> json) {
     json['compound'] as bool,
     json['taxTotal'] as String,
     json['shippingTaxTotal'] as String,
-    json['metaData'] as List,
+    (json['metaData'] as List)
+        ?.map((e) =>
+            e == null ? null : MetaDataType.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 

@@ -5,6 +5,8 @@ import 'package:bell_delivery_hub/data/local_data_source.dart';
 import 'package:bell_delivery_hub/login_bloc/login.dart';
 import 'package:bell_delivery_hub/network/interceptors/dio_connectivity_request_retrier.dart';
 import 'package:bell_delivery_hub/network/swipecomm_api.dart';
+import 'package:bell_delivery_hub/order_bloc/order_bloc.dart';
+import 'package:bell_delivery_hub/order_bloc/repository/order_repository.dart';
 import 'package:bell_delivery_hub/theme/themes/theme_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -45,6 +47,11 @@ void _registerBlocs() {
   inject.registerLazySingleton(() => AuthenticationBloc(inject()));
 
   inject.registerLazySingleton(() => LoginBloc(inject(), inject()));
+
+  inject.registerLazySingleton(() => OrderBloc(inject()));
+
+  inject.registerLazySingleton(
+      () => OrderRepository(networkApi: inject(), localDataSource: inject()));
 }
 
 void _registerRepository() {}

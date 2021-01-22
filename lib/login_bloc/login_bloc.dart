@@ -45,7 +45,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       if (data.isSuccessful) {
         _authenticationBloc.add(UserLoggedIn(websiteData: websiteData));
         yield LoginSuccess();
-        yield LoginInitial();
       } else {
         yield LoginFailure(
             error: NetworkExceptions.getErrorMessage(data.error));
