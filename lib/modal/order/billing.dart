@@ -50,4 +50,8 @@ class Billing extends HiveObject implements Equatable {
 
   @override
   bool get stringify => throw UnimplementedError();
+
+  static const fromJson = _$BillingFromJson;
+
+  Map<String, dynamic> toJson() => _$BillingToJson(this);
 }

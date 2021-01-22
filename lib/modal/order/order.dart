@@ -2,6 +2,7 @@ import 'package:bell_delivery_hub/data/hive/hive_const.dart';
 import 'package:bell_delivery_hub/modal/order/billing.dart';
 import 'package:bell_delivery_hub/modal/order/line_items.dart';
 import 'package:bell_delivery_hub/modal/order/links.dart';
+import 'package:bell_delivery_hub/modal/order/meta.dart';
 import 'package:bell_delivery_hub/modal/order/order_coupon_line.dart';
 import 'package:bell_delivery_hub/modal/order/order_fine_line.dart';
 import 'package:bell_delivery_hub/modal/order/refunds.dart';
@@ -16,6 +17,7 @@ import 'package:hive/hive.dart';
 part 'order.g.dart';
 
 @HiveType(typeId: HIVE_ORDER_BOX_TYPE_ID)
+@JsonSerializable()
 // ignore: must_be_immutable
 class Order extends HiveObject implements Equatable {
   @HiveField(0)
@@ -87,7 +89,7 @@ class Order extends HiveObject implements Equatable {
   @HiveField(33)
   final String cartHash;
   @HiveField(34)
-  final List<MetaData> metaData;
+  final List<MetaDataType> metaData;
   @HiveField(35)
   final List<LineItems> lineItems;
   @HiveField(36)
@@ -153,4 +155,8 @@ class Order extends HiveObject implements Equatable {
 
   @override
   bool get stringify => throw UnimplementedError();
+
+  static const fromJson = _$OrderFromJson;
+
+  Map<String, dynamic> toJson() => _$OrderToJson(this);
 }

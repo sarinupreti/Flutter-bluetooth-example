@@ -23,4 +23,8 @@ class Refunds extends HiveObject implements Equatable {
 
   @override
   bool get stringify => throw UnimplementedError();
+
+  static const fromJson = _$RefundsFromJson;
+
+  Map<String, dynamic> toJson() => _$RefundsToJson(this);
 }

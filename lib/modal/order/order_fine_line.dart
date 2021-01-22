@@ -36,4 +36,8 @@ class OrderFeeLine extends HiveObject implements Equatable {
 
   @override
   bool get stringify => throw UnimplementedError();
+
+  static const fromJson = _$OrderFeeLineFromJson;
+
+  Map<String, dynamic> toJson() => _$OrderFeeLineToJson(this);
 }

@@ -6,17 +6,17 @@ part of 'meta.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class MetaDataAdapter extends TypeAdapter<MetaData> {
+class MetaDataTypeAdapter extends TypeAdapter<MetaDataType> {
   @override
   final int typeId = 21;
 
   @override
-  MetaData read(BinaryReader reader) {
+  MetaDataType read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return MetaData(
+    return MetaDataType(
       id: fields[0] as int,
       key: fields[1] as String,
       value: fields[2] as String,
@@ -24,7 +24,7 @@ class MetaDataAdapter extends TypeAdapter<MetaData> {
   }
 
   @override
-  void write(BinaryWriter writer, MetaData obj) {
+  void write(BinaryWriter writer, MetaDataType obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)
@@ -41,7 +41,7 @@ class MetaDataAdapter extends TypeAdapter<MetaData> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MetaDataAdapter &&
+      other is MetaDataTypeAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -50,15 +50,16 @@ class MetaDataAdapter extends TypeAdapter<MetaData> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-MetaData _$MetaDataFromJson(Map<String, dynamic> json) {
-  return MetaData(
+MetaDataType _$MetaDataTypeFromJson(Map<String, dynamic> json) {
+  return MetaDataType(
     id: json['id'] as int,
     key: json['key'] as String,
     value: json['value'] as String,
   );
 }
 
-Map<String, dynamic> _$MetaDataToJson(MetaData instance) => <String, dynamic>{
+Map<String, dynamic> _$MetaDataTypeToJson(MetaDataType instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'key': instance.key,
       'value': instance.value,

@@ -29,4 +29,8 @@ class OrderCouponLine extends HiveObject implements Equatable {
 
   @override
   bool get stringify => throw UnimplementedError();
+
+  static const fromJson = _$OrderCouponLineFromJson;
+
+  Map<String, dynamic> toJson() => _$OrderCouponLineToJson(this);
 }

@@ -43,4 +43,8 @@ class TaxLines extends HiveObject implements Equatable {
 
   @override
   bool get stringify => throw UnimplementedError();
+
+  static const fromJson = _$TaxLinesFromJson;
+
+  Map<String, dynamic> toJson() => _$TaxLinesToJson(this);
 }

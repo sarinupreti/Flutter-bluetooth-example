@@ -44,4 +44,8 @@ class Shipping extends HiveObject implements Equatable {
 
   @override
   bool get stringify => throw UnimplementedError();
+
+  static const fromJson = _$ShippingFromJson;
+
+  Map<String, dynamic> toJson() => _$ShippingToJson(this);
 }

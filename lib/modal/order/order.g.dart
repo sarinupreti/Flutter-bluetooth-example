@@ -51,7 +51,7 @@ class OrderAdapter extends TypeAdapter<Order> {
       dateCompleted: fields[31] as String,
       dateCompletedGmt: fields[32] as String,
       cartHash: fields[33] as String,
-      metaData: (fields[34] as List)?.cast<MetaData>(),
+      metaData: (fields[34] as List)?.cast<MetaDataType>(),
       lineItems: (fields[35] as List)?.cast<LineItems>(),
       taxLines: (fields[36] as List)?.cast<TaxLines>(),
       shippingLines: (fields[37] as List)?.cast<ShippingLines>(),
@@ -162,3 +162,128 @@ class OrderAdapter extends TypeAdapter<Order> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Order _$OrderFromJson(Map<String, dynamic> json) {
+  return Order(
+    id: json['id'] as int,
+    parentId: json['parentId'] as int,
+    number: json['number'] as String,
+    orderKey: json['orderKey'] as String,
+    createdVia: json['createdVia'] as String,
+    version: json['version'] as String,
+    status: json['status'] as String,
+    currency: json['currency'] as String,
+    dateCreated: json['dateCreated'] as String,
+    dateCreatedGmt: json['dateCreatedGmt'] as String,
+    dateModified: json['dateModified'] as String,
+    dateModifiedGmt: json['dateModifiedGmt'] as String,
+    discountTotal: json['discountTotal'] as String,
+    discountTax: json['discountTax'] as String,
+    shippingTotal: json['shippingTotal'] as String,
+    shippingTax: json['shippingTax'] as String,
+    cartTax: json['cartTax'] as String,
+    total: json['total'] as String,
+    totalTax: json['totalTax'] as String,
+    pricesIncludeTax: json['pricesIncludeTax'] as bool,
+    customerId: json['customerId'] as int,
+    customerIpAddress: json['customerIpAddress'] as String,
+    customerUserAgent: json['customerUserAgent'] as String,
+    customerNote: json['customerNote'] as String,
+    billing: json['billing'] == null
+        ? null
+        : Billing.fromJson(json['billing'] as Map<String, dynamic>),
+    shipping: json['shipping'] == null
+        ? null
+        : Shipping.fromJson(json['shipping'] as Map<String, dynamic>),
+    paymentMethod: json['paymentMethod'] as String,
+    paymentMethodTitle: json['paymentMethodTitle'] as String,
+    transactionId: json['transactionId'] as String,
+    datePaid: json['datePaid'] as String,
+    datePaidGmt: json['datePaidGmt'] as String,
+    dateCompleted: json['dateCompleted'] as String,
+    dateCompletedGmt: json['dateCompletedGmt'] as String,
+    cartHash: json['cartHash'] as String,
+    metaData: (json['metaData'] as List)
+        ?.map((e) =>
+            e == null ? null : MetaDataType.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    lineItems: (json['lineItems'] as List)
+        ?.map((e) =>
+            e == null ? null : LineItems.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    taxLines: (json['taxLines'] as List)
+        ?.map((e) =>
+            e == null ? null : TaxLines.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    shippingLines: (json['shippingLines'] as List)
+        ?.map((e) => e == null
+            ? null
+            : ShippingLines.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    feeLines: (json['feeLines'] as List)
+        ?.map((e) =>
+            e == null ? null : OrderFeeLine.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    couponLines: (json['couponLines'] as List)
+        ?.map((e) => e == null
+            ? null
+            : OrderCouponLine.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    refunds: (json['refunds'] as List)
+        ?.map((e) =>
+            e == null ? null : Refunds.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    links: json['links'] == null
+        ? null
+        : Links.fromJson(json['links'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
+      'id': instance.id,
+      'parentId': instance.parentId,
+      'number': instance.number,
+      'orderKey': instance.orderKey,
+      'createdVia': instance.createdVia,
+      'version': instance.version,
+      'status': instance.status,
+      'currency': instance.currency,
+      'dateCreated': instance.dateCreated,
+      'dateCreatedGmt': instance.dateCreatedGmt,
+      'dateModified': instance.dateModified,
+      'dateModifiedGmt': instance.dateModifiedGmt,
+      'discountTotal': instance.discountTotal,
+      'discountTax': instance.discountTax,
+      'shippingTotal': instance.shippingTotal,
+      'shippingTax': instance.shippingTax,
+      'cartTax': instance.cartTax,
+      'total': instance.total,
+      'totalTax': instance.totalTax,
+      'pricesIncludeTax': instance.pricesIncludeTax,
+      'customerId': instance.customerId,
+      'customerIpAddress': instance.customerIpAddress,
+      'customerUserAgent': instance.customerUserAgent,
+      'customerNote': instance.customerNote,
+      'billing': instance.billing,
+      'shipping': instance.shipping,
+      'paymentMethod': instance.paymentMethod,
+      'paymentMethodTitle': instance.paymentMethodTitle,
+      'transactionId': instance.transactionId,
+      'datePaid': instance.datePaid,
+      'datePaidGmt': instance.datePaidGmt,
+      'dateCompleted': instance.dateCompleted,
+      'dateCompletedGmt': instance.dateCompletedGmt,
+      'cartHash': instance.cartHash,
+      'metaData': instance.metaData,
+      'lineItems': instance.lineItems,
+      'taxLines': instance.taxLines,
+      'shippingLines': instance.shippingLines,
+      'feeLines': instance.feeLines,
+      'couponLines': instance.couponLines,
+      'refunds': instance.refunds,
+      'links': instance.links,
+    };

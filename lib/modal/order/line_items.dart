@@ -61,4 +61,8 @@ class LineItems extends HiveObject implements Equatable {
 
   @override
   bool get stringify => throw UnimplementedError();
+
+  static const fromJson = _$LineItemsFromJson;
+
+  Map<String, dynamic> toJson() => _$LineItemsToJson(this);
 }

@@ -22,7 +22,7 @@ class ShippingLinesAdapter extends TypeAdapter<ShippingLines> {
       methodId: fields[2] as String,
       total: fields[3] as String,
       totalTax: fields[4] as String,
-      taxes: (fields[5] as List)?.cast<dynamic>(),
+      taxes: (fields[5] as List)?.cast<Taxes>(),
       metaData: (fields[6] as List)?.cast<MetaData>(),
     );
   }
@@ -69,7 +69,10 @@ ShippingLines _$ShippingLinesFromJson(Map<String, dynamic> json) {
     methodId: json['methodId'] as String,
     total: json['total'] as String,
     totalTax: json['totalTax'] as String,
-    taxes: json['taxes'] as List,
+    taxes: (json['taxes'] as List)
+        ?.map(
+            (e) => e == null ? null : Taxes.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     metaData: (json['metaData'] as List)
         ?.map((e) =>
             e == null ? null : MetaData.fromJson(e as Map<String, dynamic>))

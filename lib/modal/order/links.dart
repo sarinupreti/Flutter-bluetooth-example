@@ -23,4 +23,7 @@ class Links extends HiveObject implements Equatable {
 
   @override
   bool get stringify => throw UnimplementedError();
+  static const fromJson = _$LinksFromJson;
+
+  Map<String, dynamic> toJson() => _$LinksToJson(this);
 }

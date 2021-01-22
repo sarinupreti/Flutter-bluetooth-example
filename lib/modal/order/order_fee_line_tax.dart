@@ -1,8 +1,10 @@
 import 'package:bell_delivery_hub/data/hive/hive_const.dart';
-import 'package:bell_delivery_hub/modal/products/product_meta_data.dart';
+import 'package:bell_delivery_hub/modal/order/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
+
+part 'order_fee_line_tax.g.dart';
 
 @HiveType(typeId: HIVE_ORDER_FINE_LINE_TYPE_ID)
 @JsonSerializable()
@@ -33,4 +35,8 @@ class FeeLineTax extends HiveObject implements Equatable {
 
   @override
   bool get stringify => throw UnimplementedError();
+
+  static const fromJson = _$FeeLineTaxFromJson;
+
+  Map<String, dynamic> toJson() => _$FeeLineTaxToJson(this);
 }

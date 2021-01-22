@@ -19,4 +19,8 @@ class Self extends HiveObject implements Equatable {
 
   @override
   bool get stringify => throw UnimplementedError();
+
+  static const fromJson = _$SelfFromJson;
+
+  Map<String, dynamic> toJson() => _$SelfToJson(this);
 }

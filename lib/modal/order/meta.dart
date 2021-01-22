@@ -8,7 +8,7 @@ part 'meta.g.dart';
 @HiveType(typeId: HIVE_META_BOX_TYPE_ID)
 @JsonSerializable()
 // ignore: must_be_immutable
-class MetaData extends HiveObject implements Equatable {
+class MetaDataType extends HiveObject implements Equatable {
   @HiveField(0)
   int id;
   @HiveField(1)
@@ -16,11 +16,15 @@ class MetaData extends HiveObject implements Equatable {
   @HiveField(2)
   String value;
 
-  MetaData({this.id, this.key, this.value});
+  MetaDataType({this.id, this.key, this.value});
 
   @override
   List<Object> get props => throw UnimplementedError();
 
   @override
   bool get stringify => throw UnimplementedError();
+
+  static const fromJson = _$MetaDataTypeFromJson;
+
+  Map<String, dynamic> toJson() => _$MetaDataTypeToJson(this);
 }
