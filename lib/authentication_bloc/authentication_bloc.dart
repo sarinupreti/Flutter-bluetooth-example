@@ -38,7 +38,6 @@ class AuthenticationBloc
   Stream<AuthenticationState> _mapAppLoadedToState(AppLoaded event) async* {
     yield AuthenticationLoading();
     try {
-      await Future.delayed(Duration(milliseconds: 500)); // a simulated delay
       final currentUser = await _authenticationService.getAuth();
 
       if (currentUser != null) {
@@ -58,9 +57,13 @@ class AuthenticationBloc
   }
 
   Stream<AuthenticationState> _mapCheckLoggedInState(IsLoggedIn event) async* {
+    yield AuthenticationLoading();
+
     final data = await _authenticationService.getAuth();
 
-    if (data != null &&  data.consumerKey != null && data.consumerSecret != null){
+    if (data != null &&
+        data.consumerKey != null &&
+        data.consumerSecret != null) {
       yield AuthenticationAuthenticated(websiteData: data);
     } else {
       yield AuthenticationNotAuthenticated();

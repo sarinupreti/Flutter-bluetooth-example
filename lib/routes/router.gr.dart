@@ -15,13 +15,16 @@ import '../components/qr_scanner.dart';
 import '../connect_store_screen.dart';
 import '../home_page.dart';
 import '../modal/website_data.dart';
+import '../splash_screen.dart';
 
 class Routes {
-  static const String connectStoreScreen = '/';
+  static const String connectStoreScreen = 'ConnectStoreScreen';
+  static const String splashScreen = '/';
   static const String homePage = 'HomePage';
   static const String qRScannerPage = 'QRScannerPage';
   static const all = <String>{
     connectStoreScreen,
+    splashScreen,
     homePage,
     qRScannerPage,
   };
@@ -32,6 +35,7 @@ class SwipeCommRouter extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(Routes.connectStoreScreen, page: ConnectStoreScreen),
+    RouteDef(Routes.splashScreen, page: SplashScreen),
     RouteDef(Routes.homePage, page: HomePage),
     RouteDef(Routes.qRScannerPage, page: QRScannerPage),
   ];
@@ -47,6 +51,12 @@ class SwipeCommRouter extends RouterBase {
           key: args.key,
           context: args.context,
         ),
+        settings: data,
+      );
+    },
+    SplashScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const SplashScreen(),
         settings: data,
       );
     },
@@ -84,6 +94,8 @@ extension SwipeCommRouterExtendedNavigatorStateX on ExtendedNavigatorState {
         Routes.connectStoreScreen,
         arguments: ConnectStoreScreenArguments(key: key, context: context),
       );
+
+  Future<dynamic> pushSplashScreen() => push<dynamic>(Routes.splashScreen);
 
   Future<dynamic> pushHomePage({
     Key key,

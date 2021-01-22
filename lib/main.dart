@@ -1,9 +1,11 @@
 import 'package:bell_delivery_hub/authentication_bloc/authentication.dart';
 import 'package:bell_delivery_hub/authentication_bloc/repository/authentication_service.dart';
 import 'package:bell_delivery_hub/connect_store_screen.dart';
+import 'package:bell_delivery_hub/error_screen.dart';
 import 'package:bell_delivery_hub/globals/scree_util_setup.dart';
 import 'package:bell_delivery_hub/init.dart';
 import 'package:bell_delivery_hub/routes/router.gr.dart';
+import 'package:bell_delivery_hub/splash_screen.dart';
 import 'package:bell_delivery_hub/theme/theme_builder.dart';
 import 'package:bell_delivery_hub/theme/themes/theme_cubit.dart';
 import 'package:bell_delivery_hub/theme/themes/theme_palatte.dart';
@@ -143,26 +145,24 @@ class MyApp extends StatelessWidget {
                                       return HomePage(
                                         websiteData: state.websiteData,
                                       );
-                                    }
-
-                                    if (state is AuthenticationLoading) {
-                                      return CircularProgressIndicator();
-                                    }
-
-                                    if (state
+                                    } else if (state is AuthenticationLoading) {
+                                      return SplashScreen(
+                                        context: context,
+                                      );
+                                    } else if (state
                                         is AuthenticationNotAuthenticated) {
                                       return ConnectStoreScreen(
                                         context: context,
                                       );
-                                    }
-
-                                    if (state is AuthenticationFailure) {
-                                      return Text(state.message);
-                                    }
-
-                                    return ConnectStoreScreen(
-                                      context: context,
-                                    );
+                                    } else if (state is AuthenticationFailure) {
+                                      return ErrorScreen(
+                                        context: context,
+                                        message: state.message,
+                                      );
+                                    } else
+                                      return SplashScreen(
+                                        context: context,
+                                      );
 
                                     // otherwise show login page
                                   },
