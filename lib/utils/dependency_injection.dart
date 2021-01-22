@@ -1,5 +1,5 @@
 import 'package:bell_delivery_hub/authentication_bloc/authentication_bloc.dart';
-import 'package:bell_delivery_hub/authentication_bloc/repository/authentication_repository.dart';
+import 'package:bell_delivery_hub/authentication_bloc/repository/authentication_service.dart';
 import 'package:bell_delivery_hub/data/hive/hive_data_source.dart';
 import 'package:bell_delivery_hub/data/local_data_source.dart';
 import 'package:bell_delivery_hub/login_bloc/login.dart';
@@ -39,15 +39,12 @@ void _registerNetworkAndLocalDatabase() {
 void _registerBlocs() {
   inject.registerLazySingleton(() => ThemeCubit());
 
+  inject.registerLazySingleton(() => AuthenticationRepository(
+      networkApi: inject(), localDataSource: inject()));
+
   inject.registerLazySingleton(() => AuthenticationBloc(inject()));
 
   inject.registerLazySingleton(() => LoginBloc(inject(), inject()));
-
 }
 
-void _registerRepository() {
-  inject.registerLazySingleton(
-    () => AuthenticationRepository(
-        networkApi: inject(), localDataSource: inject()),
-  );
-}
+void _registerRepository() {}

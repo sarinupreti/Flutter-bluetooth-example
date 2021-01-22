@@ -1,5 +1,7 @@
 import 'package:bell_delivery_hub/components/Button.dart';
+import 'package:bell_delivery_hub/globals/exveptions/login_error_modal.dart';
 import 'package:bell_delivery_hub/globals/throttle.dart';
+import 'package:bell_delivery_hub/login_bloc/login.dart';
 import 'package:bell_delivery_hub/login_bloc/login_event.dart';
 import 'package:bell_delivery_hub/utils/dependency_injection.dart';
 import 'package:bell_delivery_hub/utils/theme.dart';
@@ -11,16 +13,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:bell_delivery_hub/extensions/context_extension.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
+import 'package:websafe_svg/websafe_svg.dart';
 import 'authentication_bloc/authentication_bloc.dart';
 import 'package:bell_delivery_hub/authentication_bloc/authentication_state.dart';
 
 import 'login_bloc/login_bloc.dart';
 
 class ConnectStoreScreen extends StatefulWidget {
-  final bool fromManageWebsite;
+  final BuildContext context;
 
-  ConnectStoreScreen({Key key, this.fromManageWebsite = false})
-      : super(key: key);
+  ConnectStoreScreen({Key key, this.context}) : super(key: key);
 
   @override
   _ConnectStoreScreenState createState() => _ConnectStoreScreenState();
@@ -31,9 +33,9 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
 
   TextEditingController websiteUrlController = TextEditingController(text: "");
   TextEditingController consumerKeyController = TextEditingController(
-      text: "ck_0233d338cf92b9ec840d1664d46621d76d8dc243");
+      text: "ck_0e57f670e3f13d985373e6e73ff6aed3d93256f1");
   TextEditingController consumerSecretController = TextEditingController(
-      text: "cs_ff69fc654869452f0a9738a2eed2d9cc7ca78d7a");
+      text: "cs_2f52978ea01fe7593ac353aa43c354ca762ff3a1");
 
   FocusNode websiteUrlFocusNode = FocusNode();
   FocusNode consumerKeyFocusNode = FocusNode();
@@ -85,76 +87,91 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: context.theme.surface,
-        body: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        body: BlocConsumer<AuthenticationBloc, AuthenticationState>(
             cubit: inject<AuthenticationBloc>(),
+            listener: (context, state) {},
             builder: (context, state) {
               return SingleChildScrollView(
-                  child: Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(color: context.theme.background
-                    // image: DecorationImage(
-                    //     alignment: Alignment.topCenter,
-                    //     image: AssetImage(
-                    //       "assets/images/login.png",
-                    //     ))
-                    ),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Stack(
-                        children: [
-                          Arc(
-                              arcType: ArcType.CONVEX,
-                              edge: Edge.BOTTOM,
-                              height: 100,
-                              child: Container(
-                                height: 250,
-                                width: screenWidth,
-                                decoration: BoxDecoration(
-                                    color: AppColors.primaryColor,
-                                    image: DecorationImage(
-                                        alignment: Alignment.topCenter,
-                                        image: AssetImage(
-                                          "assets/images/login.png",
-                                        ))),
-                              )),
-                          Positioned(
-                              bottom: -20,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  decoration: BoxDecoration(color: context.theme.surface),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Stack(
+                          children: [
+                            Arc(
+                                arcType: ArcType.CONVEX,
+                                edge: Edge.BOTTOM,
+                                height: 110.flexibleHeight,
+                                child: Container(
+                                  height: 250.flexibleHeight,
+                                  width: screenWidth,
+                                  decoration: BoxDecoration(
+                                      color: AppColors.primaryColor,
+                                      image: DecorationImage(
+                                          alignment: Alignment.topCenter,
+                                          image: NetworkImage(
+                                            "https://coursemology.sg/wp-content/uploads/2020/04/learn-makeup.jpg",
+                                          ))),
+                                  // child:
+                                )),
+                            Positioned(
+                              // top: 50.flexibleHeight,
                               left: 0,
                               right: 0,
-                              child: CircleAvatar(
-                                minRadius: 50,
-                              )),
-                        ],
-                      ),
-                      50.verticalSpace,
-                      Center(
-                        child: Text("Welcome to BelaOryx.",
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                .copyWith(
-                                    color: context.theme.textColor,
-                                    fontSize: 25.flexibleFontSize,
-                                    fontWeight: FontWeight.w500)),
-                      ),
-                      30.verticalSpace,
-                      // websiteUrl(),
-                      20.verticalSpace,
-                      consumerKey(),
-                      20.verticalSpace,
-                      consumerSecret(),
-                      20.verticalSpace,
-                      connectButton(state),
-                      termsAndCondition(),
-                    ],
+                              bottom: 0,
+                              child: Container(
+                                height: 150.flexibleHeight,
+                                alignment: Alignment(0.0, 2.5),
+                                child: CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage("assets/images/l.png"),
+                                  radius: 50.0,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        100.verticalSpace,
+                        Center(
+                          child: Text("Welcome to BelaOryx",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .copyWith(
+                                      color: context.theme.textColor,
+                                      fontSize: 25.flexibleFontSize,
+                                      fontWeight: FontWeight.w600)),
+                        ),
+                        Center(
+                          child: Text("www.belaoryx.com",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .copyWith(
+                                      color: context
+                                          .theme.corePalatte.primaryColor,
+                                      fontSize: 14.flexibleFontSize,
+                                      fontWeight: FontWeight.normal)),
+                        ),
+                        consumerKey(),
+                        20.verticalSpace,
+                        consumerSecret(),
+                        20.verticalSpace,
+                        connectButton(state, context),
+                        termsAndCondition(),
+                      ],
+                    ),
                   ),
                 ),
-              ));
+              );
             }));
   }
 
@@ -195,32 +212,44 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
     );
   }
 
-  connectButton(AuthenticationState state) {
+  connectButton(AuthenticationState state, BuildContext context) {
     final _throttle = Throttling(duration: Duration(seconds: 2));
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Hero(
-        tag: "home",
-        child: Button(
-          // isLoading: state.isLoading,
-          message: "Login",
-          style: AppTextTheme.normal15Text,
-          onPressed: () async {
-            if (_formKey.currentState.validate()) {
-              _throttle.throttle(() => inject<LoginBloc>().add(
-                    LoginInWithEmailButtonPressed(
-                      websiteUrl: "https://demo.swipecomm.com/",
-                      consumerKey: consumerKeyController.text,
-                      consumerSecret: consumerSecretController.text,
-                    ),
-                  ));
-            }
+    return BlocConsumer<LoginBloc, LoginState>(
+      cubit: inject<LoginBloc>(),
+      listener: (ctx, loginState) {
+        print(loginState);
+//
+        if (loginState is LoginFailure)
+          ConnectStoreErrorModal.showErrorModal(
+              context: context, message: loginState.error);
+        //
+      },
+      builder: (ctx, loginState) {
+        return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Hero(
+              tag: "home",
+              child: Button(
+                isLoading: loginState is LoginLoading,
+                message: "Login",
+                style: AppTextTheme.normal15Text,
+                onPressed: () async {
+                  if (_formKey.currentState.validate()) {
+                    _throttle.throttle(() => inject<LoginBloc>().add(
+                          LoginInWithEmailButtonPressed(
+                            websiteUrl: "https://demo.swipecomm.com/",
+                            consumerKey: consumerKeyController.text,
+                            consumerSecret: consumerSecretController.text,
+                          ),
+                        ));
+                  }
 
-            // _showCupertinoAlert();
-          },
-        ),
-      ),
+                  // _showCupertinoAlert();
+                },
+              ),
+            ));
+      },
     );
   }
 
@@ -329,10 +358,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
               consumerSecretFocusNode.unfocus();
             },
             textInputAction: TextInputAction.done,
-            inputFormatters: [
-              // if (!switchValue) LengthLimitingTextInputFormatter(20),
-              FilteringTextInputFormatter.deny(" ")
-            ],
+            inputFormatters: [FilteringTextInputFormatter.deny(" ")],
             autovalidateMode: AutovalidateMode.onUserInteraction,
             obscureText: switchValue ? false : !passwordVisible,
             decoration: InputDecoration(

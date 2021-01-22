@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bell_delivery_hub/authentication_bloc/repository/authentication_repository.dart';
+import 'package:bell_delivery_hub/authentication_bloc/repository/authentication_service.dart';
 import 'package:bloc/bloc.dart';
 
 import 'authentication_event.dart';
@@ -60,7 +60,7 @@ class AuthenticationBloc
   Stream<AuthenticationState> _mapCheckLoggedInState(IsLoggedIn event) async* {
     final data = await _authenticationService.getAuth();
 
-    if (data.consumerKey != null) {
+    if (data != null &&  data.consumerKey != null && data.consumerSecret != null){
       yield AuthenticationAuthenticated(websiteData: data);
     } else {
       yield AuthenticationNotAuthenticated();

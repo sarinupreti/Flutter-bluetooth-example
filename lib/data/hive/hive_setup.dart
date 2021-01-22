@@ -74,6 +74,10 @@ Future<void> clearHive() async {
   await Hive.deleteBoxFromDisk(HIVE_CATEGORY_COLLECTIONS);
 }
 
+Future<void> clearAuthHive() async {
+  await Hive.deleteBoxFromDisk(HIVE_AUTH_BOX);
+}
+
 Future<void> clearHiveBox(String boxName) async {
   // await Hive.deleteBoxFromDisk(HIVE_USER_BOX);
   await Hive.deleteBoxFromDisk(boxName);

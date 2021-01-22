@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +45,7 @@ class SwipeCommRouter extends RouterBase {
       return MaterialPageRoute<dynamic>(
         builder: (context) => ConnectStoreScreen(
           key: args.key,
-          fromManageWebsite: args.fromManageWebsite,
+          context: args.context,
         ),
         settings: data,
       );
@@ -77,12 +78,11 @@ class SwipeCommRouter extends RouterBase {
 extension SwipeCommRouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushConnectStoreScreen({
     Key key,
-    bool fromManageWebsite = false,
+    BuildContext context,
   }) =>
       push<dynamic>(
         Routes.connectStoreScreen,
-        arguments: ConnectStoreScreenArguments(
-            key: key, fromManageWebsite: fromManageWebsite),
+        arguments: ConnectStoreScreenArguments(key: key, context: context),
       );
 
   Future<dynamic> pushHomePage({
@@ -104,8 +104,8 @@ extension SwipeCommRouterExtendedNavigatorStateX on ExtendedNavigatorState {
 /// ConnectStoreScreen arguments holder class
 class ConnectStoreScreenArguments {
   final Key key;
-  final bool fromManageWebsite;
-  ConnectStoreScreenArguments({this.key, this.fromManageWebsite = false});
+  final BuildContext context;
+  ConnectStoreScreenArguments({this.key, this.context});
 }
 
 /// HomePage arguments holder class

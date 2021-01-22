@@ -2,8 +2,9 @@
 
 import 'package:bell_delivery_hub/authentication_bloc/authentication_bloc.dart';
 import 'package:bell_delivery_hub/authentication_bloc/authentication_event.dart';
-import 'package:bell_delivery_hub/authentication_bloc/repository/authentication_repository.dart';
+import 'package:bell_delivery_hub/authentication_bloc/repository/authentication_service.dart';
 import 'package:bell_delivery_hub/globals/exveptions/authentication_exception.dart';
+import 'package:bell_delivery_hub/globals/exveptions/network_exceptions.dart';
 import 'package:bell_delivery_hub/modal/website_data.dart';
 import 'package:bloc/bloc.dart';
 
@@ -46,7 +47,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         yield LoginSuccess();
         yield LoginInitial();
       } else {
-        yield LoginFailure(error: 'Something very weird just happened');
+        yield LoginFailure(
+            error: NetworkExceptions.getErrorMessage(data.error));
       }
     } on AuthenticationException catch (e) {
       yield LoginFailure(error: e.message);

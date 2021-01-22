@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bell_delivery_hub/data/local_data_source.dart';
 import 'package:bell_delivery_hub/modal/products/products.dart';
+import 'package:bell_delivery_hub/modal/website_data.dart';
 import 'package:bell_delivery_hub/network/urls.dart';
 import 'package:bell_delivery_hub/utils/dependency_injection.dart';
 import "package:dio/dio.dart" hide Headers;
@@ -68,9 +69,11 @@ Dio buildDio() {
         ),
         InterceptorsWrapper(
           onRequest: (RequestOptions request) async {
+            WebsiteData auth;
+
             final localDataSource = inject<LocalDataSource>();
 
-            final auth = await localDataSource.getAuthFromLocal(false);
+            auth = await localDataSource.getAuthFromLocal(false);
 
             request.baseUrl = auth?.websiteUrl;
 

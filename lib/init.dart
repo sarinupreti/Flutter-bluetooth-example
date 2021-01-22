@@ -18,6 +18,7 @@ class AppInit {
     await Firebase.initializeApp();
     await HiveSetup.initHive;
     await _externalSetup();
+
     await inject<ThemeCubit>().fetchTheme();
     inject<AuthenticationBloc>().add(IsLoggedIn());
   }

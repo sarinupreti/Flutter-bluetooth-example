@@ -24,7 +24,9 @@ class ConnectStoreErrorModal {
       ),
       content: Text(
         message != null && message.isNotEmpty
-            ? message
+            ? message == "Sorry, you cannot list resources."
+                ? "Invalid consumer key and secret."
+                : message
             : "There was a problem connecting with your store. Make sure that you have given read and write permission to your API keys.",
         style: Theme.of(context)
             .textTheme
@@ -32,13 +34,13 @@ class ConnectStoreErrorModal {
             .copyWith(fontWeight: FontWeight.normal),
       ),
       actions: <Widget>[
-        CupertinoDialogAction(
-          child: Text(
-            "Find help",
-            style: AppTextTheme.normal14Text.copyWith(
-                fontWeight: FontWeight.normal, color: AppColors.primaryColor),
-          ),
-        ),
+        // CupertinoDialogAction(
+        //   child: Text(
+        //     "Find help",
+        //     style: AppTextTheme.normal14Text.copyWith(
+        //         fontWeight: FontWeight.normal, color: AppColors.primaryColor),
+        //   ),
+        // ),
         CupertinoDialogAction(
           isDestructiveAction: true,
           onPressed: () {
