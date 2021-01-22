@@ -48,7 +48,7 @@ const int HIVE_TEMP_CREDS_TYPE_ID = 14;
 const String HIVE_ORDER_BOX = 'hOrderBox';
 const int HIVE_ORDER_BOX_TYPE_ID = 15;
 
-const String HIVE_ORDER_FINE_LINE = 'hOrderBox';
+const String HIVE_ORDER_FINE_LINE = 'hOrderFineLineBox';
 const int HIVE_ORDER_FINE_LINE_TYPE_ID = 16;
 
 const String HIVE_ORDER_COUPON = 'hOrderCouponBox';
@@ -66,7 +66,7 @@ const int HIVE_SHIPPING_BOX_TYPE_ID = 20;
 const String HIVE_META_BOX = 'hMetaBox';
 const int HIVE_META_BOX_TYPE_ID = 21;
 
-const String HIVE_REFUNDS_BOX = 'hMetaBox';
+const String HIVE_REFUNDS_BOX = 'hRefundsBox';
 const int HIVE_REFUNDS_BOX_TYPE_ID = 22;
 
 const String HIVE_COLLECTION_BOX = 'hCollectionBox';

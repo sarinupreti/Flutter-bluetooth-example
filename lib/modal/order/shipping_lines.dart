@@ -1,4 +1,5 @@
 import 'package:bell_delivery_hub/data/hive/hive_const.dart';
+import 'package:bell_delivery_hub/modal/order/taxes.dart';
 import 'package:bell_delivery_hub/modal/products/product_meta_data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
