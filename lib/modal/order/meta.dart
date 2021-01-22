@@ -19,10 +19,8 @@ class MetaData extends HiveObject implements Equatable {
   MetaData({this.id, this.key, this.value});
 
   @override
-  // TODO: implement props
   List<Object> get props => throw UnimplementedError();
 
   @override
-  // TODO: implement stringify
   bool get stringify => throw UnimplementedError();
 }

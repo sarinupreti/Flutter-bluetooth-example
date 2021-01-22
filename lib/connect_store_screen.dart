@@ -13,7 +13,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:bell_delivery_hub/extensions/context_extension.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
-import 'package:websafe_svg/websafe_svg.dart';
 import 'authentication_bloc/authentication_bloc.dart';
 import 'package:bell_delivery_hub/authentication_bloc/authentication_state.dart';
 

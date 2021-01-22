@@ -25,10 +25,8 @@ class OrderCouponLine extends HiveObject implements Equatable {
       this.id, this.code, this.discount, this.discountTax, this.metaData);
 
   @override
-  // TODO: implement props
   List<Object> get props => throw UnimplementedError();
 
   @override
-  // TODO: implement stringify
   bool get stringify => throw UnimplementedError();
 }

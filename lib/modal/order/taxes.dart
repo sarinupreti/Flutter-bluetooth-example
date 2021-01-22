@@ -1,5 +1,3 @@
-import 'package:bell_delivery_hub/modal/products/product_meta_data.dart';
-
 import 'package:bell_delivery_hub/data/hive/hive_const.dart';
 import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,10 +19,8 @@ class Taxes extends HiveObject implements Equatable {
   Taxes({this.id, this.total, this.subtotal});
 
   @override
-  // TODO: implement props
   List<Object> get props => throw UnimplementedError();
 
   @override
-  // TODO: implement stringify
   bool get stringify => throw UnimplementedError();
 }

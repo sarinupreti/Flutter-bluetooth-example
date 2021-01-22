@@ -42,8 +42,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _navKey = GlobalKey<NavigatorState>();
-
     return BlocProvider(
         create: (context) => inject<ThemeCubit>()..fetchTheme(),
         child: ScreenUtilSetup(

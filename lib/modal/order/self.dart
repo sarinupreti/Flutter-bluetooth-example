@@ -15,10 +15,8 @@ class Self extends HiveObject implements Equatable {
   Self({this.href});
 
   @override
-  // TODO: implement props
   List<Object> get props => throw UnimplementedError();
 
   @override
-  // TODO: implement stringify
   bool get stringify => throw UnimplementedError();
 }

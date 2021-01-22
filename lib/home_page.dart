@@ -1,5 +1,3 @@
-import 'package:bell_delivery_hub/components/platform/platform_app_bar.dart';
-import 'package:bell_delivery_hub/components/platform/platform_scaffold.dart';
 import 'package:bell_delivery_hub/modal/website_data.dart';
 import 'package:flutter/material.dart';
 import 'package:websafe_svg/websafe_svg.dart';

@@ -19,10 +19,8 @@ class Refunds extends HiveObject implements Equatable {
   Refunds({this.id, this.reason, this.total});
 
   @override
-  // TODO: implement props
   List<Object> get props => throw UnimplementedError();
 
   @override
-  // TODO: implement stringify
   bool get stringify => throw UnimplementedError();
 }
