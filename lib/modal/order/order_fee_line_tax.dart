@@ -25,7 +25,7 @@ class FeeLineTax extends HiveObject implements Equatable {
   @HiveField(6)
   String shippingTaxTotal;
   @HiveField(7)
-  List<MetaData> metaData;
+  List<MetaDataType> metaData;
 
   FeeLineTax(this.id, this.rateCode, this.rateId, this.label, this.compound,
       this.taxTotal, this.shippingTaxTotal, this.metaData);
