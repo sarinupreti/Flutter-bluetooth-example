@@ -19,18 +19,18 @@ class LineItemsAdapter extends TypeAdapter<LineItems> {
     return LineItems(
       id: fields[0] as int,
       name: fields[1] as String,
-      productId: fields[2] as int,
-      variationId: fields[3] as int,
+      product_id: fields[2] as int,
+      variation_id: fields[3] as int,
       quantity: fields[4] as int,
-      taxClass: fields[5] as String,
+      tax_class: fields[5] as String,
       subtotal: fields[6] as String,
-      subtotalTax: fields[7] as String,
+      subtotal_tax: fields[7] as String,
       total: fields[8] as String,
-      totalTax: fields[9] as String,
+      total_tax: fields[9] as String,
       taxes: (fields[10] as List)?.cast<Taxes>(),
-      metaData: (fields[11] as List)?.cast<MetaData>(),
+      meta_data: (fields[11] as List)?.cast<MetaData>(),
       sku: fields[12] as String,
-      price: fields[13] as String,
+      price: fields[13] as double,
     );
   }
 
@@ -43,25 +43,25 @@ class LineItemsAdapter extends TypeAdapter<LineItems> {
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.productId)
+      ..write(obj.product_id)
       ..writeByte(3)
-      ..write(obj.variationId)
+      ..write(obj.variation_id)
       ..writeByte(4)
       ..write(obj.quantity)
       ..writeByte(5)
-      ..write(obj.taxClass)
+      ..write(obj.tax_class)
       ..writeByte(6)
       ..write(obj.subtotal)
       ..writeByte(7)
-      ..write(obj.subtotalTax)
+      ..write(obj.subtotal_tax)
       ..writeByte(8)
       ..write(obj.total)
       ..writeByte(9)
-      ..write(obj.totalTax)
+      ..write(obj.total_tax)
       ..writeByte(10)
       ..write(obj.taxes)
       ..writeByte(11)
-      ..write(obj.metaData)
+      ..write(obj.meta_data)
       ..writeByte(12)
       ..write(obj.sku)
       ..writeByte(13)
@@ -87,40 +87,40 @@ LineItems _$LineItemsFromJson(Map<String, dynamic> json) {
   return LineItems(
     id: json['id'] as int,
     name: json['name'] as String,
-    productId: json['productId'] as int,
-    variationId: json['variationId'] as int,
+    product_id: json['product_id'] as int,
+    variation_id: json['variation_id'] as int,
     quantity: json['quantity'] as int,
-    taxClass: json['taxClass'] as String,
+    tax_class: json['tax_class'] as String,
     subtotal: json['subtotal'] as String,
-    subtotalTax: json['subtotalTax'] as String,
+    subtotal_tax: json['subtotal_tax'] as String,
     total: json['total'] as String,
-    totalTax: json['totalTax'] as String,
+    total_tax: json['total_tax'] as String,
     taxes: (json['taxes'] as List)
         ?.map(
             (e) => e == null ? null : Taxes.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    metaData: (json['metaData'] as List)
+    meta_data: (json['meta_data'] as List)
         ?.map((e) =>
             e == null ? null : MetaData.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     sku: json['sku'] as String,
-    price: json['price'] as String,
+    price: (json['price'] as num)?.toDouble(),
   );
 }
 
 Map<String, dynamic> _$LineItemsToJson(LineItems instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'productId': instance.productId,
-      'variationId': instance.variationId,
+      'product_id': instance.product_id,
+      'variation_id': instance.variation_id,
       'quantity': instance.quantity,
-      'taxClass': instance.taxClass,
+      'tax_class': instance.tax_class,
       'subtotal': instance.subtotal,
-      'subtotalTax': instance.subtotalTax,
+      'subtotal_tax': instance.subtotal_tax,
       'total': instance.total,
-      'totalTax': instance.totalTax,
+      'total_tax': instance.total_tax,
       'taxes': instance.taxes,
-      'metaData': instance.metaData,
+      'meta_data': instance.meta_data,
       'sku': instance.sku,
       'price': instance.price,
     };

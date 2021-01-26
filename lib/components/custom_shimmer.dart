@@ -2,7 +2,6 @@ import 'package:bell_delivery_hub/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:bell_delivery_hub/extensions/context_extension.dart';
-import 'package:bell_delivery_hub/extensions/number_extensions.dart';
 
 class CustomShimmer extends StatelessWidget {
   //

@@ -1,0 +1,213 @@
+[
+    {
+      "id": 592,
+      "parent_id": 0,
+      "number": "592",
+      "order_key": "wc_order_PdUetOu7EQAxI",
+      "created_via": "admin",
+      "version": "4.6.1",
+      "status": "processing",
+      "currency": "USD",
+      "date_created": "2021-01-26T06:58:12",
+      "date_created_gmt": "2021-01-26T06:58:12",
+      "date_modified": "2021-01-26T07:00:00",
+      "date_modified_gmt": "2021-01-26T07:00:00",
+      "discount_total": "0.00",
+      "discount_tax": "0.00",
+      "shipping_total": "0.00",
+      "shipping_tax": "0.00",
+      "cart_tax": "2.25",
+      "total": "37.23",
+      "total_tax": "2.25",
+      "prices_include_tax": false,
+      "customer_id": 3,
+      "customer_ip_address": "",
+      "customer_user_agent": "",
+      "customer_note": "",
+      "billing": {
+        "first_name": "Mohamed",
+        "last_name": "Nazreen",
+        "company": "",
+        "address_1": "50",
+        "address_2": "",
+        "city": "Doha",
+        "state": "CA",
+        "postcode": "90201",
+        "country": "US",
+        "email": "com.nazreen@gmail.com",
+        "phone": "50250018"
+      },
+      "shipping": {
+        "first_name": "Mohamed",
+        "last_name": "Nazreen",
+        "company": "",
+        "address_1": "50",
+        "address_2": "",
+        "city": "Doha",
+        "state": "CA",
+        "postcode": "90201",
+        "country": "US"
+      },
+      "payment_method": "",
+      "payment_method_title": "",
+      "transaction_id": "",
+      "date_paid": "2021-01-26T07:00:00",
+      "date_paid_gmt": "2021-01-26T07:00:00",
+      "date_completed": null,
+      "date_completed_gmt": null,
+      "cart_hash": "",
+      "meta_data": [
+        {
+          "id": 10784,
+          "key": "_shipping_phone",
+          "value": ""
+        },
+        {
+          "id": 10809,
+          "key": "_wishlist_analytics_processed",
+          "value": "1"
+        },
+        {
+          "id": 10810,
+          "key": "slide_template",
+          "value": ""
+        },
+        {
+          "id": 10811,
+          "key": "rs_page_bg_color",
+          "value": ""
+        }
+      ],
+      "line_items": [
+        {
+          "id": 45,
+          "name": "Premium Quality",
+          "product_id": 121,
+          "variation_id": 0,
+          "quantity": 1,
+          "tax_class": "",
+          "subtotal": "21.99",
+          "subtotal_tax": "2.25",
+          "total": "21.99",
+          "total_tax": "2.25",
+          "taxes": [
+            {
+              "id": 2,
+              "total": "2.25",
+              "subtotal": "2.25"
+            }
+          ],
+          "meta_data": [],
+          "sku": "",
+          "price": 21.99
+        },
+        {
+          "id": 46,
+          "name": "Test",
+          "product_id": 132,
+          "variation_id": 0,
+          "quantity": 1,
+          "tax_class": "",
+          "subtotal": "0.00",
+          "subtotal_tax": "0.00",
+          "total": "0.00",
+          "total_tax": "0.00",
+          "taxes": [
+            {
+              "id": 2,
+              "total": "0",
+              "subtotal": "0"
+            }
+          ],
+          "meta_data": [
+            {
+              "id": 415,
+              "key": "_reduced_stock",
+              "value": "1"
+            }
+          ],
+          "sku": "ggggttt",
+          "price": 0
+        },
+        {
+          "id": 47,
+          "name": "Draft product - test",
+          "product_id": 138,
+          "variation_id": 0,
+          "quantity": 1,
+          "tax_class": "",
+          "subtotal": "0.00",
+          "subtotal_tax": "0.00",
+          "total": "0.00",
+          "total_tax": "0.00",
+          "taxes": [
+            {
+              "id": 2,
+              "total": "0",
+              "subtotal": "0"
+            }
+          ],
+          "meta_data": [],
+          "sku": "",
+          "price": 0
+        },
+        {
+          "id": 48,
+          "name": "test from woocommerce app",
+          "product_id": 563,
+          "variation_id": 0,
+          "quantity": 1,
+          "tax_class": "zero-rate",
+          "subtotal": "12.99",
+          "subtotal_tax": "0.00",
+          "total": "12.99",
+          "total_tax": "0.00",
+          "taxes": [
+            {
+              "id": 2,
+              "total": "",
+              "subtotal": ""
+            }
+          ],
+          "meta_data": [],
+          "sku": "test12345",
+          "price": 12.99
+        }
+      ],
+      "tax_lines": [
+        {
+          "id": 50,
+          "rate_code": "US-CA-CA TAX-1",
+          "rate_id": 2,
+          "label": "CA Tax",
+          "compound": false,
+          "tax_total": "2.25",
+          "shipping_tax_total": "0.00",
+          "rate_percent": 10.25,
+          "meta_data": []
+        }
+      ],
+      "shipping_lines": [],
+      "fee_lines": [],
+      "coupon_lines": [],
+      "refunds": [],
+      "currency_symbol": "$",
+      "_links": {
+        "self": [
+          {
+            "href": "https:\/\/demo.swipecomm.com\/wp-json\/wc\/v3\/orders\/592"
+          }
+        ],
+        "collection": [
+          {
+            "href": "https:\/\/demo.swipecomm.com\/wp-json\/wc\/v3\/orders"
+          }
+        ],
+        "customer": [
+          {
+            "href": "https:\/\/demo.swipecomm.com\/wp-json\/wc\/v3\/customers\/3"
+          }
+        ]
+      }
+    }
+  ]

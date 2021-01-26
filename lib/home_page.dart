@@ -4,7 +4,6 @@ import 'package:bell_delivery_hub/modal/website_data.dart';
 import 'package:bell_delivery_hub/order_bloc/order_bloc.dart';
 import 'package:bell_delivery_hub/order_bloc/order_event.dart';
 import 'package:bell_delivery_hub/order_bloc/order_state.dart';
-import 'package:bell_delivery_hub/theme/theme.dart';
 import 'package:bell_delivery_hub/utils/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,8 +13,9 @@ import 'package:bell_delivery_hub/extensions/number_extensions.dart';
 
 class HomePage extends StatefulWidget {
   final WebsiteData websiteData;
+  final BuildContext context;
 
-  const HomePage({Key key, this.websiteData}) : super(key: key);
+  const HomePage({Key key, this.websiteData, this.context}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
+    // final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                 return OrderItem(
                   data: orderData,
                   amount: "${orderData.total} ${orderData.currency}.",
-                  date: (orderData.dateCompleted).toString(),
+                  date: (orderData.date_created).toString(),
                   imageUrl:
                       "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
                   orderId: "Order Id : ${orderData.id}",

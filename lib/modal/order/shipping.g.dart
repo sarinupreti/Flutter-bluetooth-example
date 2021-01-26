@@ -17,11 +17,11 @@ class ShippingAdapter extends TypeAdapter<Shipping> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Shipping(
-      firstName: fields[0] as String,
-      lastName: fields[1] as String,
+      first_name: fields[0] as String,
+      last_name: fields[1] as String,
       company: fields[2] as String,
-      address1: fields[3] as String,
-      address2: fields[4] as String,
+      address_1: fields[3] as String,
+      address_2: fields[4] as String,
       city: fields[5] as String,
       state: fields[6] as String,
       postcode: fields[7] as String,
@@ -34,15 +34,15 @@ class ShippingAdapter extends TypeAdapter<Shipping> {
     writer
       ..writeByte(9)
       ..writeByte(0)
-      ..write(obj.firstName)
+      ..write(obj.first_name)
       ..writeByte(1)
-      ..write(obj.lastName)
+      ..write(obj.last_name)
       ..writeByte(2)
       ..write(obj.company)
       ..writeByte(3)
-      ..write(obj.address1)
+      ..write(obj.address_1)
       ..writeByte(4)
-      ..write(obj.address2)
+      ..write(obj.address_2)
       ..writeByte(5)
       ..write(obj.city)
       ..writeByte(6)
@@ -70,11 +70,11 @@ class ShippingAdapter extends TypeAdapter<Shipping> {
 
 Shipping _$ShippingFromJson(Map<String, dynamic> json) {
   return Shipping(
-    firstName: json['firstName'] as String,
-    lastName: json['lastName'] as String,
+    first_name: json['first_name'] as String,
+    last_name: json['last_name'] as String,
     company: json['company'] as String,
-    address1: json['address1'] as String,
-    address2: json['address2'] as String,
+    address_1: json['address_1'] as String,
+    address_2: json['address_2'] as String,
     city: json['city'] as String,
     state: json['state'] as String,
     postcode: json['postcode'] as String,
@@ -83,11 +83,11 @@ Shipping _$ShippingFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ShippingToJson(Shipping instance) => <String, dynamic>{
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
+      'first_name': instance.first_name,
+      'last_name': instance.last_name,
       'company': instance.company,
-      'address1': instance.address1,
-      'address2': instance.address2,
+      'address_1': instance.address_1,
+      'address_2': instance.address_2,
       'city': instance.city,
       'state': instance.state,
       'postcode': instance.postcode,

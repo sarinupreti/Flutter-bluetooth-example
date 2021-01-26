@@ -82,7 +82,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
       }
     });
 
-    final screenHeight = MediaQuery.of(context).size.height;
+    // final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: context.theme.surface,
@@ -113,6 +113,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
                                   decoration: BoxDecoration(
                                       color: AppColors.primaryColor,
                                       image: DecorationImage(
+                                          fit: BoxFit.cover,
                                           alignment: Alignment.topCenter,
                                           image: NetworkImage(
                                             "https://coursemology.sg/wp-content/uploads/2020/04/learn-makeup.jpg",
@@ -136,7 +137,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
                             ),
                           ],
                         ),
-                        100.verticalSpace,
+                        60.verticalSpace,
                         Center(
                           child: Text("Welcome to BelaOryx",
                               textAlign: TextAlign.center,
@@ -160,6 +161,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
                                       fontSize: 14.flexibleFontSize,
                                       fontWeight: FontWeight.normal)),
                         ),
+                        20.verticalSpace,
                         consumerKey(),
                         20.verticalSpace,
                         consumerSecret(),
@@ -175,38 +177,39 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
   }
 
   termsAndCondition() {
-    return InkWell(
-      onTap: () {
-        // ExtendedNavigator.of(context).push(Routes.alternateConnectStoreScreen);
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-        child: RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-                text: "By connecting you agree to our ",
-                style: AppTextTheme.normal12Text.copyWith(
-                    color: AppColors.greyColor, fontWeight: FontWeight.normal),
-                children: [
-                  TextSpan(
-                    text: "Privacy policy",
-                    style: AppTextTheme.normal12Text.copyWith(
-                        color: AppColors.primaryColor,
-                        fontWeight: FontWeight.normal),
-                  ),
-                  TextSpan(
-                    text: " and ",
-                    style: AppTextTheme.normal12Text.copyWith(
-                        color: AppColors.greyColor,
-                        fontWeight: FontWeight.normal),
-                  ),
-                  TextSpan(
-                    text: "Terms and Conditions",
-                    style: AppTextTheme.normal12Text.copyWith(
-                        color: AppColors.primaryColor,
-                        fontWeight: FontWeight.normal),
-                  ),
-                ])),
+    return SafeArea(
+      child: InkWell(
+        onTap: () {},
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+          child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                  text: "By connecting you agree to our ",
+                  style: AppTextTheme.normal12Text.copyWith(
+                      color: AppColors.greyColor,
+                      fontWeight: FontWeight.normal),
+                  children: [
+                    TextSpan(
+                      text: "Privacy policy",
+                      style: AppTextTheme.normal12Text.copyWith(
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.normal),
+                    ),
+                    TextSpan(
+                      text: " and ",
+                      style: AppTextTheme.normal12Text.copyWith(
+                          color: AppColors.greyColor,
+                          fontWeight: FontWeight.normal),
+                    ),
+                    TextSpan(
+                      text: "Terms and Conditions",
+                      style: AppTextTheme.normal12Text.copyWith(
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.normal),
+                    ),
+                  ])),
+        ),
       ),
     );
   }

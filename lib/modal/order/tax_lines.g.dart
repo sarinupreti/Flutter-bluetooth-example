@@ -18,36 +18,39 @@ class TaxLinesAdapter extends TypeAdapter<TaxLines> {
     };
     return TaxLines(
       id: fields[0] as int,
-      rateCode: fields[1] as String,
-      rateId: fields[2] as int,
+      rate_code: fields[1] as String,
+      rate_id: fields[2] as int,
       label: fields[3] as String,
       compound: fields[4] as bool,
-      taxTotal: fields[5] as String,
-      shippingTaxTotal: fields[6] as String,
-      metaData: (fields[7] as List)?.cast<MetaData>(),
+      tax_total: fields[5] as String,
+      shipping_tax_total: fields[6] as String,
+      meta_data: (fields[7] as List)?.cast<MetaData>(),
+      rate_percent: fields[8] as double,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaxLines obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.rateCode)
+      ..write(obj.rate_code)
       ..writeByte(2)
-      ..write(obj.rateId)
+      ..write(obj.rate_id)
       ..writeByte(3)
       ..write(obj.label)
       ..writeByte(4)
       ..write(obj.compound)
       ..writeByte(5)
-      ..write(obj.taxTotal)
+      ..write(obj.tax_total)
       ..writeByte(6)
-      ..write(obj.shippingTaxTotal)
+      ..write(obj.shipping_tax_total)
       ..writeByte(7)
-      ..write(obj.metaData);
+      ..write(obj.meta_data)
+      ..writeByte(8)
+      ..write(obj.rate_percent);
   }
 
   @override
@@ -68,26 +71,28 @@ class TaxLinesAdapter extends TypeAdapter<TaxLines> {
 TaxLines _$TaxLinesFromJson(Map<String, dynamic> json) {
   return TaxLines(
     id: json['id'] as int,
-    rateCode: json['rateCode'] as String,
-    rateId: json['rateId'] as int,
+    rate_code: json['rate_code'] as String,
+    rate_id: json['rate_id'] as int,
     label: json['label'] as String,
     compound: json['compound'] as bool,
-    taxTotal: json['taxTotal'] as String,
-    shippingTaxTotal: json['shippingTaxTotal'] as String,
-    metaData: (json['metaData'] as List)
+    tax_total: json['tax_total'] as String,
+    shipping_tax_total: json['shipping_tax_total'] as String,
+    meta_data: (json['meta_data'] as List)
         ?.map((e) =>
             e == null ? null : MetaData.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    rate_percent: (json['rate_percent'] as num)?.toDouble(),
   );
 }
 
 Map<String, dynamic> _$TaxLinesToJson(TaxLines instance) => <String, dynamic>{
       'id': instance.id,
-      'rateCode': instance.rateCode,
-      'rateId': instance.rateId,
+      'rate_code': instance.rate_code,
+      'rate_id': instance.rate_id,
       'label': instance.label,
       'compound': instance.compound,
-      'taxTotal': instance.taxTotal,
-      'shippingTaxTotal': instance.shippingTaxTotal,
-      'metaData': instance.metaData,
+      'tax_total': instance.tax_total,
+      'shipping_tax_total': instance.shipping_tax_total,
+      'meta_data': instance.meta_data,
+      'rate_percent': instance.rate_percent,
     };

@@ -23,13 +23,13 @@ class Order extends HiveObject implements Equatable {
   @HiveField(0)
   final int id;
   @HiveField(1)
-  final int parentId;
+  final int parent_id;
   @HiveField(2)
   final String number;
   @HiveField(3)
-  final String orderKey;
+  final String order_key;
   @HiveField(4)
-  final String createdVia;
+  final String created_via;
   @HiveField(5)
   final String version;
   @HiveField(6)
@@ -37,117 +37,120 @@ class Order extends HiveObject implements Equatable {
   @HiveField(7)
   final String currency;
   @HiveField(8)
-  final String dateCreated;
+  final String date_created;
   @HiveField(9)
-  final String dateCreatedGmt;
+  final String date_created_gmt;
   @HiveField(10)
-  final String dateModified;
+  final String date_modified;
   @HiveField(11)
-  final String dateModifiedGmt;
+  final String date_modified_gmt;
   @HiveField(12)
-  final String discountTotal;
+  final String discount_total;
   @HiveField(13)
-  final String discountTax;
+  final String discount_tax;
   @HiveField(14)
-  final String shippingTotal;
+  final String shipping_total;
   @HiveField(15)
-  final String shippingTax;
+  final String shipping_tax;
   @HiveField(16)
-  final String cartTax;
+  final String cart_tax;
   @HiveField(17)
   final String total;
   @HiveField(18)
-  final String totalTax;
+  final String total_tax;
   @HiveField(19)
-  final bool pricesIncludeTax;
+  final bool prices_include_tax;
   @HiveField(20)
-  final int customerId;
+  final int customer_id;
   @HiveField(21)
-  final String customerIpAddress;
+  final String customer_ip_address;
   @HiveField(22)
-  final String customerUserAgent;
+  final String customer_user_agent;
   @HiveField(23)
-  final String customerNote;
+  final String customer_note;
   @HiveField(24)
   final Billing billing;
   @HiveField(25)
   final Shipping shipping;
   @HiveField(26)
-  final String paymentMethod;
+  final String payment_method;
   @HiveField(27)
-  final String paymentMethodTitle;
+  final String payment_method_title;
   @HiveField(28)
-  final String transactionId;
+  final String transaction_id;
   @HiveField(29)
-  final String datePaid;
+  final String date_paid;
   @HiveField(30)
-  final String datePaidGmt;
+  final String date_paid_gmt;
   @HiveField(31)
-  final String dateCompleted;
+  final String date_completed;
   @HiveField(32)
-  final String dateCompletedGmt;
+  final String date_completed_gmt;
   @HiveField(33)
-  final String cartHash;
+  final String cart_hash;
   @HiveField(34)
-  final List<MetaDataType> metaData;
+  final List<MetaDataType> meta_data;
   @HiveField(35)
-  final List<LineItems> lineItems;
+  final List<LineItems> line_items;
   @HiveField(36)
-  final List<TaxLines> taxLines;
+  final List<TaxLines> tax_lines;
   @HiveField(37)
-  final List<ShippingLines> shippingLines;
+  final List<ShippingLines> shipping_lines;
   @HiveField(38)
-  final List<OrderFeeLine> feeLines;
+  final List<OrderFeeLine> fee_lines;
   @HiveField(39)
   final List<OrderCouponLine> couponLines;
   @HiveField(40)
   final List<Refunds> refunds;
   @HiveField(41)
   final Links links;
+  @HiveField(42)
+  final String currency_symbol;
 
   Order(
-      {@required this.id,
-      this.parentId,
+      this.id,
+      this.parent_id,
       this.number,
-      this.orderKey,
-      this.createdVia,
+      this.order_key,
+      this.created_via,
       this.version,
       this.status,
       this.currency,
-      this.dateCreated,
-      this.dateCreatedGmt,
-      this.dateModified,
-      this.dateModifiedGmt,
-      this.discountTotal,
-      this.discountTax,
-      this.shippingTotal,
-      this.shippingTax,
-      this.cartTax,
+      this.date_created,
+      this.date_created_gmt,
+      this.date_modified,
+      this.date_modified_gmt,
+      this.discount_total,
+      this.discount_tax,
+      this.shipping_total,
+      this.shipping_tax,
+      this.cart_tax,
       this.total,
-      this.totalTax,
-      this.pricesIncludeTax,
-      this.customerId,
-      this.customerIpAddress,
-      this.customerUserAgent,
-      this.customerNote,
+      this.total_tax,
+      this.prices_include_tax,
+      this.customer_id,
+      this.customer_ip_address,
+      this.customer_user_agent,
+      this.customer_note,
       this.billing,
       this.shipping,
-      this.paymentMethod,
-      this.paymentMethodTitle,
-      this.transactionId,
-      this.datePaid,
-      this.datePaidGmt,
-      this.dateCompleted,
-      this.dateCompletedGmt,
-      this.cartHash,
-      this.metaData,
-      this.lineItems,
-      this.taxLines,
-      this.shippingLines,
-      this.feeLines,
+      this.payment_method,
+      this.payment_method_title,
+      this.transaction_id,
+      this.date_paid,
+      this.date_paid_gmt,
+      this.date_completed,
+      this.date_completed_gmt,
+      this.cart_hash,
+      this.meta_data,
+      this.line_items,
+      this.tax_lines,
+      this.shipping_lines,
+      this.fee_lines,
       this.couponLines,
       this.refunds,
-      this.links})
+      this.links,
+      this.currency_symbol)
       : assert(id != null);
 
   @override

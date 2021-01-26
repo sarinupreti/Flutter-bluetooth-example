@@ -16,43 +16,43 @@ class LineItems extends HiveObject implements Equatable {
   @HiveField(1)
   String name;
   @HiveField(2)
-  int productId;
+  int product_id;
   @HiveField(3)
-  int variationId;
+  int variation_id;
   @HiveField(4)
   int quantity;
   @HiveField(5)
-  String taxClass;
+  String tax_class;
   @HiveField(6)
   String subtotal;
   @HiveField(7)
-  String subtotalTax;
+  String subtotal_tax;
   @HiveField(8)
   String total;
   @HiveField(9)
-  String totalTax;
+  String total_tax;
   @HiveField(10)
   List<Taxes> taxes;
   @HiveField(11)
-  List<MetaData> metaData;
+  List<MetaData> meta_data;
   @HiveField(12)
   String sku;
   @HiveField(13)
-  String price;
+  double price;
 
   LineItems(
       {this.id,
       this.name,
-      this.productId,
-      this.variationId,
+      this.product_id,
+      this.variation_id,
       this.quantity,
-      this.taxClass,
+      this.tax_class,
       this.subtotal,
-      this.subtotalTax,
+      this.subtotal_tax,
       this.total,
-      this.totalTax,
+      this.total_tax,
       this.taxes,
-      this.metaData,
+      this.meta_data,
       this.sku,
       this.price});
 

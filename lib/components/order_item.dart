@@ -1,7 +1,6 @@
-import 'package:bell_delivery_hub/components/custom_shimmer.dart';
 import 'package:bell_delivery_hub/modal/order/order.dart';
+import 'package:bell_delivery_hub/order_details.dart';
 import 'package:bell_delivery_hub/theme/theme.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:bell_delivery_hub/extensions/context_extension.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
@@ -11,7 +10,6 @@ class OrderItem extends StatelessWidget {
   final String orderId;
   final String date;
   final Order data;
-
   final String amount;
 
   const OrderItem(
@@ -22,9 +20,16 @@ class OrderItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // return ExtendedNavigator.of(context).push(Routes.orderDetailsScreen,
-        //     arguments:
-        //         OrderDetailsScreenArguments(orderId: orderId, data: data));
+        return
+            // ExtendedNavigator.of(ctx).push(Routes.orderDetailsScreens,
+            //     arguments:
+            //         OrderDetailsScreensArguments(orderId: orderId, data: data));
+
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        OrderDetailsScreens(orderId: orderId, data: data)));
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -56,7 +61,7 @@ class OrderItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                          "${data.id} ${data.billing.firstName} ${data.billing.lastName}",
+                          "${data.id} ${data.billing.first_name} ${data.billing.last_name}",
                           style: AppTextTheme.title.copyWith(
                               color: context.theme.textColor,
                               fontSize: 15.flexibleHeight)),

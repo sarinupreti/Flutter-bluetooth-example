@@ -14,29 +14,32 @@ class TaxLines extends HiveObject implements Equatable {
   @HiveField(0)
   int id;
   @HiveField(1)
-  String rateCode;
+  String rate_code;
   @HiveField(2)
-  int rateId;
+  int rate_id;
   @HiveField(3)
   String label;
   @HiveField(4)
   bool compound;
   @HiveField(5)
-  String taxTotal;
+  String tax_total;
   @HiveField(6)
-  String shippingTaxTotal;
+  String shipping_tax_total;
   @HiveField(7)
-  List<MetaData> metaData;
+  List<MetaData> meta_data;
+  @HiveField(8)
+  double rate_percent;
 
   TaxLines(
       {this.id,
-      this.rateCode,
-      this.rateId,
+      this.rate_code,
+      this.rate_id,
       this.label,
       this.compound,
-      this.taxTotal,
-      this.shippingTaxTotal,
-      this.metaData});
+      this.tax_total,
+      this.shipping_tax_total,
+      this.meta_data,
+      this.rate_percent});
 
   @override
   List<Object> get props => throw UnimplementedError();

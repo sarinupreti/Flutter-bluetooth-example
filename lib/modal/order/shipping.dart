@@ -10,15 +10,15 @@ part 'shipping.g.dart';
 // ignore: must_be_immutable
 class Shipping extends HiveObject implements Equatable {
   @HiveField(0)
-  String firstName;
+  String first_name;
   @HiveField(1)
-  String lastName;
+  String last_name;
   @HiveField(2)
   String company;
   @HiveField(3)
-  String address1;
+  String address_1;
   @HiveField(4)
-  String address2;
+  String address_2;
   @HiveField(5)
   String city;
   @HiveField(6)
@@ -29,11 +29,11 @@ class Shipping extends HiveObject implements Equatable {
   String country;
 
   Shipping(
-      {this.firstName,
-      this.lastName,
+      {this.first_name,
+      this.last_name,
       this.company,
-      this.address1,
-      this.address2,
+      this.address_1,
+      this.address_2,
       this.city,
       this.state,
       this.postcode,
