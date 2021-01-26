@@ -230,26 +230,23 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
       builder: (ctx, loginState) {
         return Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Hero(
-              tag: "home",
-              child: Button(
-                isLoading: loginState is LoginLoading,
-                message: "Login",
-                style: AppTextTheme.normal15Text,
-                onPressed: () async {
-                  if (_formKey.currentState.validate()) {
-                    _throttle.throttle(() => inject<LoginBloc>().add(
-                          LoginInWithEmailButtonPressed(
-                            websiteUrl: "https://demo.swipecomm.com/",
-                            consumerKey: consumerKeyController.text,
-                            consumerSecret: consumerSecretController.text,
-                          ),
-                        ));
-                  }
+            child: Button(
+              isLoading: loginState is LoginLoading,
+              message: "Login",
+              style: AppTextTheme.normal15Text,
+              onPressed: () async {
+                if (_formKey.currentState.validate()) {
+                  _throttle.throttle(() => inject<LoginBloc>().add(
+                        LoginInWithEmailButtonPressed(
+                          websiteUrl: "https://demo.swipecomm.com/",
+                          consumerKey: consumerKeyController.text,
+                          consumerSecret: consumerSecretController.text,
+                        ),
+                      ));
+                }
 
-                  // _showCupertinoAlert();
-                },
-              ),
+                // _showCupertinoAlert();
+              },
             ));
       },
     );

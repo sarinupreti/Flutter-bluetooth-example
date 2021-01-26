@@ -158,7 +158,7 @@ extension SwipeCommRouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushOrderDetailsScreens({
     Key key,
-    String orderId,
+    int orderId,
     Order data,
   }) =>
       push<dynamic>(
@@ -205,7 +205,7 @@ class HomePageArguments {
 /// OrderDetailsScreens arguments holder class
 class OrderDetailsScreensArguments {
   final Key key;
-  final String orderId;
+  final int orderId;
   final Order data;
   OrderDetailsScreensArguments({this.key, this.orderId, this.data});
 }

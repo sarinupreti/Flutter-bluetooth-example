@@ -161,4 +161,24 @@ class _SwipeCommApi implements SwipeCommApi {
         .toList();
     return value;
   }
+
+  @override
+  Future<Order> updateOrder(id, body) async {
+    ArgumentError.checkNotNull(id, 'id');
+    ArgumentError.checkNotNull(body, 'body');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = body;
+    final _result = await _dio.request<Map<String, dynamic>>(
+        'wp-json/wc/v3/orders/$id',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'POST',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = Order.fromJson(_result.data);
+    return value;
+  }
 }

@@ -14,3 +14,12 @@ class GetAllOrders extends OrderEvent {
   @override
   List<Object> get props => [];
 }
+
+class UpdateOrders extends OrderEvent {
+  final int orderId;
+
+  UpdateOrders(this.orderId);
+
+  @override
+  List<Object> get props => [orderId];
+}

@@ -22,6 +22,10 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     if (event is GetAllOrders) {
       yield* _mapOrderWithEmailToState(event);
     }
+
+    if (event is UpdateOrders) {
+      yield* _mapUpdateOrderStatus(event);
+    }
   }
 
   Stream<OrderState> _mapOrderWithEmailToState(GetAllOrders event) async* {
@@ -30,6 +34,23 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       final data = await _orderRepository.getAllOdersFromApi();
       if (data.isSuccessful) {
         yield OrderSuccess(orders: data.data);
+      } else {
+        yield OrderFailure(
+            error: NetworkExceptions.getErrorMessage(data.error));
+      }
+    } on AuthenticationException catch (e) {
+      yield OrderFailure(error: e.message);
+    } catch (err) {
+      yield OrderFailure(error: err.message ?? 'An unknown error occured');
+    }
+  }
+
+  Stream<OrderState> _mapUpdateOrderStatus(UpdateOrders event) async* {
+    yield OrderLoading();
+    try {
+      final data = await _orderRepository.updateOrderFromApi(event.orderId);
+      if (data.isSuccessful) {
+        yield OderUpdatingSuccess();
       } else {
         yield OrderFailure(
             error: NetworkExceptions.getErrorMessage(data.error));

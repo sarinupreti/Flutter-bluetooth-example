@@ -13,6 +13,8 @@ class OrderInitial extends OrderState {}
 
 class OrderLoading extends OrderState {}
 
+class OderUpdatingSuccess extends OrderState {}
+
 class OrderSuccess extends OrderState {
   final List<Order> orders;
 

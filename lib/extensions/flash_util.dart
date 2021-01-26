@@ -1,5 +1,8 @@
+import 'package:bell_delivery_hub/theme/theme.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
+import 'package:bell_delivery_hub/extensions/number_extensions.dart';
+import 'package:bell_delivery_hub/extensions/context_extension.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
 
 extension CaliberBuildContextExtension on BuildContext {
@@ -56,29 +59,27 @@ extension CaliberBuildContextExtension on BuildContext {
       },
     ).then((_) {
       if (_ != null) {
-        showMessage(_.toString());
+        showMessage(_.toString(), false);
       }
     });
   }
 
-  void showMessage(
-    String message,
-  ) {
+  void showMessage(String message, bool isError) {
     showFlash(
         context: this,
         duration: Duration(seconds: 3),
         builder: (_, controller) {
           return Flash(
             controller: controller,
-            backgroundColor: Colors.white,
-            position: FlashPosition.top,
+            backgroundColor: isError ? Colors.red : AppColors.seaGreenColor,
+            position: FlashPosition.bottom,
             style: FlashStyle.floating,
             child: FlashBar(
               message: Text(message,
-                  style: TextStyle(
+                  style: Theme.of(this).textTheme.subtitle1.copyWith(
                       fontFamily: "Poppins",
-                      fontSize: 14.flexibleFontSize,
-                      color: Colors.red,
+                      fontSize: 15.flexibleFontSize,
+                      color: Colors.white,
                       fontWeight: FontWeight.w500)),
             ),
           );

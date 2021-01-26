@@ -47,6 +47,12 @@ abstract class SwipeCommApi {
 
   @GET("$getAllOrdersList")
   Future<List<Order>> getAllOrders();
+
+  @POST("$getAllOrdersList/{orderId}")
+  Future<Order> updateOrder(
+    @Path("orderId") int id,
+    @Body() body,
+  );
 }
 
 Dio buildDio() {
@@ -54,10 +60,6 @@ Dio buildDio() {
     connectTimeout: DEFAULT_CONNECTION_TIMEOUT.inMilliseconds,
     receiveTimeout: DEFAULT_RECEIVE_TIMEOUT.inMilliseconds,
   );
-  // final deviceData = GetDeviceInfo.deviceData;
-  // if (deviceData != null)
-  //   options.headers["user-agent"] =
-  //       "Linux; ${deviceData['deviceType']} ${deviceData['version.release']}; ${deviceData['model']} Build/${deviceData['id']} MC${deviceData['devicePlatform']}/${deviceData['appVersion']}";
 
   final dio = Dio(options)
     ..interceptors.addAll(
