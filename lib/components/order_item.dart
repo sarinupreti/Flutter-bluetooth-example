@@ -4,9 +4,7 @@ import 'package:bell_delivery_hub/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:bell_delivery_hub/extensions/context_extension.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
-
 import 'package:auto_route/auto_route.dart';
-import 'package:intl/intl.dart';
 
 class OrderItem extends StatelessWidget {
   final String imageUrl;

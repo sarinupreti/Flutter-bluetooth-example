@@ -2,6 +2,7 @@ import 'package:bell_delivery_hub/theme/theme.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
+import 'package:bell_delivery_hub/extensions/context_extension.dart';
 
 extension CaliberBuildContextExtension on BuildContext {
   static TextStyle _contentStyle(BuildContext context, [Color color]) {
@@ -86,6 +87,7 @@ extension CaliberBuildContextExtension on BuildContext {
 
   void showCustom(
     String message,
+    BuildContext context,
   ) {
     showFlash(
         context: this,
@@ -93,13 +95,15 @@ extension CaliberBuildContextExtension on BuildContext {
         builder: (_, controller) {
           return Flash(
             controller: controller,
-            backgroundColor: AppColors.white,
+            backgroundColor: context.theme.background,
             position: FlashPosition.bottom,
             style: FlashStyle.grounded,
             child: FlashBar(
               message: Text(message,
+                  textAlign: TextAlign.center,
                   style: Theme.of(this).textTheme.subtitle1.copyWith(
                       fontFamily: "Poppins",
+                      color: context.theme.textColor,
                       fontSize: 15.flexibleFontSize,
                       fontWeight: FontWeight.w500)),
             ),

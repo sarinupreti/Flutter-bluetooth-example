@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:android_intent/android_intent.dart';
 import 'package:bell_delivery_hub/components/Button.dart';
 import 'package:bell_delivery_hub/components/settings_ui/settings_section.dart';
 import 'package:bell_delivery_hub/globals/exveptions/login_error_modal.dart';
@@ -10,6 +12,7 @@ import 'package:bell_delivery_hub/extensions/context_extension.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
 import 'package:bell_delivery_hub/extensions/flash_util.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OrderDetailsScreens extends StatefulWidget {
   final int orderId;
@@ -451,26 +454,29 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                     ? Column(
                         children: [
                           8.verticalSpace,
-                          Row(
-                            children: [
-                              Icon(Icons.call,
-                                  color:
-                                      context.theme.corePalatte.seaGreenColor),
-                              10.horizontalSpace,
-                              Text(
-                                widget.data.billing.phone,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6
-                                    .copyWith(
-                                        fontSize: 15.flexibleFontSize,
-                                        color: context
-                                            .theme.corePalatte.seaGreenColor,
-                                        fontWeight: FontWeight.normal),
-                              )
-                            ],
+                          InkWell(
+                            onTap: () => openPhone(widget.data.billing.phone),
+                            child: Row(
+                              children: [
+                                Icon(Icons.call,
+                                    color: context
+                                        .theme.corePalatte.seaGreenColor),
+                                10.horizontalSpace,
+                                Text(
+                                  widget.data.billing.phone,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      .copyWith(
+                                          fontSize: 15.flexibleFontSize,
+                                          color: context
+                                              .theme.corePalatte.seaGreenColor,
+                                          fontWeight: FontWeight.normal),
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       )
@@ -479,26 +485,31 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                     ? Column(
                         children: [
                           8.verticalSpace,
-                          Row(
-                            children: [
-                              Icon(Icons.mail,
-                                  color:
-                                      context.theme.corePalatte.seaGreenColor),
-                              10.horizontalSpace,
-                              Text(
-                                widget.data.billing.email,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6
-                                    .copyWith(
-                                        fontSize: 15.flexibleFontSize,
-                                        color: context
-                                            .theme.corePalatte.seaGreenColor,
-                                        fontWeight: FontWeight.normal),
-                              )
-                            ],
+                          InkWell(
+                            onTap: () => openMail(
+                              widget.data.billing.email,
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(Icons.mail,
+                                    color: context
+                                        .theme.corePalatte.seaGreenColor),
+                                10.horizontalSpace,
+                                Text(
+                                  widget.data.billing.email,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      .copyWith(
+                                          fontSize: 15.flexibleFontSize,
+                                          color: context
+                                              .theme.corePalatte.seaGreenColor,
+                                          fontWeight: FontWeight.normal),
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       )
@@ -616,26 +627,29 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                     ? Column(
                         children: [
                           8.verticalSpace,
-                          Row(
-                            children: [
-                              Icon(Icons.call,
-                                  color:
-                                      context.theme.corePalatte.seaGreenColor),
-                              10.horizontalSpace,
-                              Text(
-                                widget.data.billing.phone,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6
-                                    .copyWith(
-                                        fontSize: 15.flexibleFontSize,
-                                        color: context
-                                            .theme.corePalatte.seaGreenColor,
-                                        fontWeight: FontWeight.normal),
-                              )
-                            ],
+                          InkWell(
+                            onTap: () => openPhone(widget.data.billing.phone),
+                            child: Row(
+                              children: [
+                                Icon(Icons.call,
+                                    color: context
+                                        .theme.corePalatte.seaGreenColor),
+                                10.horizontalSpace,
+                                Text(
+                                  widget.data.billing.phone,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      .copyWith(
+                                          fontSize: 15.flexibleFontSize,
+                                          color: context
+                                              .theme.corePalatte.seaGreenColor,
+                                          fontWeight: FontWeight.normal),
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       )
@@ -644,26 +658,29 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                     ? Column(
                         children: [
                           8.verticalSpace,
-                          Row(
-                            children: [
-                              Icon(Icons.mail,
-                                  color:
-                                      context.theme.corePalatte.seaGreenColor),
-                              10.horizontalSpace,
-                              Text(
-                                widget.data.billing.email,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6
-                                    .copyWith(
-                                        fontSize: 15.flexibleFontSize,
-                                        color: context
-                                            .theme.corePalatte.seaGreenColor,
-                                        fontWeight: FontWeight.normal),
-                              )
-                            ],
+                          InkWell(
+                            onTap: () => openMail(widget.data.billing.email),
+                            child: Row(
+                              children: [
+                                Icon(Icons.mail,
+                                    color: context
+                                        .theme.corePalatte.seaGreenColor),
+                                10.horizontalSpace,
+                                Text(
+                                  widget.data.billing.email,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      .copyWith(
+                                          fontSize: 15.flexibleFontSize,
+                                          color: context
+                                              .theme.corePalatte.seaGreenColor,
+                                          fontWeight: FontWeight.normal),
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       )
@@ -672,5 +689,23 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
             ),
           )
         ]);
+  }
+
+  openMail(String email) {
+    final Uri _emailLaunchUri = Uri(
+        scheme: 'mailto',
+        path: email,
+        queryParameters: {'subject': 'Bell Delivery'});
+
+    launch(_emailLaunchUri.toString());
+  }
+
+  openPhone(String number) async {
+    final url = "tel:$number";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
