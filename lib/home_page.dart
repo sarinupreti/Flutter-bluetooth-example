@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 import 'package:bell_delivery_hub/extensions/context_extension.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
+import 'package:bell_delivery_hub/extensions/flash_util.dart';
 
 class HomePage extends StatefulWidget {
   final WebsiteData websiteData;
@@ -127,71 +128,74 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         title: WebsafeSvg.asset("assets/images/logo_app_bar.svg"),
       ),
-      body: BlocConsumer<OrderBloc, OrderState>(
-        cubit: inject<OrderBloc>(),
-        listener: (context, state) {
-          if (state is OrderLoading) {
-            Scaffold.of(context)
-                .showSnackBar(SnackBar(content: CupertinoActivityIndicator()));
-          } else if (state is OrderSuccess && state.orders.isEmpty) {
-            Scaffold.of(context)
-                .showSnackBar(SnackBar(content: Text('No more orders')));
-          } else if (state is OrderFailure) {
-            Scaffold.of(context)
-                .showSnackBar(SnackBar(content: Text(state.error)));
-            context.bloc<OrderBloc>().isFetching = false;
-          }
-        },
-        builder: (context, state) {
-          if (state is OrderInitial ||
-              state is OrderLoading && _orders.isEmpty) {
-            return CircularProgressIndicator();
-          } else if (state is OrderSuccess) {
-            _orders.addAll(state.orders);
-            context.bloc<OrderBloc>().isFetching = false;
-            Scaffold.of(context).hideCurrentSnackBar();
-          } else if (state is OrderFailure && _orders.isEmpty) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {
+      body: BlocProvider(
+        create: (context) => inject<OrderBloc>(),
+        child: BlocConsumer<OrderBloc, OrderState>(
+          cubit: inject<OrderBloc>(),
+          listener: (context, state) {
+            if (state is OrderSuccess && state.orders.isEmpty) {
+              return context.showCustom("No more data");
+            }
+          },
+          builder: (context, state) {
+            if (state is OrderInitial ||
+                state is OrderLoading && _orders.isEmpty) {
+              return Center(child: CupertinoActivityIndicator());
+            } else if (state is OrderSuccess) {
+              state.orders.forEach((element) {
+                if (!_orders.contains(element)) {
+                  _orders.add(element);
+                }
+              });
+
+              context.bloc<OrderBloc>().isFetching = false;
+              Scaffold.of(context).hideCurrentSnackBar();
+            } else if (state is OrderFailure && _orders.isEmpty) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      context.bloc<OrderBloc>()
+                        ..isFetching = true
+                        ..add(GetAllOrders());
+                    },
+                    icon: Icon(Icons.refresh, size: 35),
+                  ),
+                  SizedBox(height: 20.flexibleHeight),
+                  Center(
+                      child: Text(state.error,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.subtitle1)),
+                ],
+              );
+            }
+            return ListView.builder(
+              controller: _scrollController
+                ..addListener(() {
+                  if (_scrollController.offset ==
+                          _scrollController.position.maxScrollExtent &&
+                      !context.bloc<OrderBloc>().isFetching) {
                     context.bloc<OrderBloc>()
                       ..isFetching = true
                       ..add(GetAllOrders());
-                  },
-                  icon: Icon(Icons.refresh),
-                ),
-                const SizedBox(height: 15),
-                Text(state.error, textAlign: TextAlign.center),
-              ],
-            );
-          }
-          return ListView.builder(
-            controller: _scrollController
-              ..addListener(() {
-                if (_scrollController.offset ==
-                        _scrollController.position.maxScrollExtent &&
-                    !context.bloc<OrderBloc>().isFetching) {
-                  context.bloc<OrderBloc>()
-                    ..isFetching = true
-                    ..add(GetAllOrders());
-                }
-              }),
-            itemCount: _orders.length,
-            itemBuilder: (BuildContext context, int index) {
-              final orderData = _orders[index];
+                  }
+                }),
+              itemCount: _orders.length,
+              itemBuilder: (BuildContext context, int index) {
+                final orderData = _orders[index];
 
-              return OrderItem(
-                data: orderData,
-                amount: "${orderData.total} ${orderData.currency}.",
-                date: (orderData.date_created).toString(),
-                orderId: "Order Id : ${orderData.id}",
-              );
-            },
-          );
-        },
+                return OrderItem(
+                  data: orderData,
+                  amount: "${orderData.total} ${orderData.currency}.",
+                  date: (orderData.date_created).toString(),
+                  orderId: "Order Id : ${orderData.id}",
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

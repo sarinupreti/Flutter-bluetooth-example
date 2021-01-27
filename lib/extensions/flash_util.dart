@@ -84,6 +84,29 @@ extension CaliberBuildContextExtension on BuildContext {
         });
   }
 
+  void showCustom(
+    String message,
+  ) {
+    showFlash(
+        context: this,
+        duration: Duration(seconds: 3),
+        builder: (_, controller) {
+          return Flash(
+            controller: controller,
+            backgroundColor: AppColors.white,
+            position: FlashPosition.bottom,
+            style: FlashStyle.grounded,
+            child: FlashBar(
+              message: Text(message,
+                  style: Theme.of(this).textTheme.subtitle1.copyWith(
+                      fontFamily: "Poppins",
+                      fontSize: 15.flexibleFontSize,
+                      fontWeight: FontWeight.w500)),
+            ),
+          );
+        });
+  }
+
   showStatusBar({
     @required String message,
     @required Icon icon,

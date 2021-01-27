@@ -21,8 +21,6 @@ class OrderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime tempDate = new DateFormat("yyyy-MM-dd hh:mm:ss").parse(date);
-
     return GestureDetector(
       onTap: () {
         return ExtendedNavigator.of(context).push(Routes.orderDetailsScreens,
@@ -71,7 +69,7 @@ class OrderItem extends StatelessWidget {
                                   : context.theme.corePalatte.greyColor,
                               fontSize: 15.flexibleHeight)),
                       8.verticalSpace,
-                      Text(tempDate.toString(),
+                      Text(date.toString(),
                           style: AppTextTheme.title
                               .copyWith(fontSize: 15.flexibleFontSize)),
                     ],

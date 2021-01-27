@@ -23,7 +23,7 @@ class OrderRepository {
 
   Future<ApiResponseStatus<List<Order>>> getAllOdersFromApi(int page) async {
     try {
-      final data = await _networkApi.getAllOrders(page, 10);
+      final data = await _networkApi.getAllOrders(page, 20);
 
       if (data != null) {
         return ApiResponseStatus(
