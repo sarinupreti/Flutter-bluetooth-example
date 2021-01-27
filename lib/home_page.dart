@@ -126,7 +126,9 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: WebsafeSvg.asset("assets/images/logo_app_bar.svg"),
+        title: context.theme.themeType
+            ? Image.asset("assets/images/l_logo.png")
+            : WebsafeSvg.asset("assets/images/logo_app_bar.svg"),
       ),
       body: BlocProvider(
         create: (context) => inject<OrderBloc>(),
