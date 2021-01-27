@@ -144,9 +144,14 @@ class _SwipeCommApi implements SwipeCommApi {
   }
 
   @override
-  Future<List<Order>> getAllOrders() async {
+  Future<List<Order>> getAllOrders(page, perPage) async {
+    ArgumentError.checkNotNull(page, 'page');
+    ArgumentError.checkNotNull(perPage, 'perPage');
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'per_page': perPage
+    };
     final _data = <String, dynamic>{};
     final _result = await _dio.request<List<dynamic>>('wp-json/wc/v3/orders',
         queryParameters: queryParameters,

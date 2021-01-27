@@ -38,7 +38,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final websiteData = WebsiteData(
           consumerKey: event.consumerKey,
           consumerSecret: event.consumerSecret,
-          isLegacy: true,
+          isLegacy: false,
           websiteUrl: event.websiteUrl);
 
       final data = await _authenticationService.connectWebsiteData(websiteData);

@@ -3,16 +3,25 @@ import 'package:bloc/bloc.dart';
 class SwipeCommBlocObserver extends BlocObserver {
   @override
   void onEvent(Bloc bloc, Object event) {
+    print(event);
     super.onEvent(bloc, event);
   }
 
   @override
-  void onError(Cubit cubit, Object error, StackTrace stacktrace) {
-    super.onError(cubit, error, stacktrace);
+  void onChange(Cubit cubit, Change change) {
+    print(change);
+    super.onChange(cubit, change);
   }
 
   @override
   void onTransition(Bloc bloc, Transition transition) {
+    print(transition);
     super.onTransition(bloc, transition);
+  }
+
+  @override
+  void onError(Cubit cubit, Object error, StackTrace stackTrace) {
+    print('$error, $stackTrace');
+    super.onError(cubit, error, stackTrace);
   }
 }

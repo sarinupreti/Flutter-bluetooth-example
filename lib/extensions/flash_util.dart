@@ -2,8 +2,6 @@ import 'package:bell_delivery_hub/theme/theme.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
-import 'package:bell_delivery_hub/extensions/context_extension.dart';
-import 'package:bell_delivery_hub/extensions/number_extensions.dart';
 
 extension CaliberBuildContextExtension on BuildContext {
   static TextStyle _contentStyle(BuildContext context, [Color color]) {

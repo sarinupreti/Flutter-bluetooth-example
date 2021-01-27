@@ -4,7 +4,9 @@ import 'package:bell_delivery_hub/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:bell_delivery_hub/extensions/context_extension.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
+
 import 'package:auto_route/auto_route.dart';
+import 'package:intl/intl.dart';
 
 class OrderItem extends StatelessWidget {
   final String imageUrl;
@@ -19,17 +21,13 @@ class OrderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime tempDate = new DateFormat("yyyy-MM-dd hh:mm:ss").parse(date);
+
     return GestureDetector(
       onTap: () {
         return ExtendedNavigator.of(context).push(Routes.orderDetailsScreens,
             arguments:
                 OrderDetailsScreensArguments(orderId: data.id, data: data));
-
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (context) =>
-        //             OrderDetailsScreens(orderId: orderId, data: data)));
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -68,10 +66,12 @@ class OrderItem extends StatelessWidget {
                       4.verticalSpace,
                       Text("${data.status}".toUpperCase(),
                           style: AppTextTheme.title.copyWith(
-                              color: context.theme.corePalatte.greenColor,
+                              color: data.status == "completed"
+                                  ? context.theme.corePalatte.greenColor
+                                  : context.theme.corePalatte.greyColor,
                               fontSize: 15.flexibleHeight)),
                       8.verticalSpace,
-                      Text(date,
+                      Text(tempDate.toString(),
                           style: AppTextTheme.title
                               .copyWith(fontSize: 15.flexibleFontSize)),
                     ],

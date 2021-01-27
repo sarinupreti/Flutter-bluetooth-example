@@ -71,7 +71,7 @@ class SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final platform = Theme.of(context).platform;
+    // final platform = Theme.of(context).platform;
     // if (platform.isIOS(context)) {
     //   return iosTile(context);
     // } else {

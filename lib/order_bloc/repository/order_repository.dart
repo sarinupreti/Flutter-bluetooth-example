@@ -21,9 +21,9 @@ class OrderRepository {
   })  : assert(networkApi != null),
         _networkApi = networkApi;
 
-  Future<ApiResponseStatus<List<Order>>> getAllOdersFromApi() async {
+  Future<ApiResponseStatus<List<Order>>> getAllOdersFromApi(int page) async {
     try {
-      final data = await _networkApi.getAllOrders();
+      final data = await _networkApi.getAllOrders(page, 10);
 
       if (data != null) {
         return ApiResponseStatus(

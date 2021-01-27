@@ -1,5 +1,6 @@
 import 'package:bell_delivery_hub/components/Button.dart';
 import 'package:bell_delivery_hub/components/settings_ui/settings_section.dart';
+import 'package:bell_delivery_hub/globals/exveptions/login_error_modal.dart';
 import 'package:bell_delivery_hub/modal/order/order.dart';
 import 'package:bell_delivery_hub/order_bloc/order.dart';
 import 'package:bell_delivery_hub/utils/dependency_injection.dart';
@@ -28,36 +29,45 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: Text(widget.orderId.toString()),
-        actions: [
-          BlocConsumer<OrderBloc, OrderState>(
-            cubit: inject<OrderBloc>(),
-            listener: (context, state) {
-              if (state is OderUpdatingSuccess) {
-                inject<OrderBloc>().add(GetAllOrders());
-
-                context.showMessage("Order status has been updated", false);
-              }
-
-              if (state is OrderFailure) {
-                context.showMessage("${state.error}", true);
-              }
-            },
-            builder: (context, state) {
-              return IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: 10.flexibleWidth),
-                  icon: Icon(
-                    CupertinoIcons.check_mark_circled_solid,
-                    color: context.theme.corePalatte.seaGreenColor,
-                    size: 24.flexibleFontSize,
-                  ),
-                  onPressed: () {
-                    inject<OrderBloc>().add(UpdateOrders(widget.orderId));
-                  });
-            },
-          )
-        ],
+        title: Text("Order Id: " + widget.orderId.toString()),
+        actions: [],
       ),
+      bottomNavigationBar: widget.data.status != "completed"
+          ? Container(
+              height: 90.flexibleHeight,
+              color: context.theme.surface,
+              child: BlocConsumer<OrderBloc, OrderState>(
+                cubit: inject<OrderBloc>(),
+                listener: (context, state) {
+                  if (state is OderUpdatingSuccess) {
+                    inject<OrderBloc>().add(GetAllOrders());
+
+                    // context.showMessage("Order status has been updated", false);
+                    ConnectStoreErrorModal.showErrorModal(
+                        title: "Successful",
+                        context: context,
+                        isCustom: true,
+                        message: "Order status has been updated");
+                  }
+
+                  if (state is OrderFailure) {
+                    context.showMessage("${state.error}", true);
+                  }
+                },
+                builder: (context, state) {
+                  return Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Button(
+                        color: context.theme.corePalatte.seaGreenColor,
+                        message: "Complete Task",
+                        onPressed: () {
+                          inject<OrderBloc>().add(UpdateOrders(widget.orderId));
+                        }),
+                  );
+                },
+              ),
+            )
+          : SizedBox(),
       body: Container(
         child: ListView(
           children: <Widget>[
@@ -444,7 +454,8 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                           Row(
                             children: [
                               Icon(Icons.call,
-                                  color: context.theme.corePalatte.greenColor),
+                                  color:
+                                      context.theme.corePalatte.seaGreenColor),
                               10.horizontalSpace,
                               Text(
                                 widget.data.billing.phone,
@@ -456,7 +467,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                                     .copyWith(
                                         fontSize: 15.flexibleFontSize,
                                         color: context
-                                            .theme.corePalatte.greenColor,
+                                            .theme.corePalatte.seaGreenColor,
                                         fontWeight: FontWeight.normal),
                               )
                             ],
@@ -471,7 +482,8 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                           Row(
                             children: [
                               Icon(Icons.mail,
-                                  color: context.theme.corePalatte.greenColor),
+                                  color:
+                                      context.theme.corePalatte.seaGreenColor),
                               10.horizontalSpace,
                               Text(
                                 widget.data.billing.email,
@@ -483,7 +495,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                                     .copyWith(
                                         fontSize: 15.flexibleFontSize,
                                         color: context
-                                            .theme.corePalatte.greenColor,
+                                            .theme.corePalatte.seaGreenColor,
                                         fontWeight: FontWeight.normal),
                               )
                             ],
@@ -607,7 +619,8 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                           Row(
                             children: [
                               Icon(Icons.call,
-                                  color: context.theme.corePalatte.greenColor),
+                                  color:
+                                      context.theme.corePalatte.seaGreenColor),
                               10.horizontalSpace,
                               Text(
                                 widget.data.billing.phone,
@@ -619,7 +632,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                                     .copyWith(
                                         fontSize: 15.flexibleFontSize,
                                         color: context
-                                            .theme.corePalatte.greenColor,
+                                            .theme.corePalatte.seaGreenColor,
                                         fontWeight: FontWeight.normal),
                               )
                             ],
@@ -634,7 +647,8 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                           Row(
                             children: [
                               Icon(Icons.mail,
-                                  color: context.theme.corePalatte.greenColor),
+                                  color:
+                                      context.theme.corePalatte.seaGreenColor),
                               10.horizontalSpace,
                               Text(
                                 widget.data.billing.email,
@@ -646,7 +660,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                                     .copyWith(
                                         fontSize: 15.flexibleFontSize,
                                         color: context
-                                            .theme.corePalatte.greenColor,
+                                            .theme.corePalatte.seaGreenColor,
                                         fontWeight: FontWeight.normal),
                               )
                             ],

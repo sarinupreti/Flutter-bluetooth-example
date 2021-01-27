@@ -32,7 +32,7 @@ class SettingsSection extends AbstractSection {
 
   @override
   Widget build(BuildContext context) {
-    final platform = Theme.of(context).platform;
+    // final platform = Theme.of(context).platform;
     // if (platform.isIOS(context)) {
     //   return iosSection();
     // } else {

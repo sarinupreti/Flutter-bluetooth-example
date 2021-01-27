@@ -31,16 +31,16 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController websiteUrlController = TextEditingController(text: "");
-  TextEditingController consumerKeyController = TextEditingController(
-      text: "ck_0e57f670e3f13d985373e6e73ff6aed3d93256f1");
-  TextEditingController consumerSecretController = TextEditingController(
-      text: "cs_2f52978ea01fe7593ac353aa43c354ca762ff3a1");
+  TextEditingController consumerKeyController =
+      TextEditingController(text: "sarin");
+  TextEditingController consumerSecretController =
+      TextEditingController(text: "3rvymyiXis6BvPewf9YqsL8P");
 
   FocusNode websiteUrlFocusNode = FocusNode();
   FocusNode consumerKeyFocusNode = FocusNode();
   FocusNode consumerSecretFocusNode = FocusNode();
 
-  bool switchValue = true;
+  bool switchValue = false;
   bool passwordVisible = false;
 
   final String https = 'https://';
@@ -68,20 +68,6 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    websiteUrlFocusNode.addListener(() {
-      if (websiteUrlFocusNode.hasFocus) {
-        setState(() {
-          hintText = 'www.example.com';
-          hasHint = false;
-        });
-      } else {
-        setState(() {
-          hintText = 'www.example.com';
-          hasHint = true;
-        });
-      }
-    });
-
     // final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -91,9 +77,9 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
             listener: (context, state) {},
             builder: (context, state) {
               return SingleChildScrollView(
+                physics: NeverScrollableScrollPhysics(),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(color: context.theme.surface),
                   child: Form(
                     key: _formKey,
@@ -106,17 +92,15 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
                             Arc(
                                 arcType: ArcType.CONVEX,
                                 edge: Edge.BOTTOM,
-                                height: 110.flexibleHeight,
+                                height: 100.flexibleHeight,
                                 child: Container(
-                                  height: 250.flexibleHeight,
+                                  height: 300.flexibleHeight,
                                   width: screenWidth,
                                   decoration: BoxDecoration(
-                                      color: AppColors.primaryColor,
                                       image: DecorationImage(
                                           fit: BoxFit.cover,
-                                          alignment: Alignment.topCenter,
-                                          image: NetworkImage(
-                                            "https://coursemology.sg/wp-content/uploads/2020/04/learn-makeup.jpg",
+                                          image: AssetImage(
+                                            "assets/images/bg.png",
                                           ))),
                                   // child:
                                 )),
@@ -262,7 +246,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(!switchValue ? "Username" : "Consumer Key",
+              Text("Username",
                   style: Theme.of(context).textTheme.subtitle1.copyWith(
                       fontWeight: FontWeight.w500,
                       fontSize: 14.flexibleFontSize)),
@@ -326,7 +310,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(!switchValue ? "Application Password" : "Consumer Secret",
+              Text("Password",
                   style: Theme.of(context).textTheme.subtitle1.copyWith(
                       fontWeight: FontWeight.w500,
                       fontSize: 14.flexibleFontSize)),

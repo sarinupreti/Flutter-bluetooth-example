@@ -11,6 +11,8 @@ import 'order_state.dart';
 
 class OrderBloc extends Bloc<OrderEvent, OrderState> {
   final OrderRepository _orderRepository;
+  int page = 1;
+  bool isFetching = false;
 
   OrderBloc(OrderRepository orderRepository)
       : assert(orderRepository != null),
@@ -31,9 +33,10 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   Stream<OrderState> _mapOrderWithEmailToState(GetAllOrders event) async* {
     yield OrderLoading();
     try {
-      final data = await _orderRepository.getAllOdersFromApi();
+      final data = await _orderRepository.getAllOdersFromApi(page);
       if (data.isSuccessful) {
         yield OrderSuccess(orders: data.data);
+        page++;
       } else {
         yield OrderFailure(
             error: NetworkExceptions.getErrorMessage(data.error));

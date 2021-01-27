@@ -1,13 +1,11 @@
-import 'dart:io';
-
 import 'package:bell_delivery_hub/authentication_bloc/authentication.dart';
 import 'package:bell_delivery_hub/components/order_item.dart';
+import 'package:bell_delivery_hub/modal/order/order.dart';
 import 'package:bell_delivery_hub/modal/website_data.dart';
 import 'package:bell_delivery_hub/order_bloc/order_bloc.dart';
 import 'package:bell_delivery_hub/order_bloc/order_event.dart';
 import 'package:bell_delivery_hub/order_bloc/order_state.dart';
 import 'package:bell_delivery_hub/utils/dependency_injection.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +24,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final List<Order> _orders = [];
+  final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
     getAllOrders();
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
           color: context.theme.background,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -56,18 +56,18 @@ class _HomePageState extends State<HomePage> {
                   Stack(
                     children: [
                       Container(
-                          child: Container(
                         height: 150.flexibleHeight,
                         width: screenWidth,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 fit: BoxFit.cover,
+                                scale: 0.5,
                                 alignment: Alignment.topCenter,
-                                image: NetworkImage(
-                                  "https://coursemology.sg/wp-content/uploads/2020/04/learn-makeup.jpg",
+                                image: AssetImage(
+                                  "assets/images/drawer.png",
                                 ))),
                         // child:
-                      )),
+                      ),
                       Positioned(
                         left: 20.flexibleHeight,
                         bottom: 10,
@@ -83,7 +83,8 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   50.verticalSpace,
-                  Center(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 28.0),
                     child: Text("Welcome to BelaOryx",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headline6.copyWith(
@@ -91,7 +92,8 @@ class _HomePageState extends State<HomePage> {
                             fontSize: 16.flexibleFontSize,
                             fontWeight: FontWeight.w600)),
                   ),
-                  Center(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 28.0),
                     child: Text("www.belaoryx.com",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headline6.copyWith(
@@ -101,15 +103,19 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: Text(
-                  "Sign out",
-                  textAlign: TextAlign.left,
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1
-                      .copyWith(color: context.theme.corePalatte.errorColor),
+              InkWell(
+                onTap: () {
+                  return inject<AuthenticationBloc>().add(UserLoggedOut());
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: Text(
+                    "Sign out",
+                    style: Theme.of(context)
+                        .textTheme
+                        .subtitle1
+                        .copyWith(color: context.theme.corePalatte.errorColor),
+                  ),
                 ),
               )
             ],
@@ -121,55 +127,71 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         title: WebsafeSvg.asset("assets/images/logo_app_bar.svg"),
       ),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          await getAllOrders();
+      body: BlocConsumer<OrderBloc, OrderState>(
+        cubit: inject<OrderBloc>(),
+        listener: (context, state) {
+          if (state is OrderLoading) {
+            Scaffold.of(context)
+                .showSnackBar(SnackBar(content: CupertinoActivityIndicator()));
+          } else if (state is OrderSuccess && state.orders.isEmpty) {
+            Scaffold.of(context)
+                .showSnackBar(SnackBar(content: Text('No more orders')));
+          } else if (state is OrderFailure) {
+            Scaffold.of(context)
+                .showSnackBar(SnackBar(content: Text(state.error)));
+            context.bloc<OrderBloc>().isFetching = false;
+          }
         },
-        child: BlocConsumer<OrderBloc, OrderState>(
-          cubit: inject<OrderBloc>(),
-          listener: (context, state) {},
-          builder: (context, state) {
-            if (state is OrderSuccess) {
-              return state.orders != null && state.orders.length == 0
-                  ? Container(
-                      child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Center(
-                            child: WebsafeSvg.asset(
-                          "assets/images/empty_cart.svg",
-                          height: screenHeight / 4,
-                          width: screenWidth / 2,
-                        )),
-                        20.verticalSpace,
-                        Text("No orders at the moment.",
-                            style: Theme.of(context).textTheme.headline6)
-                      ],
-                    ))
-                  : ListView.builder(
-                      itemCount: state.orders.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final orderData = state.orders[index];
+        builder: (context, state) {
+          if (state is OrderInitial ||
+              state is OrderLoading && _orders.isEmpty) {
+            return CircularProgressIndicator();
+          } else if (state is OrderSuccess) {
+            _orders.addAll(state.orders);
+            context.bloc<OrderBloc>().isFetching = false;
+            Scaffold.of(context).hideCurrentSnackBar();
+          } else if (state is OrderFailure && _orders.isEmpty) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    context.bloc<OrderBloc>()
+                      ..isFetching = true
+                      ..add(GetAllOrders());
+                  },
+                  icon: Icon(Icons.refresh),
+                ),
+                const SizedBox(height: 15),
+                Text(state.error, textAlign: TextAlign.center),
+              ],
+            );
+          }
+          return ListView.builder(
+            controller: _scrollController
+              ..addListener(() {
+                if (_scrollController.offset ==
+                        _scrollController.position.maxScrollExtent &&
+                    !context.bloc<OrderBloc>().isFetching) {
+                  context.bloc<OrderBloc>()
+                    ..isFetching = true
+                    ..add(GetAllOrders());
+                }
+              }),
+            itemCount: _orders.length,
+            itemBuilder: (BuildContext context, int index) {
+              final orderData = _orders[index];
 
-                        return OrderItem(
-                          data: orderData,
-                          amount: "${orderData.total} ${orderData.currency}.",
-                          date: (orderData.date_created).toString(),
-                          imageUrl:
-                              "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
-                          orderId: "Order Id : ${orderData.id}",
-                        );
-                      },
-                    );
-            } else {
-              return Center(
-                  child: Platform.isAndroid
-                      ? CircularProgressIndicator()
-                      : CupertinoActivityIndicator());
-            }
-          },
-        ),
+              return OrderItem(
+                data: orderData,
+                amount: "${orderData.total} ${orderData.currency}.",
+                date: (orderData.date_created).toString(),
+                orderId: "Order Id : ${orderData.id}",
+              );
+            },
+          );
+        },
       ),
     );
   }

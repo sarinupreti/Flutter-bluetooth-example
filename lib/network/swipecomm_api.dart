@@ -46,7 +46,8 @@ abstract class SwipeCommApi {
   Future<List<Products>> searchProductsBySKU(@Query("sku") String sku);
 
   @GET("$getAllOrdersList")
-  Future<List<Order>> getAllOrders();
+  Future<List<Order>> getAllOrders(
+      @Query("page") int page, @Query("per_page") int perPage);
 
   @POST("$getAllOrdersList/{orderId}")
   Future<Order> updateOrder(

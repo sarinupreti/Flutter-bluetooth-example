@@ -3,23 +3,30 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ConnectStoreErrorModal {
-  static void showErrorModal({BuildContext context, String message}) {
+  static void showErrorModal({
+    BuildContext context,
+    String message,
+    bool isCustom,
+    String title,
+  }) {
     showCupertinoModalPopup(
         context: context,
         useRootNavigator: true,
-        builder: (BuildContext context) => alertIOS(context, message));
+        builder: (BuildContext context) =>
+            alertIOS(context, message, isCustom, title));
   }
 
-  static CupertinoAlertDialog alertIOS(BuildContext context, String message) {
+  static CupertinoAlertDialog alertIOS(
+      BuildContext context, String message, bool isCustom, String title) {
     return CupertinoAlertDialog(
       title: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Text(
-          "Connection error",
+          isCustom ? title : "Connection error",
           style: Theme.of(context)
               .textTheme
               .subtitle1
-              .copyWith(fontWeight: FontWeight.w700),
+              .copyWith(fontWeight: FontWeight.w500, fontSize: 20),
         ),
       ),
       content: Text(
@@ -34,20 +41,18 @@ class ConnectStoreErrorModal {
             .copyWith(fontWeight: FontWeight.normal),
       ),
       actions: <Widget>[
-        // CupertinoDialogAction(
-        //   child: Text(
-        //     "Find help",
-        //     style: AppTextTheme.normal14Text.copyWith(
-        //         fontWeight: FontWeight.normal, color: AppColors.primaryColor),
-        //   ),
-        // ),
         CupertinoDialogAction(
           isDestructiveAction: true,
           onPressed: () {
-            Navigator.pop(context);
+            if (isCustom) {
+              Navigator.pop(context);
+              Navigator.pop(context);
+            } else {
+              Navigator.pop(context);
+            }
           },
           child: Text(
-            "Close",
+            "Ok",
             style: AppTextTheme.normal14Text.copyWith(
                 fontWeight: FontWeight.normal, color: AppColors.primaryColor),
           ),
