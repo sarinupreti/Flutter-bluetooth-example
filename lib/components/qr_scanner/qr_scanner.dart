@@ -17,7 +17,6 @@ class QRScannerPage extends StatefulWidget {
 }
 
 class _QRScannerPageState extends State<QRScannerPage> {
-  String _code = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

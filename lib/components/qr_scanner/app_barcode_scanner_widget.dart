@@ -2,7 +2,6 @@ import 'package:ai_barcode/ai_barcode.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-String _label;
 Function(String result) _resultCallback;
 
 ///
@@ -15,7 +14,6 @@ class AppBarcodeScannerWidget extends StatefulWidget {
     String label = 'Barcode Scanner',
   }) {
     _resultCallback = resultCallback ?? (String result) {};
-    _label = label;
   }
 
   @override
@@ -37,25 +35,9 @@ class _BarcodePermissionWidget extends StatefulWidget {
 }
 
 class _BarcodePermissionWidgetState extends State<_BarcodePermissionWidget> {
-  bool _isGranted = false;
-
-  bool _useCameraScan = true;
-
-  String _inputValue = "";
-
   @override
   void initState() {
     super.initState();
-
-    _requestPermission();
-  }
-
-  void _requestPermission() async {
-    if (await Permission.camera.request().isGranted) {
-      setState(() {
-        _isGranted = true;
-      });
-    }
   }
 
   @override
