@@ -22,8 +22,7 @@ abstract class SwipeCommApi {
   factory SwipeCommApi(Dio dio, {String baseUrl}) = _SwipeCommApi;
 
   @GET("$getAllProducts")
-  Future<List<Products>> getProducts(
-      @Query("page") int page, @Query("per_page") int perPage);
+  Future<List<Products>> getProducts();
 
   @POST("$getAllProducts")
   Future<Products> createProduct();
@@ -32,10 +31,6 @@ abstract class SwipeCommApi {
   Future<Products> deleteProduct(
     @Path("id") int id,
   );
-
-  @GET("$getAllProducts")
-  Future<List<Products>> getDraftProducts(@Query("page") int page,
-      @Query("status") String status, @Query("per_page") int perPage);
 
   @GET("$getAllProducts")
   Future<List<Products>> searchProductsByName(

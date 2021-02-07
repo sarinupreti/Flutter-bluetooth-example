@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  ai_barcode: ^1.1.4
   android_intent: ^0.3.7+6
   cached_network_image: ^2.3.3
   clippy_flutter: ^1.1.1

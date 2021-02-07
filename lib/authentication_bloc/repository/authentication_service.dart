@@ -39,7 +39,7 @@ class AuthenticationRepository extends AuthenticationService {
     try {
       await _localDataSource.cacheAuth(creds, false);
 
-      final readResponse = await _networkApi.getProducts(1, 10);
+      final readResponse = await _networkApi.getProducts();
 
       if (readResponse != null) {
         final writeResponse = await _networkApi.createProduct();

@@ -4,6 +4,7 @@ import 'package:bell_delivery_hub/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:bell_delivery_hub/extensions/context_extension.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
+import 'package:bell_delivery_hub/extensions/string_extension.dart';
 import 'package:auto_route/auto_route.dart';
 
 class OrderItem extends StatelessWidget {
@@ -67,7 +68,7 @@ class OrderItem extends StatelessWidget {
                                   : context.theme.corePalatte.greyColor,
                               fontSize: 15.flexibleHeight)),
                       8.verticalSpace,
-                      Text(date.toString(),
+                      Text(date.convertTimeStamp(),
                           style: AppTextTheme.title
                               .copyWith(fontSize: 15.flexibleFontSize)),
                     ],

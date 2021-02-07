@@ -13,6 +13,8 @@ import 'package:websafe_svg/websafe_svg.dart';
 import 'package:bell_delivery_hub/extensions/context_extension.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
 import 'package:bell_delivery_hub/extensions/flash_util.dart';
+// import 'package:web_socket_channel/io.dart' as websocket;
+// import 'package:web_socket_channel/status.dart' as status;
 
 class HomePage extends StatefulWidget {
   final WebsiteData websiteData;
@@ -27,11 +29,24 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<Order> _orders = [];
   final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     getAllOrders();
+    // initWebHook();
     super.initState();
   }
+
+  // initWebHook() async {
+  //   final channel = websocket.IOWebSocketChannel.connect(
+  //       'https://us-central1-dashcommerce-app.cloudfunctions.net/webhookOrderNotification?url=https://demo.swipecomm.com//&agency=dashcommerce&language=en&token=ca2a827874b88a43eb99b722f9a72c7a3f63007c');
+
+  //   channel.stream.listen((message) {
+  //     print("wtf!$message");
+  //   }).onError((e) {
+  //     print(e);
+  //   });
+  // }
 
   getAllOrders() {
     inject<OrderBloc>().add(GetAllOrders());

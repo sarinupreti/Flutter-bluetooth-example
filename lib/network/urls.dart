@@ -1,4 +1,4 @@
-const String baseUrl = "https://demo.swipecomm.com/";
+const String baseUrl = "https://belaoryx.com/";
 
 const String getAllProducts = "wp-json/wc/v3/products";
 const String createProduct = "wp-json/wc/v3/products";

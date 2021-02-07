@@ -1,18 +1,16 @@
-import 'dart:io';
-import 'package:android_intent/android_intent.dart';
 import 'package:bell_delivery_hub/components/Button.dart';
+import 'package:bell_delivery_hub/components/permissions/permission_checker.dart';
 import 'package:bell_delivery_hub/components/settings_ui/settings_section.dart';
-import 'package:bell_delivery_hub/globals/exveptions/login_error_modal.dart';
 import 'package:bell_delivery_hub/modal/order/order.dart';
-import 'package:bell_delivery_hub/order_bloc/order.dart';
-import 'package:bell_delivery_hub/utils/dependency_injection.dart';
+import 'package:bell_delivery_hub/routes/router.gr.dart';
+import 'package:bell_delivery_hub/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bell_delivery_hub/extensions/context_extension.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
-import 'package:bell_delivery_hub/extensions/flash_util.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:websafe_svg/websafe_svg.dart';
 
 class OrderDetailsScreens extends StatefulWidget {
   final int orderId;
@@ -29,48 +27,58 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar:
+          // AppBar(
+          //   elevation: 0,
+          //   centerTitle: true,
+          //   actions: [],
+          // ),
+          AppBar(
         elevation: 0,
         centerTitle: true,
-        title: Text("Order Id: " + widget.orderId.toString()),
+        title: Text(
+          "Order ID : " + widget.orderId.toString(),
+          style: AppTextTheme.appBarTitle.copyWith(
+              fontSize: 17.flexibleFontSize, color: context.theme.textColor),
+        ),
         actions: [],
       ),
-      bottomNavigationBar: widget.data.status != "completed"
-          ? Container(
-              height: 90.flexibleHeight,
-              color: context.theme.surface,
-              child: BlocConsumer<OrderBloc, OrderState>(
-                cubit: inject<OrderBloc>(),
-                listener: (context, state) {
-                  if (state is OderUpdatingSuccess) {
-                    inject<OrderBloc>().add(GetAllOrders());
+      // bottomNavigationBar: widget.data.status != "completed"
+      //     ? Container(
+      //         height: 90.flexibleHeight,
+      //         color: context.theme.surface,
+      //         child: BlocConsumer<OrderBloc, OrderState>(
+      //           cubit: inject<OrderBloc>(),
+      //           listener: (context, state) {
+      //             if (state is OderUpdatingSuccess) {
+      //               inject<OrderBloc>().add(GetAllOrders());
 
-                    // context.showMessage("Order status has been updated", false);
-                    ConnectStoreErrorModal.showErrorModal(
-                        title: "Successful",
-                        context: context,
-                        isCustom: true,
-                        message: "Order status has been updated");
-                  }
+      //               // context.showMessage("Order status has been updated", false);
+      //               ConnectStoreErrorModal.showErrorModal(
+      //                   title: "Successful",
+      //                   context: context,
+      //                   isCustom: true,
+      //                   message: "Order status has been updated");
+      //             }
 
-                  if (state is OrderFailure) {
-                    context.showMessage("${state.error}", true);
-                  }
-                },
-                builder: (context, state) {
-                  return Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Button(
-                        color: context.theme.corePalatte.seaGreenColor,
-                        message: "Complete Task",
-                        onPressed: () {
-                          inject<OrderBloc>().add(UpdateOrders(widget.orderId));
-                        }),
-                  );
-                },
-              ),
-            )
-          : SizedBox(),
+      //             if (state is OrderFailure) {
+      //               context.showMessage("${state.error}", true);
+      //             }
+      //           },
+      //           builder: (context, state) {
+      //             return Padding(
+      //               padding: const EdgeInsets.all(20.0),
+      //               child: Button(
+      //                   color: context.theme.corePalatte.primaryColor,
+      //                   message: "Complete Task",
+      //                   onPressed: () {
+      //                     inject<OrderBloc>().add(UpdateOrders(widget.orderId));
+      //                   }),
+      //             );
+      //           },
+      //         ),
+      //       )
+      //     : SizedBox(),
       body: Container(
         child: ListView(
           children: <Widget>[
@@ -90,81 +98,141 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
     return SettingsSection(
       titlePadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       title: 'Products'.toUpperCase(),
-      tiles: widget.data.line_items
-          .map((e) => Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          e.name,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.headline6.copyWith(
-                              fontSize: 15.flexibleFontSize,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        e.sku.isNotEmpty
-                            ? Row(
-                                children: [
-                                  Text(
-                                    "SKU: ",
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline6
-                                        .copyWith(
-                                            fontSize: 14.flexibleFontSize,
-                                            fontWeight: FontWeight.w500),
-                                  ),
-                                  Text(
-                                    e.sku,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline6
-                                        .copyWith(
-                                            fontSize: 14.flexibleFontSize,
-                                            color: context
-                                                .theme.corePalatte.greyColor,
-                                            fontWeight: FontWeight.w500),
-                                  ),
-                                ],
-                              )
-                            : SizedBox(),
-                        4.verticalSpace,
-                        Text(
-                          "${widget.data.currency_symbol} ${e.total}",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+      tiles: widget.data.line_items.map((e) {
+        final barcodeData = widget.data.line_items[0].meta_data
+            .where((e) => e.key == "Barcode")
+            .toList();
+
+        print(barcodeData);
+
+        return Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 1.5,
+                    child: Text(
+                      e.name,
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.headline6.copyWith(
+                          fontSize: 15.flexibleFontSize,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  e.sku.isNotEmpty
+                      ? Row(
+                          children: [
+                            Text(
+                              "SKU: ",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .copyWith(
+                                      fontSize: 14.flexibleFontSize,
+                                      fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              e.sku,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .copyWith(
+                                      fontSize: 14.flexibleFontSize,
+                                      color:
+                                          context.theme.corePalatte.greyColor,
+                                      fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        )
+                      : SizedBox(),
+                  barcodeData.length > 0
+                      ? Row(
+                          children: [
+                            Text(
+                              "BARCODE: ",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .copyWith(
+                                      fontSize: 14.flexibleFontSize,
+                                      fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              barcodeData[0]
+                                  .value
+                                  .toUpperCase()
+                                  .toString()
+                                  .trim(),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .copyWith(
+                                      fontSize: 14.flexibleFontSize,
+                                      color:
+                                          context.theme.corePalatte.greyColor,
+                                      fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        )
+                      : SizedBox(),
+                  4.verticalSpace,
+                  Text(
+                    "${widget.data.currency_symbol} ${e.total}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.headline6.copyWith(
+                        fontSize: 14.flexibleFontSize,
+                        color: context.theme.corePalatte.primaryColor,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  if (barcodeData.length > 0)
+                    IconButton(
+                        icon: WebsafeSvg.asset("assets/images/barcode.svg"),
+                        onPressed: () async {
+                          final hasCameraPermission =
+                              await PermissionChecker.hasCameraPermission(
+                                  context);
+
+                          if (hasCameraPermission) {
+                            return ExtendedNavigator.of(context).push(
+                                Routes.qRScannerPage,
+                                arguments: QRScannerPageArguments(
+                                    barcodeValue: barcodeData[0].value));
+                          }
+                        }),
+                  e.quantity > 0
+                      ? Text(
+                          "QTY:  " + e.quantity.toString(),
                           style: Theme.of(context).textTheme.headline6.copyWith(
                               fontSize: 14.flexibleFontSize,
-                              color: context.theme.corePalatte.seaGreenColor,
+                              color: context.theme.corePalatte.greyColor,
                               fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    ),
-                    e.quantity > 0
-                        ? Text(
-                            "QTY:  " + e.quantity.toString(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                .copyWith(
-                                    fontSize: 14.flexibleFontSize,
-                                    color: context.theme.corePalatte.greyColor,
-                                    fontWeight: FontWeight.w500),
-                          )
-                        : SizedBox()
-                  ],
-                ),
-              ))
-          .toList(),
+                        )
+                      : SizedBox()
+                ],
+              )
+            ],
+          ),
+        );
+      }).toList(),
     );
   }
 
@@ -324,7 +392,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyText1.copyWith(
                           fontSize: 15.flexibleFontSize,
-                          color: context.theme.corePalatte.seaGreenColor,
+                          color: context.theme.corePalatte.primaryColor,
                           fontWeight: FontWeight.w500),
                     ),
                   ],
@@ -459,8 +527,8 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                             child: Row(
                               children: [
                                 Icon(Icons.call,
-                                    color: context
-                                        .theme.corePalatte.seaGreenColor),
+                                    color:
+                                        context.theme.corePalatte.primaryColor),
                                 10.horizontalSpace,
                                 Text(
                                   widget.data.billing.phone,
@@ -472,7 +540,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                                       .copyWith(
                                           fontSize: 15.flexibleFontSize,
                                           color: context
-                                              .theme.corePalatte.seaGreenColor,
+                                              .theme.corePalatte.primaryColor,
                                           fontWeight: FontWeight.normal),
                                 )
                               ],
@@ -492,8 +560,8 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                             child: Row(
                               children: [
                                 Icon(Icons.mail,
-                                    color: context
-                                        .theme.corePalatte.seaGreenColor),
+                                    color:
+                                        context.theme.corePalatte.primaryColor),
                                 10.horizontalSpace,
                                 Text(
                                   widget.data.billing.email,
@@ -505,7 +573,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                                       .copyWith(
                                           fontSize: 15.flexibleFontSize,
                                           color: context
-                                              .theme.corePalatte.seaGreenColor,
+                                              .theme.corePalatte.primaryColor,
                                           fontWeight: FontWeight.normal),
                                 )
                               ],
@@ -632,8 +700,8 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                             child: Row(
                               children: [
                                 Icon(Icons.call,
-                                    color: context
-                                        .theme.corePalatte.seaGreenColor),
+                                    color:
+                                        context.theme.corePalatte.primaryColor),
                                 10.horizontalSpace,
                                 Text(
                                   widget.data.billing.phone,
@@ -645,7 +713,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                                       .copyWith(
                                           fontSize: 15.flexibleFontSize,
                                           color: context
-                                              .theme.corePalatte.seaGreenColor,
+                                              .theme.corePalatte.primaryColor,
                                           fontWeight: FontWeight.normal),
                                 )
                               ],
@@ -663,8 +731,8 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                             child: Row(
                               children: [
                                 Icon(Icons.mail,
-                                    color: context
-                                        .theme.corePalatte.seaGreenColor),
+                                    color:
+                                        context.theme.corePalatte.primaryColor),
                                 10.horizontalSpace,
                                 Text(
                                   widget.data.billing.email,
@@ -676,7 +744,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                                       .copyWith(
                                           fontSize: 15.flexibleFontSize,
                                           color: context
-                                              .theme.corePalatte.seaGreenColor,
+                                              .theme.corePalatte.primaryColor,
                                           fontWeight: FontWeight.normal),
                                 )
                               ],

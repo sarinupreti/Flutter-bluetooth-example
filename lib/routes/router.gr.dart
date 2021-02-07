@@ -9,6 +9,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../components/qr_scanner/qr_scanner.dart';
 import '../connect_store_screen.dart';
 import '../error_screen.dart';
 import '../home_page.dart';
@@ -22,12 +23,14 @@ class Routes {
   static const String splashScreen = '/';
   static const String errorScreen = 'ErrorScreen';
   static const String homePage = 'HomePage';
+  static const String qRScannerPage = 'QRScannerPage';
   static const String orderDetailsScreens = 'OrderDetailsScreens';
   static const all = <String>{
     connectStoreScreen,
     splashScreen,
     errorScreen,
     homePage,
+    qRScannerPage,
     orderDetailsScreens,
   };
 }
@@ -40,6 +43,7 @@ class SwipeCommRouter extends RouterBase {
     RouteDef(Routes.splashScreen, page: SplashScreen),
     RouteDef(Routes.errorScreen, page: ErrorScreen),
     RouteDef(Routes.homePage, page: HomePage),
+    RouteDef(Routes.qRScannerPage, page: QRScannerPage),
     RouteDef(Routes.orderDetailsScreens, page: OrderDetailsScreens),
   ];
   @override
@@ -91,6 +95,18 @@ class SwipeCommRouter extends RouterBase {
           key: args.key,
           websiteData: args.websiteData,
           context: args.context,
+        ),
+        settings: data,
+      );
+    },
+    QRScannerPage: (data) {
+      final args = data.getArgs<QRScannerPageArguments>(
+        orElse: () => QRScannerPageArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => QRScannerPage(
+          key: args.key,
+          barcodeValue: args.barcodeValue,
         ),
         settings: data,
       );
@@ -156,6 +172,15 @@ extension SwipeCommRouterExtendedNavigatorStateX on ExtendedNavigatorState {
             key: key, websiteData: websiteData, context: context),
       );
 
+  Future<dynamic> pushQRScannerPage({
+    Key key,
+    String barcodeValue,
+  }) =>
+      push<dynamic>(
+        Routes.qRScannerPage,
+        arguments: QRScannerPageArguments(key: key, barcodeValue: barcodeValue),
+      );
+
   Future<dynamic> pushOrderDetailsScreens({
     Key key,
     int orderId,
@@ -200,6 +225,13 @@ class HomePageArguments {
   final WebsiteData websiteData;
   final BuildContext context;
   HomePageArguments({this.key, this.websiteData, this.context});
+}
+
+/// QRScannerPage arguments holder class
+class QRScannerPageArguments {
+  final Key key;
+  final String barcodeValue;
+  QRScannerPageArguments({this.key, this.barcodeValue});
 }
 
 /// OrderDetailsScreens arguments holder class

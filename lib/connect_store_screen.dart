@@ -3,6 +3,7 @@ import 'package:bell_delivery_hub/globals/exveptions/login_error_modal.dart';
 import 'package:bell_delivery_hub/globals/throttle.dart';
 import 'package:bell_delivery_hub/login_bloc/login.dart';
 import 'package:bell_delivery_hub/login_bloc/login_event.dart';
+import 'package:bell_delivery_hub/network/urls.dart';
 import 'package:bell_delivery_hub/utils/dependency_injection.dart';
 import 'package:bell_delivery_hub/utils/theme.dart';
 import 'package:clippy_flutter/clippy_flutter.dart';
@@ -31,16 +32,16 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController websiteUrlController = TextEditingController(text: "");
-  TextEditingController consumerKeyController =
-      TextEditingController(text: "sarin");
-  TextEditingController consumerSecretController =
-      TextEditingController(text: "3rvymyiXis6BvPewf9YqsL8P");
+  TextEditingController consumerKeyController = TextEditingController(
+      text: "ck_5fc6d72612a3cd3e6cacf7092f326750061d95d5");
+  TextEditingController consumerSecretController = TextEditingController(
+      text: "cs_640afce73058a9f256b6b03fb43f8519bdc37d11");
 
   FocusNode websiteUrlFocusNode = FocusNode();
   FocusNode consumerKeyFocusNode = FocusNode();
   FocusNode consumerSecretFocusNode = FocusNode();
 
-  bool switchValue = false;
+  bool switchValue = true;
   bool passwordVisible = false;
 
   final String https = 'https://';
@@ -208,7 +209,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
 //
         if (loginState is LoginFailure)
           ConnectStoreErrorModal.showErrorModal(
-              context: context, message: loginState.error);
+              isCustom: false, context: context, message: loginState.error);
         //
       },
       builder: (ctx, loginState) {
@@ -222,7 +223,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
                 if (_formKey.currentState.validate()) {
                   _throttle.throttle(() => inject<LoginBloc>().add(
                         LoginInWithEmailButtonPressed(
-                          websiteUrl: "https://demo.swipecomm.com/",
+                          websiteUrl: baseUrl,
                           consumerKey: consumerKeyController.text,
                           consumerSecret: consumerSecretController.text,
                         ),

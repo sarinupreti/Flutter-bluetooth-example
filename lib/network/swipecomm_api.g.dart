@@ -17,14 +17,9 @@ class _SwipeCommApi implements SwipeCommApi {
   String baseUrl;
 
   @override
-  Future<List<Products>> getProducts(page, perPage) async {
-    ArgumentError.checkNotNull(page, 'page');
-    ArgumentError.checkNotNull(perPage, 'perPage');
+  Future<List<Products>> getProducts() async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'page': page,
-      r'per_page': perPage
-    };
+    final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.request<List<dynamic>>('wp-json/wc/v3/products',
         queryParameters: queryParameters,
@@ -74,32 +69,6 @@ class _SwipeCommApi implements SwipeCommApi {
             baseUrl: baseUrl),
         data: _data);
     final value = Products.fromJson(_result.data);
-    return value;
-  }
-
-  @override
-  Future<List<Products>> getDraftProducts(page, status, perPage) async {
-    ArgumentError.checkNotNull(page, 'page');
-    ArgumentError.checkNotNull(status, 'status');
-    ArgumentError.checkNotNull(perPage, 'perPage');
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'page': page,
-      r'status': status,
-      r'per_page': perPage
-    };
-    final _data = <String, dynamic>{};
-    final _result = await _dio.request<List<dynamic>>('wp-json/wc/v3/products',
-        queryParameters: queryParameters,
-        options: RequestOptions(
-            method: 'GET',
-            headers: <String, dynamic>{},
-            extra: _extra,
-            baseUrl: baseUrl),
-        data: _data);
-    var value = _result.data
-        .map((dynamic i) => Products.fromJson(i as Map<String, dynamic>))
-        .toList();
     return value;
   }
 
