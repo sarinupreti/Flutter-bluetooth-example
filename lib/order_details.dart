@@ -435,7 +435,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
               children: <Widget>[
                 Text(
                   "${widget.data.billing.first_name} ${widget.data.billing.last_name}",
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.headline6.copyWith(
                       fontSize: 15.flexibleFontSize,
@@ -448,7 +448,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                 widget.data.billing.address_1.isNotEmpty
                     ? Text(
                         widget.data.billing.address_1,
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.headline6.copyWith(
                             fontSize: 15.flexibleFontSize,
@@ -462,7 +462,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                 widget.data.billing.address_2.isNotEmpty
                     ? Text(
                         widget.data.billing.address_2,
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.headline6.copyWith(
                             fontSize: 15.flexibleFontSize,
@@ -608,7 +608,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
               children: <Widget>[
                 Text(
                   "${widget.data.shipping.first_name} ${widget.data.shipping.last_name}",
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.headline6.copyWith(
                       fontSize: 15.flexibleFontSize,
@@ -621,7 +621,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                 widget.data.shipping.address_1.isNotEmpty
                     ? Text(
                         widget.data.shipping.address_1,
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.headline6.copyWith(
                             fontSize: 15.flexibleFontSize,
@@ -635,7 +635,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                 widget.data.shipping.address_2.isNotEmpty
                     ? Text(
                         widget.data.shipping.address_2,
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.headline6.copyWith(
                             fontSize: 15.flexibleFontSize,
@@ -649,7 +649,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                 widget.data.shipping.city.isNotEmpty
                     ? Text(
                         widget.data.shipping.city,
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.headline6.copyWith(
                             fontSize: 15.flexibleFontSize,
