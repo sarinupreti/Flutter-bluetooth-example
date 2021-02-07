@@ -1,13 +1,19 @@
 import 'package:bell_delivery_hub/components/Button.dart';
 import 'package:bell_delivery_hub/components/permissions/permission_checker.dart';
 import 'package:bell_delivery_hub/components/settings_ui/settings_section.dart';
+import 'package:bell_delivery_hub/globals/exveptions/login_error_modal.dart';
 import 'package:bell_delivery_hub/modal/order/order.dart';
+import 'package:bell_delivery_hub/order_bloc/order.dart';
 import 'package:bell_delivery_hub/routes/router.gr.dart';
 import 'package:bell_delivery_hub/theme/theme.dart';
+import 'package:bell_delivery_hub/utils/dependency_injection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bell_delivery_hub/extensions/context_extension.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
+import 'package:bell_delivery_hub/extensions/flash_util.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:websafe_svg/websafe_svg.dart';
@@ -43,42 +49,42 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
         ),
         actions: [],
       ),
-      // bottomNavigationBar: widget.data.status != "completed"
-      //     ? Container(
-      //         height: 90.flexibleHeight,
-      //         color: context.theme.surface,
-      //         child: BlocConsumer<OrderBloc, OrderState>(
-      //           cubit: inject<OrderBloc>(),
-      //           listener: (context, state) {
-      //             if (state is OderUpdatingSuccess) {
-      //               inject<OrderBloc>().add(GetAllOrders());
+      bottomNavigationBar: widget.data.status != "completed"
+          ? Container(
+              padding: EdgeInsets.all(10),
+              height: 90.flexibleHeight,
+              color: context.theme.surface,
+              child: Center(
+                child: BlocConsumer<OrderBloc, OrderState>(
+                  cubit: inject<OrderBloc>(),
+                  listener: (context, state) {
+                    if (state is OderUpdatingSuccess) {
+                      inject<OrderBloc>().add(GetAllOrders());
 
-      //               // context.showMessage("Order status has been updated", false);
-      //               ConnectStoreErrorModal.showErrorModal(
-      //                   title: "Successful",
-      //                   context: context,
-      //                   isCustom: true,
-      //                   message: "Order status has been updated");
-      //             }
+                      // context.showMessage("Order status has been updated", false);
+                      ConnectStoreErrorModal.showErrorModal(
+                          title: "Successful",
+                          context: context,
+                          isCustom: true,
+                          message: "Order status has been updated");
+                    }
 
-      //             if (state is OrderFailure) {
-      //               context.showMessage("${state.error}", true);
-      //             }
-      //           },
-      //           builder: (context, state) {
-      //             return Padding(
-      //               padding: const EdgeInsets.all(20.0),
-      //               child: Button(
-      //                   color: context.theme.corePalatte.primaryColor,
-      //                   message: "Complete Task",
-      //                   onPressed: () {
-      //                     inject<OrderBloc>().add(UpdateOrders(widget.orderId));
-      //                   }),
-      //             );
-      //           },
-      //         ),
-      //       )
-      //     : SizedBox(),
+                    if (state is OrderFailure) {
+                      context.showMessage("${state.error}", true);
+                    }
+                  },
+                  builder: (context, state) {
+                    return Button(
+                        color: context.theme.corePalatte.primaryColor,
+                        message: "Complete Task",
+                        onPressed: () {
+                          inject<OrderBloc>().add(UpdateOrders(widget.orderId));
+                        });
+                  },
+                ),
+              ),
+            )
+          : SizedBox(),
       body: Container(
         child: ListView(
           children: <Widget>[
@@ -119,7 +125,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 1.5,
                     child: Text(
-                      e.name,
+                      e.name.toUpperCase(),
                       maxLines: 4,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.headline6.copyWith(
