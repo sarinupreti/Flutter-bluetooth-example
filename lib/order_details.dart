@@ -85,6 +85,8 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
             20.verticalSpace,
             productDetails(context),
             20.verticalSpace,
+            summary(context),
+            20.verticalSpace,
             billindetails(context),
             20.verticalSpace,
             shippingDetails(context),
