@@ -14,6 +14,7 @@ import 'package:bell_delivery_hub/extensions/number_extensions.dart';
 import 'package:bell_delivery_hub/extensions/flash_util.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:websafe_svg/websafe_svg.dart';
@@ -50,37 +51,42 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
         actions: [],
       ),
       bottomNavigationBar: widget.data.status != "completed"
-          ? Container(
-              padding: EdgeInsets.all(10),
-              height: 90.flexibleHeight,
-              color: context.theme.surface,
+          ? SizedBox(
+              height: ScreenUtil.defaultSize.height / 25,
               child: Center(
-                child: BlocConsumer<OrderBloc, OrderState>(
-                  cubit: inject<OrderBloc>(),
-                  listener: (context, state) {
-                    if (state is OderUpdatingSuccess) {
-                      inject<OrderBloc>().add(GetAllOrders());
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  color: context.theme.surface,
+                  child: Center(
+                    child: BlocConsumer<OrderBloc, OrderState>(
+                      cubit: inject<OrderBloc>(),
+                      listener: (context, state) {
+                        if (state is OderUpdatingSuccess) {
+                          inject<OrderBloc>().add(GetAllOrders());
 
-                      // context.showMessage("Order status has been updated", false);
-                      ConnectStoreErrorModal.showErrorModal(
-                          title: "Successful",
-                          context: context,
-                          isCustom: true,
-                          message: "Order status has been updated");
-                    }
+                          // context.showMessage("Order status has been updated", false);
+                          ConnectStoreErrorModal.showErrorModal(
+                              title: "Successful",
+                              context: context,
+                              isCustom: true,
+                              message: "Order status has been updated");
+                        }
 
-                    if (state is OrderFailure) {
-                      context.showMessage("${state.error}", true);
-                    }
-                  },
-                  builder: (context, state) {
-                    return Button(
-                        color: context.theme.corePalatte.primaryColor,
-                        message: "Complete Task",
-                        onPressed: () {
-                          inject<OrderBloc>().add(UpdateOrders(widget.orderId));
-                        });
-                  },
+                        if (state is OrderFailure) {
+                          context.showMessage("${state.error}", true);
+                        }
+                      },
+                      builder: (context, state) {
+                        return Button(
+                            color: context.theme.corePalatte.primaryColor,
+                            message: "Complete Task",
+                            onPressed: () {
+                              inject<OrderBloc>()
+                                  .add(UpdateOrders(widget.orderId));
+                            });
+                      },
+                    ),
+                  ),
                 ),
               ),
             )
