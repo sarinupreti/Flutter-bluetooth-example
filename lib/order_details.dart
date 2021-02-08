@@ -84,40 +84,45 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
         actions: [],
       ),
       bottomNavigationBar: widget.data.status != "completed"
-          ? SizedBox(
-              height: ScreenUtil.defaultSize.height / 25,
-              child: Center(
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  color: context.theme.surface,
+          ? Container(
+              color: context.theme.surface,
+              child: SafeArea(
+                child: SizedBox(
+                  height: ScreenUtil.defaultSize.height / 25,
                   child: Center(
-                    child: BlocConsumer<OrderBloc, OrderState>(
-                      cubit: inject<OrderBloc>(),
-                      listener: (context, state) {
-                        if (state is OderUpdatingSuccess) {
-                          inject<OrderBloc>().add(GetAllOrders());
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      color: context.theme.surface,
+                      child: Center(
+                        child: BlocConsumer<OrderBloc, OrderState>(
+                          cubit: inject<OrderBloc>(),
+                          listener: (context, state) {
+                            if (state is OderUpdatingSuccess) {
+                              inject<OrderBloc>().add(GetAllOrders());
 
-                          // context.showMessage("Order status has been updated", false);
-                          ConnectStoreErrorModal.showErrorModal(
-                              title: "Successful",
-                              context: context,
-                              isCustom: true,
-                              message: "Order status has been updated");
-                        }
+                              // context.showMessage("Order status has been updated", false);
+                              ConnectStoreErrorModal.showErrorModal(
+                                  title: "Successful",
+                                  context: context,
+                                  isCustom: true,
+                                  message: "Order status has been updated");
+                            }
 
-                        if (state is OrderFailure) {
-                          context.showMessage("${state.error}", true);
-                        }
-                      },
-                      builder: (context, state) {
-                        return Button(
-                            color: context.theme.corePalatte.primaryColor,
-                            message: "Complete Task",
-                            onPressed: () {
-                              inject<OrderBloc>()
-                                  .add(UpdateOrders(widget.orderId));
-                            });
-                      },
+                            if (state is OrderFailure) {
+                              context.showMessage("${state.error}", true);
+                            }
+                          },
+                          builder: (context, state) {
+                            return Button(
+                                color: context.theme.corePalatte.primaryColor,
+                                message: "Complete Task",
+                                onPressed: () {
+                                  inject<OrderBloc>()
+                                      .add(UpdateOrders(widget.orderId));
+                                });
+                          },
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -309,6 +314,10 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
   }
 
   SettingsSection summary(BuildContext context) {
+    final sumofPrice = widget.data.line_items
+        .map((expense) => expense.price)
+        .fold(0, (prev, amount) => prev + amount);
+
     return SettingsSection(
         titlePadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         title: 'Summary'.toUpperCase(),
@@ -332,7 +341,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                           fontWeight: FontWeight.w500),
                     ),
                     Text(
-                      "${widget.data.currency_symbol} ${widget.data.total}",
+                      "${widget.data.currency_symbol} $sumofPrice",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.headline6.copyWith(
