@@ -146,10 +146,14 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
       titlePadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       title: 'Products'.toUpperCase(),
       tiles: widget.data.line_items.map((e) {
-        final barcodeData =
-            e.meta_data.firstWhere((metaData) => metaData.key == "Barcode");
+        final barcodeData = e.meta_data
+            .firstWhere((metaData) => metaData.key == "Barcode", orElse: () {
+          return null;
+        });
 
-        if (pref != null && pref.containsKey(barcodeData.value)) {
+        if (pref != null &&
+            barcodeData != null &&
+            pref.containsKey(barcodeData.value)) {
           final data = pref.get(barcodeData.value);
 
           print(data);
@@ -253,7 +257,9 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
               ),
               Column(
                 children: [
-                  (pref != null && pref.containsKey(barcodeData.value))
+                  (pref != null &&
+                          barcodeData != null &&
+                          pref.containsKey(barcodeData.value))
                       ? SizedBox(
                           height: 20.flexibleFontSize,
                           width: 20.flexibleFontSize,

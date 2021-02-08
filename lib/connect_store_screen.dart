@@ -33,9 +33,9 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
 
   TextEditingController websiteUrlController = TextEditingController(text: "");
   TextEditingController consumerKeyController = TextEditingController(
-      text: "ck_5fc6d72612a3cd3e6cacf7092f326750061d95d5");
+      text: kReleaseMode ? "" : "ck_5fc6d72612a3cd3e6cacf7092f326750061d95d5");
   TextEditingController consumerSecretController = TextEditingController(
-      text: "cs_640afce73058a9f256b6b03fb43f8519bdc37d11");
+      text: kReleaseMode ? "" : "cs_640afce73058a9f256b6b03fb43f8519bdc37d11");
 
   FocusNode websiteUrlFocusNode = FocusNode();
   FocusNode consumerKeyFocusNode = FocusNode();
@@ -78,7 +78,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
             listener: (context, state) {},
             builder: (context, state) {
               return SingleChildScrollView(
-                physics: NeverScrollableScrollPhysics(),
+                // physics: NeverScrollableScrollPhysics(),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(color: context.theme.surface),
@@ -247,7 +247,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text("Username",
+              Text("Consumer Key",
                   style: Theme.of(context).textTheme.subtitle1.copyWith(
                       fontWeight: FontWeight.w500,
                       fontSize: 14.flexibleFontSize)),
@@ -278,7 +278,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
             textInputAction: TextInputAction.next,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: InputDecoration(
-              hintText: 'Enter consumer Key',
+              hintText: 'Enter consumer key',
               hintStyle: AppTextTheme.normal15Text
                   .copyWith(color: AppColors.greyColor),
               disabledBorder: OutlineInputBorder(
@@ -311,7 +311,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text("Password",
+              Text("Consumer Secret",
                   style: Theme.of(context).textTheme.subtitle1.copyWith(
                       fontWeight: FontWeight.w500,
                       fontSize: 14.flexibleFontSize)),
@@ -353,7 +353,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
                       width: 2, color: AppColors.primaryColorAccent)),
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: AppColors.primaryColor)),
-              hintText: 'Type or scan your consumer Key',
+              hintText: 'Enter consumer secret',
               hintStyle: AppTextTheme.normal15Text
                   .copyWith(color: AppColors.greyColor),
             ),
