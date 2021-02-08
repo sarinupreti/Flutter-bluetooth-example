@@ -5,6 +5,7 @@ import 'package:bell_delivery_hub/components/permissions/permission_checker.dart
 import 'package:bell_delivery_hub/components/settings_ui/settings_section.dart';
 import 'package:bell_delivery_hub/globals/exveptions/login_error_modal.dart';
 import 'package:bell_delivery_hub/modal/order/order.dart';
+import 'package:bell_delivery_hub/modal/qr_scanned_response.dart';
 import 'package:bell_delivery_hub/order_bloc/order.dart';
 import 'package:bell_delivery_hub/routes/router.gr.dart';
 import 'package:bell_delivery_hub/theme/theme.dart';
@@ -35,12 +36,10 @@ class OrderDetailsScreens extends StatefulWidget {
 
 class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
   List<String> listOfBardcodes;
-
   SharedPreferences pref;
-
   bool isSuccess;
 
-  Map<String, String> navigationData;
+  QRScannedResponse jsonData;
 
   @override
   void initState() {
@@ -137,6 +136,16 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
       tiles: widget.data.line_items.map((e) {
         final barcodeData =
             e.meta_data.where((metaData) => metaData.key == "Barcode").toList();
+
+        if (pref != null && pref.containsKey(barcodeData[0].value)) {
+          final data = pref.get(barcodeData[0].value);
+
+          print(data);
+
+          final a = json.decode(data[0]);
+          //
+          jsonData = QRScannedResponse.fromJson(a);
+        }
 
         return Padding(
           padding: const EdgeInsets.all(15.0),
@@ -236,14 +245,14 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
               ),
               Column(
                 children: [
-                  (navigationData != null &&
-                          navigationData.keys.contains(barcodeData[0].value))
+                  (pref != null &&
+                          jsonData != null &&
+                          pref.containsKey(barcodeData[0].value))
                       ? SizedBox(
                           height: 20.flexibleFontSize,
                           width: 20.flexibleFontSize,
-                          child: navigationData.keys
-                                      .contains(barcodeData[0].value) &&
-                                  navigationData.values.elementAt(0) == "true"
+                          child: jsonData.id == barcodeData[0].value &&
+                                  jsonData.value
                               ? WebsafeSvg.asset("assets/images/check.svg")
                               : WebsafeSvg.asset("assets/images/wrong.svg"),
                         )
@@ -264,13 +273,9 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                                               barcodeValue:
                                                   barcodeData[0].value));
 
-                                  print(result);
-
                                   setState(() {
-                                    navigationData = result;
+                                    pref = result;
                                   });
-
-                                  print(navigationData);
                                 }
                               })
                           : SizedBox(),

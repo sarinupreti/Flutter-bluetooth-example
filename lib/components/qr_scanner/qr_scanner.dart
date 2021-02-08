@@ -45,7 +45,9 @@ class _QRScannerPageState extends State<QRScannerPage> {
                   final data = QRScannedResponse(code, true);
 
                   if (!pref.containsKey(code)) {
-                    pref.setString(code, json.encode(data));
+                    setState(() {
+                      pref.setStringList(code, [json.encode(data)]);
+                    });
                   }
 
                   Navigator.pop(context, pref);
@@ -61,9 +63,12 @@ class _QRScannerPageState extends State<QRScannerPage> {
                   SharedPreferences pref =
                       await SharedPreferences.getInstance();
 
-                  final data = QRScannedResponse(code, false);
+                  final data = QRScannedResponse(widget.barcodeValue, false);
 
-                  pref.setString(code, json.encode(data));
+                  setState(() {
+                    pref.setStringList(
+                        widget.barcodeValue, [json.encode(data)]);
+                  });
                   Navigator.pop(context, pref);
 
                   CustomAlert.showCustomAlert(
