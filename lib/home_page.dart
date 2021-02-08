@@ -60,7 +60,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       drawer: Drawer(
         child: Container(
-          color: context.theme.background,
+          color: context.theme.themeType
+              ? context.theme.surface
+              : context.theme.background,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
