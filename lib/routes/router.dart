@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route_annotations.dart';
-import 'package:bell_delivery_hub/components/qr_scanner/qr_scanner.dart';
+// import 'package:bell_delivery_hub/components/qr_scanner/qr_scanner.dart';
+import 'package:bell_delivery_hub/components/qr_scanner/scanner.dart';
 import 'package:bell_delivery_hub/connect_store_screen.dart';
 import 'package:bell_delivery_hub/error_screen.dart';
 import 'package:bell_delivery_hub/home_page.dart';
@@ -24,9 +25,13 @@ import 'package:flutter/material.dart';
     page: HomePage,
     path: "HomePage",
   ),
+  // MaterialRoute(
+  //   page: QRScannerPage,
+  //   path: "QRScannerPage",
+  // ),
   MaterialRoute(
-    page: QRScannerPage,
-    path: "QRScannerPage",
+    page: UserQRScannerPage,
+    path: "UserQRScannerPage",
   ),
   MaterialRoute(page: OrderDetailsScreens, path: 'OrderDetailsScreens')
 ])

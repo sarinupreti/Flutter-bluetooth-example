@@ -274,8 +274,8 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                                 if (hasCameraPermission) {
                                   final result =
                                       await ExtendedNavigator.of(context).push(
-                                          Routes.qRScannerPage,
-                                          arguments: QRScannerPageArguments(
+                                          Routes.userQRScannerPage,
+                                          arguments: UserQRScannerPageArguments(
                                               barcodeValue: barcodeData.value));
 
                                   setState(() {

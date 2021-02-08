@@ -17,11 +17,17 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: context.theme.corePalatte.black,
       body: Center(
-        child: Image.asset(
-          "assets/images/l.png",
-          height: 192.flexibleHeight,
-          width: 192.flexibleHeight,
-        ),
+        child: context.theme.themeType
+            ? Image.asset(
+                "assets/images/logo_white.png",
+                height: 192.flexibleHeight,
+                width: 192.flexibleHeight,
+              )
+            : Image.asset(
+                "assets/images/l.png",
+                height: 192.flexibleHeight,
+                width: 192.flexibleHeight,
+              ),
       ),
     );
   }
