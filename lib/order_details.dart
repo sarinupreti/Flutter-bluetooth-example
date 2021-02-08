@@ -248,7 +248,9 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                       : SizedBox(),
                   4.verticalSpace,
                   Text(
-                    "${widget.data.currency_symbol} ${e.price * e.quantity}",
+                    e.quantity > 1
+                        ? "${widget.data.currency_symbol} ${e.price} x ${e.quantity} = ${e.price * e.quantity}"
+                        : "${widget.data.currency_symbol} ${e.price}",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.headline6.copyWith(
