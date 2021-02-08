@@ -82,9 +82,6 @@ Dio buildDio() {
             final decruptedCK = auth.consumerKey;
             final decruptedCS = auth.consumerSecret;
 
-            print(decruptedCK);
-            print(decruptedCS);
-
             if (auth != null && auth.isLegacy) {
               request.queryParameters
                   .putIfAbsent("consumer_key", () => decruptedCK);
@@ -95,12 +92,8 @@ Dio buildDio() {
                   base64Encode(utf8.encode('$decruptedCK:$decruptedCS'));
               request.headers.putIfAbsent("Authorization", () => basicAuth);
             }
-
-            print(request);
           },
-          onResponse: (Response response) async {
-            print(response);
-          },
+          onResponse: (Response response) async {},
           onError: (DioError e) async {
             // inject<AuthenticationBloc>().add(AuthenticationEvent.logOut());
 

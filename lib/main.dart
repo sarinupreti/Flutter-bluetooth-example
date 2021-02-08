@@ -104,8 +104,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                         message: state.message,
                       ));
             } else
-              print("elsa");
-            return CircularProgressIndicator();
+              return CircularProgressIndicator();
           },
           child: Builder(
             builder: (context) {

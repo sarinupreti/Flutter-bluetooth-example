@@ -57,8 +57,6 @@ class HiveSetup {
 }
 
 Future<void> clearHive() async {
-  print("deleting boxes ==============");
-
   await Hive.deleteBoxFromDisk(HIVE_AUTH_BOX);
   await Hive.deleteBoxFromDisk(HIVE_USER_BOX);
   await Hive.deleteBoxFromDisk(HIVE_TEMP_CREDS);
@@ -74,8 +72,6 @@ Future<void> clearHive() async {
   await Hive.deleteBoxFromDisk(HIVE_PRODUCT_CATEGORY_LINKS);
   await Hive.deleteBoxFromDisk(HIVE_CATEGORY_SELF);
   await Hive.deleteBoxFromDisk(HIVE_CATEGORY_COLLECTIONS);
-
-  print("deleting boxes complete ==============");
 }
 
 Future<void> clearAuthHive() async {

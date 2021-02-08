@@ -161,8 +161,6 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
             pref.containsKey(barcodeData.value)) {
           final data = pref.get(barcodeData.value);
 
-          print(data);
-
           final a = json.decode(data[0]);
           //
           jsonData = QRScannedResponse.fromJson(a);

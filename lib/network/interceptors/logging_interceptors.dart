@@ -1,34 +1,35 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class LoggingInterceptor extends Interceptor {
   int _maxCharactersPerLine = 10000;
 
   @override
   Future onRequest(RequestOptions options) {
-    print("========================================");
-    print("========================================");
+    debugPrint("========================================");
+    debugPrint("========================================");
 
-    print("--> ${options.method} ${options.path}");
-    print("========================================");
-    print("========================================");
+    debugPrint("--> ${options.method} ${options.path}");
+    debugPrint("========================================");
+    debugPrint("========================================");
 
-    print("Content type: ${options.contentType}");
-    print("========================================");
+    debugPrint("Content type: ${options.contentType}");
+    debugPrint("========================================");
 
-    print("<-- END HTTP");
+    debugPrint("<-- END HTTP");
     return super.onRequest(options);
   }
 
   @override
   Future onResponse(Response response) {
-    print("========================================");
-    print("========================================");
+    debugPrint("========================================");
+    debugPrint("========================================");
 
-    print(
+    debugPrint(
         "<-- ${response.statusCode} ${response.request.method} ${response.request.path}");
 
-    print("========================================");
-    print("========================================");
+    debugPrint("========================================");
+    debugPrint("========================================");
 
     String responseAsString = response.data.toString();
     if (responseAsString.length > _maxCharactersPerLine) {
@@ -39,34 +40,34 @@ class LoggingInterceptor extends Interceptor {
         if (endingIndex > responseAsString.length) {
           endingIndex = responseAsString.length;
         }
-        print(
+        debugPrint(
             responseAsString.substring(i * _maxCharactersPerLine, endingIndex));
       }
     } else {
-      print("========================================");
-      print("========================================");
+      debugPrint("========================================");
+      debugPrint("========================================");
 
-      print(response.data);
+      debugPrint(response.data);
 
-      print("========================================");
-      print("========================================");
+      debugPrint("========================================");
+      debugPrint("========================================");
     }
-    print("<-- END HTTP");
+    debugPrint("<-- END HTTP");
 
     return super.onResponse(response);
   }
 
   @override
   Future onError(DioError err) {
-    print("<-- Error -->");
-    print("========================================");
-    print("========================================");
+    debugPrint("<-- Error -->");
+    debugPrint("========================================");
+    debugPrint("========================================");
 
-    print(err.error);
-    print(err.message);
+    debugPrint(err.error);
+    debugPrint(err.message);
 
-    print("========================================");
-    print("========================================");
+    debugPrint("========================================");
+    debugPrint("========================================");
 
     return super.onError(err);
   }

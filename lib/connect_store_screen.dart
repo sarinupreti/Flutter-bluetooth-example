@@ -205,7 +205,6 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
     return BlocConsumer<LoginBloc, LoginState>(
       cubit: inject<LoginBloc>(),
       listener: (ctx, loginState) {
-        print(loginState);
 //
         if (loginState is LoginFailure)
           ConnectStoreErrorModal.showErrorModal(
