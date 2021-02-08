@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bell_delivery_hub/components/Button.dart';
 import 'package:bell_delivery_hub/components/permissions/permission_checker.dart';
 import 'package:bell_delivery_hub/components/settings_ui/settings_section.dart';
@@ -15,6 +17,7 @@ import 'package:bell_delivery_hub/extensions/flash_util.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:websafe_svg/websafe_svg.dart';
@@ -31,6 +34,25 @@ class OrderDetailsScreens extends StatefulWidget {
 }
 
 class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
+  List<String> listOfBardcodes;
+
+  SharedPreferences pref;
+
+  bool isSuccess;
+
+  Map<String, String> navigationData;
+
+  @override
+  void initState() {
+    getSharedPreference();
+    super.initState();
+  }
+
+  getSharedPreference() async {
+    pref = await SharedPreferences.getInstance();
+    return pref;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,11 +135,8 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
       titlePadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       title: 'Products'.toUpperCase(),
       tiles: widget.data.line_items.map((e) {
-        final barcodeData = widget.data.line_items[0].meta_data
-            .where((e) => e.key == "Barcode")
-            .toList();
-
-        print(barcodeData);
+        final barcodeData =
+            e.meta_data.where((metaData) => metaData.key == "Barcode").toList();
 
         return Padding(
           padding: const EdgeInsets.all(15.0),
@@ -217,21 +236,44 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
               ),
               Column(
                 children: [
-                  if (barcodeData.length > 0)
-                    IconButton(
-                        icon: WebsafeSvg.asset("assets/images/barcode.svg"),
-                        onPressed: () async {
-                          final hasCameraPermission =
-                              await PermissionChecker.hasCameraPermission(
-                                  context);
+                  (navigationData != null &&
+                          navigationData.keys.contains(barcodeData[0].value))
+                      ? SizedBox(
+                          height: 20.flexibleFontSize,
+                          width: 20.flexibleFontSize,
+                          child: navigationData.keys
+                                      .contains(barcodeData[0].value) &&
+                                  navigationData.values.elementAt(0) == "true"
+                              ? WebsafeSvg.asset("assets/images/check.svg")
+                              : WebsafeSvg.asset("assets/images/wrong.svg"),
+                        )
+                      : barcodeData.length > 0
+                          ? IconButton(
+                              icon:
+                                  WebsafeSvg.asset("assets/images/barcode.svg"),
+                              onPressed: () async {
+                                final hasCameraPermission =
+                                    await PermissionChecker.hasCameraPermission(
+                                        context);
 
-                          if (hasCameraPermission) {
-                            return ExtendedNavigator.of(context).push(
-                                Routes.qRScannerPage,
-                                arguments: QRScannerPageArguments(
-                                    barcodeValue: barcodeData[0].value));
-                          }
-                        }),
+                                if (hasCameraPermission) {
+                                  final result =
+                                      await ExtendedNavigator.of(context).push(
+                                          Routes.qRScannerPage,
+                                          arguments: QRScannerPageArguments(
+                                              barcodeValue:
+                                                  barcodeData[0].value));
+
+                                  print(result);
+
+                                  setState(() {
+                                    navigationData = result;
+                                  });
+
+                                  print(navigationData);
+                                }
+                              })
+                          : SizedBox(),
                   e.quantity > 0
                       ? Text(
                           "QTY:  " + e.quantity.toString(),
@@ -285,31 +327,31 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                   ],
                 ),
                 4.verticalSpace,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Delivery fee:",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.headline6.copyWith(
-                          fontSize: 15.flexibleFontSize,
-                          color: context.theme.corePalatte.greyColor,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Text(
-                      "${widget.data.currency_symbol} ${widget.data.shipping_total}",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.headline6.copyWith(
-                          fontSize: 15.flexibleFontSize,
-                          color: context.theme.corePalatte.greyColor,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                ),
-                4.verticalSpace,
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   children: [
+                //     Text(
+                //       "Delivery fee:",
+                //       maxLines: 1,
+                //       overflow: TextOverflow.ellipsis,
+                //       style: Theme.of(context).textTheme.headline6.copyWith(
+                //           fontSize: 15.flexibleFontSize,
+                //           color: context.theme.corePalatte.greyColor,
+                //           fontWeight: FontWeight.w500),
+                //     ),
+                //     Text(
+                //       "${widget.data.currency_symbol} ${widget.data.shipping_total}",
+                //       maxLines: 1,
+                //       overflow: TextOverflow.ellipsis,
+                //       style: Theme.of(context).textTheme.headline6.copyWith(
+                //           fontSize: 15.flexibleFontSize,
+                //           color: context.theme.corePalatte.greyColor,
+                //           fontWeight: FontWeight.w500),
+                //     ),
+                //   ],
+                // ),
+                // 4.verticalSpace,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -418,7 +460,9 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                 widget.data.payment_method != null &&
                         widget.data.payment_method.isNotEmpty
                     ? Button(
-                        color: context.theme.textColor,
+                        color: context.theme.themeType
+                            ? context.theme.background
+                            : context.theme.textColor,
                         message: widget.data.payment_method_title,
                         onPressed: () {},
                       )
