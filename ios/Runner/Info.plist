@@ -45,5 +45,7 @@
 	<string>this app needs sccess to camera to scan barcodes of products.</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	 <key>io.flutter.embedded_views_preview</key>
+    <true/>
 </dict>
 </plist>
