@@ -248,7 +248,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                       : SizedBox(),
                   4.verticalSpace,
                   Text(
-                    "${widget.data.currency_symbol} ${e.total}",
+                    "${widget.data.currency_symbol} ${e.price * e.quantity}",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.headline6.copyWith(
@@ -315,6 +315,8 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
     final sumofPrice = widget.data.line_items
         .map((expense) => expense.price)
         .fold(0, (prev, amount) => prev + amount);
+
+    print(sumofPrice);
 
     return SettingsSection(
         titlePadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
