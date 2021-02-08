@@ -65,7 +65,16 @@ class OrderItem extends StatelessWidget {
                           style: AppTextTheme.title.copyWith(
                               color: data.status == "completed"
                                   ? context.theme.corePalatte.greenColor
-                                  : context.theme.corePalatte.greyColor,
+                                  : data.status == "failed" ||
+                                          data.status == "cancelled"
+                                      ? Colors.red
+                                      : data.status == "processing"
+                                          ? Colors.orange
+                                          : data.status == "refunded"
+                                              ? context.theme.corePalatte
+                                                  .seaGreenColor
+                                              : context
+                                                  .theme.corePalatte.greyColor,
                               fontSize: 15.flexibleHeight)),
                       8.verticalSpace,
                       Text(date.convertTimeStamp(),
