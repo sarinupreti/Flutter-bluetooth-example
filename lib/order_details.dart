@@ -147,10 +147,10 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
       title: 'Products'.toUpperCase(),
       tiles: widget.data.line_items.map((e) {
         final barcodeData =
-            e.meta_data.where((metaData) => metaData.key == "Barcode").toList();
+            e.meta_data.firstWhere((metaData) => metaData.key == "Barcode");
 
-        if (pref != null && pref.containsKey(barcodeData[0].value)) {
-          final data = pref.get(barcodeData[0].value);
+        if (pref != null && pref.containsKey(barcodeData.value)) {
+          final data = pref.get(barcodeData.value);
 
           print(data);
 
@@ -209,7 +209,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                           ],
                         )
                       : SizedBox(),
-                  barcodeData.length > 0
+                  barcodeData != null
                       ? Row(
                           children: [
                             Text(
@@ -224,11 +224,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                                       fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              barcodeData[0]
-                                  .value
-                                  .toUpperCase()
-                                  .toString()
-                                  .trim(),
+                              barcodeData.value.toUpperCase().toString().trim(),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context)
@@ -257,18 +253,16 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
               ),
               Column(
                 children: [
-                  (pref != null &&
-                          jsonData != null &&
-                          pref.containsKey(barcodeData[0].value))
+                  (pref != null && pref.containsKey(barcodeData.value))
                       ? SizedBox(
                           height: 20.flexibleFontSize,
                           width: 20.flexibleFontSize,
-                          child: jsonData.id == barcodeData[0].value &&
+                          child: jsonData.id.trim() == barcodeData.value &&
                                   jsonData.value
                               ? WebsafeSvg.asset("assets/images/check.svg")
                               : WebsafeSvg.asset("assets/images/wrong.svg"),
                         )
-                      : barcodeData.length > 0
+                      : barcodeData != null
                           ? IconButton(
                               icon:
                                   WebsafeSvg.asset("assets/images/barcode.svg"),
@@ -282,8 +276,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                                       await ExtendedNavigator.of(context).push(
                                           Routes.qRScannerPage,
                                           arguments: QRScannerPageArguments(
-                                              barcodeValue:
-                                                  barcodeData[0].value));
+                                              barcodeValue: barcodeData.value));
 
                                   setState(() {
                                     pref = result;
@@ -349,7 +342,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                 //   crossAxisAlignment: CrossAxisAlignment.center,
                 //   children: [
                 //     Text(
-                //       "Delivery fee:",
+                //       "taxes:",
                 //       maxLines: 1,
                 //       overflow: TextOverflow.ellipsis,
                 //       style: Theme.of(context).textTheme.headline6.copyWith(
@@ -358,7 +351,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                 //           fontWeight: FontWeight.w500),
                 //     ),
                 //     Text(
-                //       "${widget.data.currency_symbol} ${widget.data.shipping_total}",
+                //       "${widget.data.currency_symbol} ${widget.data.total_tax}",
                 //       maxLines: 1,
                 //       overflow: TextOverflow.ellipsis,
                 //       style: Theme.of(context).textTheme.headline6.copyWith(
@@ -369,31 +362,6 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
                 //   ],
                 // ),
                 // 4.verticalSpace,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "taxes:",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.headline6.copyWith(
-                          fontSize: 15.flexibleFontSize,
-                          color: context.theme.corePalatte.greyColor,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Text(
-                      "${widget.data.currency_symbol} ${widget.data.total_tax}",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.headline6.copyWith(
-                          fontSize: 15.flexibleFontSize,
-                          color: context.theme.corePalatte.greyColor,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                ),
-                4.verticalSpace,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,

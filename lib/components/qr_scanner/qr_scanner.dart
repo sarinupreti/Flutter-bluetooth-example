@@ -46,7 +46,8 @@ class _QRScannerPageState extends State<QRScannerPage> {
 
                   if (!pref.containsKey(code)) {
                     setState(() {
-                      pref.setStringList(code, [json.encode(data)]);
+                      pref.setStringList(
+                          widget.barcodeValue, [json.encode(data)]);
                     });
                   }
 
