@@ -313,7 +313,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
 
   SettingsSection summary(BuildContext context) {
     final sumofPrice = widget.data.line_items
-        .map((expense) => expense.price)
+        .map((data) => data.price * data.quantity)
         .fold(0, (prev, amount) => prev + amount);
 
     print(sumofPrice);
