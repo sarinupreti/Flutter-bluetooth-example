@@ -43,6 +43,7 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
 
   @override
   void initState() {
+    clearSharedPreference();
     getSharedPreference();
     super.initState();
   }
@@ -50,6 +51,17 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
   getSharedPreference() async {
     pref = await SharedPreferences.getInstance();
     return pref;
+  }
+
+  clearSharedPreference() async {
+    pref = await SharedPreferences.getInstance();
+    pref.clear();
+  }
+
+  @override
+  void dispose() {
+    clearSharedPreference();
+    super.dispose();
   }
 
   @override
