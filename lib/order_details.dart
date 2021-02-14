@@ -83,7 +83,9 @@ class _OrderDetailsScreensState extends State<OrderDetailsScreens> {
         ),
         actions: [],
       ),
-      bottomNavigationBar: widget.data.status != "completed"
+      bottomNavigationBar: widget.data.status != "completed" &&
+              widget.data.status != "failed" &&
+              widget.data.status != "cancelled"
           ? Container(
               color: context.theme.surface,
               child: SafeArea(

@@ -191,12 +191,13 @@ class _HomePageState extends State<HomePage> {
               );
             }
             return ListView.builder(
+              physics: ScrollPhysics(),
               controller: _scrollController
                 ..addListener(() {
                   if (_scrollController.offset ==
                           _scrollController.position.maxScrollExtent &&
-                      !context.bloc<OrderBloc>().isFetching) {
-                    context.bloc<OrderBloc>()
+                      !context.watch<OrderBloc>().isFetching) {
+                    context.watch<OrderBloc>()
                       ..isFetching = true
                       ..add(GetAllOrders());
                   }
