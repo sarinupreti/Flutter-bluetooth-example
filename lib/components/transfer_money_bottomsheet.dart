@@ -41,7 +41,8 @@ class TransferMoneyBottomSheet {
                       Navigator.pop(context);
 
                       context.showMessage(
-                          "Payment sucessful to merchant.", false);
+                          "Payment sucessful to merchant. Response: ${state.transactionHistory.toJson()} ",
+                          false);
                     }
 
                     if (state is AddFundFailure) {
