@@ -1,3 +1,4 @@
+import 'package:bots_demo/network/urls.dart';
 import 'package:bots_demo/blocs/authentication_bloc/authentication.dart';
 import 'package:bots_demo/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:bots_demo/data/local_data_source.dart';
@@ -78,7 +79,10 @@ Dio buildDio() {
           },
           onResponse: (Response response) async {},
           onError: (DioError e) async {
-            if (e.response.statusCode == 404) {
+            if (e.request.path != loginEndpoint) if (e.response.statusCode ==
+                    404 ||
+                e.response.statusCode == 503 ||
+                e.response.statusCode == 500) {
               inject<AuthenticationBloc>().add(UserLoggedOut());
 
               globalNavigatorKey.currentState.context.showStatusBar(

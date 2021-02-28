@@ -1,4 +1,5 @@
 import 'package:bots_demo/components/add_fund_bottomsheet.dart';
+import 'package:bots_demo/components/custom_drawer.dart';
 import 'package:bots_demo/components/custom_shimmer.dart';
 import 'package:bots_demo/blocs/authentication_bloc/authentication.dart';
 import 'package:bots_demo/blocs/transaction_bloc/transaction_bloc.dart';
@@ -52,6 +53,7 @@ class _HomePageState extends State<HomePage> {
       builder: (context, state) {
         return state is AuthenticationAuthenticated
             ? Scaffold(
+                drawer: CustomDrawer(screenWidth: screenWidth),
                 appBar: AppBar(
                   automaticallyImplyLeading: false,
                   centerTitle: false,
