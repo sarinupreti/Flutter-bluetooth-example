@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bell_delivery_hub/network/interceptors/dio_connectivity_request_retrier.dart';
+import 'package:bots_demo/network/interceptors/dio_connectivity_request_retrier.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 

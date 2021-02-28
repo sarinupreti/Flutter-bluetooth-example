@@ -1,17 +1,17 @@
-import 'package:bell_delivery_hub/blocs/authentication_bloc/authentication.dart';
-import 'package:bell_delivery_hub/blocs/authentication_bloc/authentication_bloc.dart';
-import 'package:bell_delivery_hub/data/local_data_source.dart';
-import 'package:bell_delivery_hub/globals/navigation.dart';
-import 'package:bell_delivery_hub/modal/base_response.dart';
-import 'package:bell_delivery_hub/modal/login/request/login_request.dart';
-import 'package:bell_delivery_hub/modal/wallet/add_wallet_fund.dart';
-import 'package:bell_delivery_hub/modal/wallet/request/add_refund_request.dart';
-import 'package:bell_delivery_hub/utils/dependency_injection.dart';
+import 'package:bots_demo/blocs/authentication_bloc/authentication.dart';
+import 'package:bots_demo/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:bots_demo/data/local_data_source.dart';
+import 'package:bots_demo/globals/navigation.dart';
+import 'package:bots_demo/modal/base_response.dart';
+import 'package:bots_demo/modal/login/request/login_request.dart';
+import 'package:bots_demo/modal/wallet/add_wallet_fund.dart';
+import 'package:bots_demo/modal/wallet/request/add_refund_request.dart';
+import 'package:bots_demo/utils/dependency_injection.dart';
 import "package:dio/dio.dart" hide Headers;
 import 'package:flutter/material.dart';
 import "package:retrofit/retrofit.dart";
 import 'urls.dart';
-import 'package:bell_delivery_hub/extensions/flash_util.dart';
+import 'package:bots_demo/extensions/flash_util.dart';
 
 part 'network_api.g.dart';
 

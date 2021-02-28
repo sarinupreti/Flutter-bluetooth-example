@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:bell_delivery_hub/extensions/number_extensions.dart';
+import 'package:bots_demo/extensions/number_extensions.dart';
 
 class AppColors {
   const AppColors();

@@ -1,6 +1,6 @@
-import 'package:bell_delivery_hub/data/hive/hive_const.dart';
-import 'package:bell_delivery_hub/modal/user/user.dart';
-import 'package:bell_delivery_hub/modal/wallet/wallet.dart';
+import 'package:bots_demo/data/hive/hive_const.dart';
+import 'package:bots_demo/modal/user/user.dart';
+import 'package:bots_demo/modal/wallet/wallet.dart';
 
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;

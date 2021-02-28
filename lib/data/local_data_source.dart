@@ -1,5 +1,5 @@
-import 'package:bell_delivery_hub/modal/user/user.dart';
-import 'package:bell_delivery_hub/modal/wallet/wallet.dart';
+import 'package:bots_demo/modal/user/user.dart';
+import 'package:bots_demo/modal/wallet/wallet.dart';
 
 abstract class LocalDataSource {
   Future<User> getUserFromLocal();

@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
-import 'package:bell_delivery_hub/data/hive/hive_const.dart';
+import 'package:bots_demo/data/hive/hive_const.dart';
 
 part 'wallet.g.dart';
 

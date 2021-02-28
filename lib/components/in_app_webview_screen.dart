@@ -1,11 +1,11 @@
-import 'package:bell_delivery_hub/blocs/wallet_bloc/wallet_bloc.dart';
-import 'package:bell_delivery_hub/utils/dependency_injection.dart';
-import 'package:bell_delivery_hub/utils/theme.dart';
+import 'package:bots_demo/blocs/wallet_bloc/wallet_bloc.dart';
+import 'package:bots_demo/utils/dependency_injection.dart';
+import 'package:bots_demo/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:bell_delivery_hub/extensions/number_extensions.dart';
-import 'package:bell_delivery_hub/extensions/context_extension.dart';
-import 'package:bell_delivery_hub/extensions/flash_util.dart';
+import 'package:bots_demo/extensions/number_extensions.dart';
+import 'package:bots_demo/extensions/context_extension.dart';
+import 'package:bots_demo/extensions/flash_util.dart';
 
 class InAppViewBottomSheet {
   InAppWebViewController webView;

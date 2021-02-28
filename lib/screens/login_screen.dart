@@ -1,22 +1,22 @@
-import 'package:bell_delivery_hub/blocs/authentication_bloc/authentication_bloc.dart';
-import 'package:bell_delivery_hub/blocs/authentication_bloc/authentication_state.dart';
-import 'package:bell_delivery_hub/blocs/login_bloc/login_bloc.dart';
-import 'package:bell_delivery_hub/blocs/login_bloc/login_event.dart';
-import 'package:bell_delivery_hub/blocs/login_bloc/login_state.dart';
-import 'package:bell_delivery_hub/components/button.dart';
-import 'package:bell_delivery_hub/globals/exveptions/login_error_modal.dart';
-import 'package:bell_delivery_hub/globals/throttle.dart';
-import 'package:bell_delivery_hub/network/urls.dart';
-import 'package:bell_delivery_hub/utils/dependency_injection.dart';
-import 'package:bell_delivery_hub/utils/theme.dart';
+import 'package:bots_demo/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:bots_demo/blocs/authentication_bloc/authentication_state.dart';
+import 'package:bots_demo/blocs/login_bloc/login_bloc.dart';
+import 'package:bots_demo/blocs/login_bloc/login_event.dart';
+import 'package:bots_demo/blocs/login_bloc/login_state.dart';
+import 'package:bots_demo/components/button.dart';
+import 'package:bots_demo/globals/exveptions/login_error_modal.dart';
+import 'package:bots_demo/globals/throttle.dart';
+import 'package:bots_demo/network/urls.dart';
+import 'package:bots_demo/utils/dependency_injection.dart';
+import 'package:bots_demo/utils/theme.dart';
 import 'package:clippy_flutter/clippy_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:bell_delivery_hub/extensions/context_extension.dart';
-import 'package:bell_delivery_hub/extensions/number_extensions.dart';
+import 'package:bots_demo/extensions/context_extension.dart';
+import 'package:bots_demo/extensions/number_extensions.dart';
 
 class ConnectStoreScreen extends StatefulWidget {
   final BuildContext context;

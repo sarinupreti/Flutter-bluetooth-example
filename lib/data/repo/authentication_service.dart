@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:bell_delivery_hub/data/hive/hive_setup.dart';
-import 'package:bell_delivery_hub/data/local_data_source.dart';
-import 'package:bell_delivery_hub/globals/exveptions/network_exceptions.dart';
-import 'package:bell_delivery_hub/modal/api_response_status.dart';
-import 'package:bell_delivery_hub/modal/login/request/login_request.dart';
-import 'package:bell_delivery_hub/modal/user/user.dart';
-import 'package:bell_delivery_hub/network/network_api.dart';
+import 'package:bots_demo/data/hive/hive_setup.dart';
+import 'package:bots_demo/data/local_data_source.dart';
+import 'package:bots_demo/globals/exveptions/network_exceptions.dart';
+import 'package:bots_demo/modal/api_response_status.dart';
+import 'package:bots_demo/modal/login/request/login_request.dart';
+import 'package:bots_demo/modal/user/user.dart';
+import 'package:bots_demo/network/network_api.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 

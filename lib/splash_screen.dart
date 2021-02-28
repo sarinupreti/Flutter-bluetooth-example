@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:bell_delivery_hub/extensions/context_extension.dart';
-import 'package:bell_delivery_hub/extensions/number_extensions.dart';
+import 'package:bots_demo/extensions/context_extension.dart';
+import 'package:bots_demo/extensions/number_extensions.dart';
 
 class SplashScreen extends StatefulWidget {
   final BuildContext context;

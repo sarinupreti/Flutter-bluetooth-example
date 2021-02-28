@@ -1,7 +1,7 @@
-import 'package:bell_delivery_hub/utils/theme.dart';
+import 'package:bots_demo/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:bell_delivery_hub/extensions/number_extensions.dart';
+import 'package:bots_demo/extensions/number_extensions.dart';
 
 class PermissionDialog extends StatefulWidget {
   //

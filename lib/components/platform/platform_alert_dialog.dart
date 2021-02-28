@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bell_delivery_hub/components/platform/platform_widget.dart';
+import 'package:bots_demo/components/platform/platform_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

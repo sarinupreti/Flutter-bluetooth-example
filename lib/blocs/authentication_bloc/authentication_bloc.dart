@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bell_delivery_hub/data/repo/authentication_service.dart';
+import 'package:bots_demo/data/repo/authentication_service.dart';
 import 'package:bloc/bloc.dart';
 
 import 'authentication_event.dart';

@@ -1,21 +1,21 @@
-import 'package:bell_delivery_hub/blocs/authentication_bloc/authentication_bloc.dart';
-import 'package:bell_delivery_hub/blocs/authentication_bloc/authentication_state.dart';
-import 'package:bell_delivery_hub/components/error_screen.dart';
-import 'package:bell_delivery_hub/globals/navigation.dart';
-import 'package:bell_delivery_hub/globals/scree_util_setup.dart';
-import 'package:bell_delivery_hub/init.dart';
-import 'package:bell_delivery_hub/routes/router.dart';
-import 'package:bell_delivery_hub/routes/router.gr.dart';
-import 'package:bell_delivery_hub/theme/theme_builder.dart';
-import 'package:bell_delivery_hub/theme/themes/theme_cubit.dart';
-import 'package:bell_delivery_hub/theme/themes/theme_palatte.dart';
-import 'package:bell_delivery_hub/utils/dependency_injection.dart';
+import 'package:bots_demo/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:bots_demo/blocs/authentication_bloc/authentication_state.dart';
+import 'package:bots_demo/components/error_screen.dart';
+import 'package:bots_demo/globals/navigation.dart';
+import 'package:bots_demo/globals/scree_util_setup.dart';
+import 'package:bots_demo/init.dart';
+import 'package:bots_demo/routes/router.dart';
+import 'package:bots_demo/routes/router.gr.dart';
+import 'package:bots_demo/theme/theme_builder.dart';
+import 'package:bots_demo/theme/themes/theme_cubit.dart';
+import 'package:bots_demo/theme/themes/theme_palatte.dart';
+import 'package:bots_demo/utils/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:bell_delivery_hub/extensions/number_extensions.dart';
-import 'package:bell_delivery_hub/extensions/navigation_extension.dart';
+import 'package:bots_demo/extensions/number_extensions.dart';
+import 'package:bots_demo/extensions/navigation_extension.dart';
 
 void main() async {
   await AppInit.initialize();

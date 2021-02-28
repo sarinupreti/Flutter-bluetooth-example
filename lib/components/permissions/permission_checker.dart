@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:bell_delivery_hub/components/permissions/permission_dialog.dart';
+import 'package:bots_demo/components/permissions/permission_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';

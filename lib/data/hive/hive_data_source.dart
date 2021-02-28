@@ -1,8 +1,8 @@
-import 'package:bell_delivery_hub/data/hive/hive_const.dart';
-import 'package:bell_delivery_hub/data/hive/hive_setup.dart';
-import 'package:bell_delivery_hub/data/local_data_source.dart';
-import 'package:bell_delivery_hub/modal/user/user.dart';
-import 'package:bell_delivery_hub/modal/wallet/wallet.dart';
+import 'package:bots_demo/data/hive/hive_const.dart';
+import 'package:bots_demo/data/hive/hive_setup.dart';
+import 'package:bots_demo/data/local_data_source.dart';
+import 'package:bots_demo/modal/user/user.dart';
+import 'package:bots_demo/modal/wallet/wallet.dart';
 
 class HiveDataSource implements LocalDataSource {
   @override

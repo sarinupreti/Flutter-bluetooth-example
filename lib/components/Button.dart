@@ -1,9 +1,9 @@
 import 'dart:io';
-import 'package:bell_delivery_hub/utils/theme.dart';
+import 'package:bots_demo/utils/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:bell_delivery_hub/extensions/context_extension.dart';
+import 'package:bots_demo/extensions/context_extension.dart';
 
 class Button extends StatelessWidget {
   final double width;

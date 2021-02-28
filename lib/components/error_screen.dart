@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bell_delivery_hub/extensions/context_extension.dart';
+import 'package:bots_demo/extensions/context_extension.dart';
 
 class ErrorScreen extends StatefulWidget {
   final BuildContext context;

@@ -1,4 +1,4 @@
-import 'package:bell_delivery_hub/globals/exveptions/network_exceptions.dart';
+import 'package:bots_demo/globals/exveptions/network_exceptions.dart';
 import 'package:equatable/equatable.dart';
 
 class ApiResponseStatus<T> extends Equatable {

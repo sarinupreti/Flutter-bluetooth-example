@@ -1,4 +1,4 @@
-import 'package:bell_delivery_hub/modal/user/user.dart';
+import 'package:bots_demo/modal/user/user.dart';
 import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

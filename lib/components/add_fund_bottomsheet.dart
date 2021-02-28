@@ -1,15 +1,15 @@
-import 'package:bell_delivery_hub/blocs/add_fund_bloc/bloc/add_fund_bloc.dart';
-import 'package:bell_delivery_hub/blocs/wallet_bloc/wallet_bloc.dart';
-import 'package:bell_delivery_hub/components/button.dart';
-import 'package:bell_delivery_hub/components/in_app_webview_screen.dart';
-import 'package:bell_delivery_hub/modal/wallet/request/add_refund_request.dart';
-import 'package:bell_delivery_hub/utils/dependency_injection.dart';
-import 'package:bell_delivery_hub/utils/theme.dart';
+import 'package:bots_demo/blocs/add_fund_bloc/bloc/add_fund_bloc.dart';
+import 'package:bots_demo/blocs/wallet_bloc/wallet_bloc.dart';
+import 'package:bots_demo/components/button.dart';
+import 'package:bots_demo/components/in_app_webview_screen.dart';
+import 'package:bots_demo/modal/wallet/request/add_refund_request.dart';
+import 'package:bots_demo/utils/dependency_injection.dart';
+import 'package:bots_demo/utils/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:bell_delivery_hub/extensions/string_extension.dart';
-import 'package:bell_delivery_hub/extensions/number_extensions.dart';
-import 'package:bell_delivery_hub/extensions/context_extension.dart';
-import 'package:bell_delivery_hub/extensions/flash_util.dart';
+import 'package:bots_demo/extensions/string_extension.dart';
+import 'package:bots_demo/extensions/number_extensions.dart';
+import 'package:bots_demo/extensions/context_extension.dart';
+import 'package:bots_demo/extensions/flash_util.dart';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

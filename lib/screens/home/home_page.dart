@@ -1,14 +1,14 @@
-import 'package:bell_delivery_hub/blocs/authentication_bloc/authentication.dart';
-import 'package:bell_delivery_hub/blocs/wallet_bloc/wallet_bloc.dart';
-import 'package:bell_delivery_hub/components/add_fund_bottomsheet.dart';
-import 'package:bell_delivery_hub/components/custom_shimmer.dart';
-import 'package:bell_delivery_hub/utils/dependency_injection.dart';
+import 'package:bots_demo/blocs/authentication_bloc/authentication.dart';
+import 'package:bots_demo/blocs/wallet_bloc/wallet_bloc.dart';
+import 'package:bots_demo/components/add_fund_bottomsheet.dart';
+import 'package:bots_demo/components/custom_shimmer.dart';
+import 'package:bots_demo/utils/dependency_injection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bell_delivery_hub/extensions/string_extension.dart';
-import 'package:bell_delivery_hub/extensions/number_extensions.dart';
-import 'package:bell_delivery_hub/extensions/context_extension.dart';
+import 'package:bots_demo/extensions/string_extension.dart';
+import 'package:bots_demo/extensions/number_extensions.dart';
+import 'package:bots_demo/extensions/context_extension.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
