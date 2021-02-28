@@ -49,4 +49,13 @@ extension StringExtension on String {
 
     return date;
   }
+
+  String returnMonth() {
+    final removeTFromString = this.replaceFirst("T", " ");
+
+    var formattedDate =
+        DateFormat('yyyy-MM-dd H:mm:ss').parse(removeTFromString);
+
+    return DateFormat.d().format(formattedDate);
+  }
 }

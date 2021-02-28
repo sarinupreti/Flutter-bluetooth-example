@@ -1,7 +1,10 @@
 import 'package:bots_demo/blocs/add_fund_bloc/bloc/add_fund_bloc.dart';
 import 'package:bots_demo/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:bots_demo/blocs/pay_fund_bloc/pay_fund_bloc.dart';
+import 'package:bots_demo/blocs/transaction_bloc/transaction_bloc.dart';
 import 'package:bots_demo/data/repo/authentication_service.dart';
 import 'package:bots_demo/blocs/login_bloc/login_bloc.dart';
+import 'package:bots_demo/data/repo/transaction_repository.dart';
 import 'package:bots_demo/data/repo/wallet_repository.dart';
 import 'package:bots_demo/blocs/wallet_bloc/wallet_bloc.dart';
 import 'package:bots_demo/data/hive/hive_data_source.dart';
@@ -43,12 +46,19 @@ void _registerBlocs() {
   inject.registerLazySingleton(
       () => WalletRepository(networkApi: inject(), localDataSource: inject()));
 
+  inject.registerLazySingleton(() =>
+      TransactionRepository(networkApi: inject(), localDataSource: inject()));
+
   //BLOCS//
 
   inject.registerLazySingleton(() => AuthenticationBloc(inject()));
   inject.registerLazySingleton(() => LoginBloc(inject(), inject()));
   inject.registerLazySingleton(() => WalletBloc(walletRepository: inject()));
   inject.registerLazySingleton(() => AddFundBloc(walletRepository: inject()));
+  inject.registerLazySingleton(() => PayFundBloc(walletRepository: inject()));
+
+  inject.registerLazySingleton(
+      () => TransactionBloc(transactionRepository: inject()));
 }
 
 void _registerRepository() {}

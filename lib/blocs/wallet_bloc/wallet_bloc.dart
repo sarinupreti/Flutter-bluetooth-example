@@ -5,7 +5,6 @@ import 'package:bots_demo/globals/exveptions/network_exceptions.dart';
 import 'package:bots_demo/modal/wallet/add_wallet_fund.dart';
 import 'package:bots_demo/modal/wallet/request/add_refund_request.dart';
 import 'package:bots_demo/modal/wallet/wallet.dart';
-import 'package:bots_demo/network/urls.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';

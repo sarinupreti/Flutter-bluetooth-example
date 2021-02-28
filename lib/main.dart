@@ -4,7 +4,6 @@ import 'package:bots_demo/components/error_screen.dart';
 import 'package:bots_demo/globals/navigation.dart';
 import 'package:bots_demo/globals/scree_util_setup.dart';
 import 'package:bots_demo/init.dart';
-import 'package:bots_demo/routes/router.dart';
 import 'package:bots_demo/routes/router.gr.dart';
 import 'package:bots_demo/theme/theme_builder.dart';
 import 'package:bots_demo/theme/themes/theme_cubit.dart';

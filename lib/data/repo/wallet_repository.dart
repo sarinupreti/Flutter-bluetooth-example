@@ -1,8 +1,10 @@
 import 'dart:io';
 
-import 'package:bots_demo/data/local_data_source.dart';
 import 'package:bots_demo/globals/exveptions/network_exceptions.dart';
+import 'package:bots_demo/data/local_data_source.dart';
 import 'package:bots_demo/modal/api_response_status.dart';
+import 'package:bots_demo/modal/transaction/request/payment_request.dart';
+import 'package:bots_demo/modal/transaction/transaction.dart';
 import 'package:bots_demo/modal/wallet/add_wallet_fund.dart';
 import 'package:bots_demo/modal/wallet/request/add_refund_request.dart';
 import 'package:bots_demo/modal/wallet/wallet.dart';
@@ -61,6 +63,35 @@ class WalletRepository {
           data: data,
           isSuccessful: true,
           error: null,
+        );
+      }
+    } on DioError catch (error) {
+      return ApiResponseStatus(
+          isSuccessful: false, error: NetworkExceptions.getDioException(error));
+    } on SocketException catch (error) {
+      return ApiResponseStatus(
+          isSuccessful: false, error: NetworkExceptions.getDioException(error));
+    }
+  }
+
+  // ignore: missing_return
+  Future<ApiResponseStatus<TransactionHistory>> payFund(
+      PaymentRequest body) async {
+    try {
+      final response = await _networkApi.payFund(body);
+      if (response != null && response.status == "success") {
+        final data = TransactionHistory.fromJson(response.data["transaction"]);
+
+        return ApiResponseStatus(
+          data: data,
+          isSuccessful: true,
+          error: null,
+        );
+      } else {
+        return ApiResponseStatus(
+          data: null,
+          isSuccessful: true,
+          error: NetworkExceptions.defaultError(response.status),
         );
       }
     } on DioError catch (error) {

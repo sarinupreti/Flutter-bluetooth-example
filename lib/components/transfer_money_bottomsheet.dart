@@ -1,7 +1,7 @@
-import 'package:bots_demo/blocs/add_fund_bloc/bloc/add_fund_bloc.dart';
+import 'package:bots_demo/blocs/wallet_bloc/wallet_bloc.dart';
+import 'package:bots_demo/blocs/pay_fund_bloc/pay_fund_bloc.dart';
 import 'package:bots_demo/components/button.dart';
-import 'package:bots_demo/components/in_app_webview_screen.dart';
-import 'package:bots_demo/modal/wallet/request/add_refund_request.dart';
+import 'package:bots_demo/modal/transaction/request/payment_request.dart';
 import 'package:bots_demo/utils/dependency_injection.dart';
 import 'package:bots_demo/utils/theme.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +12,11 @@ import 'package:bots_demo/extensions/flash_util.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AddFundBottomSheet {
+class TransferMoneyBottomSheet {
   static void showSheet({BuildContext context}) {
     TextEditingController amountController = TextEditingController();
+    TextEditingController nameController = TextEditingController();
+
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     showModalBottomSheet(
@@ -28,17 +30,22 @@ class AddFundBottomSheet {
           child: SingleChildScrollView(
             child: StatefulBuilder(
               builder: (context, setState) {
-                return BlocConsumer<AddFundBloc, AddFundState>(
-                  cubit: inject<AddFundBloc>(),
+                return BlocConsumer<PayFundBloc, PayFundState>(
+                  cubit: inject<PayFundBloc>(),
                   listener: (context, state) {
-                    if (state is AddFundSuccess) {
-                      if (state.postAddFundResponse.url != null) {
-                        Navigator.pop(context);
+                    if (state is AddFundSuccess &&
+                        state.transactionHistory != null &&
+                        state.transactionHistory.createdAt != null) {
+                      inject<WalletBloc>().add(GetWalletBalance());
 
-                        return InAppViewBottomSheet().showSheet(
-                            context: context,
-                            url: state.postAddFundResponse.url);
-                      }
+                      Navigator.pop(context);
+
+                      context.showMessage(
+                          "Payment sucessful to merchant.", false);
+                    }
+
+                    if (state is AddFundFailure) {
+                      context.showMessage(state.error.toString(), true);
                     }
                   },
                   builder: (context, state) {
@@ -70,7 +77,7 @@ class AddFundBottomSheet {
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
-                                          "Add Fund",
+                                          "Pay Merchant",
                                           style: AppTextTheme.appBarTitle
                                               .copyWith(
                                                   color:
@@ -123,6 +130,36 @@ class AddFundBottomSheet {
                                     height: 20,
                                   ),
                                   Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20.flexibleWidth),
+                                    child: TextFormField(
+                                      controller: nameController,
+                                      keyboardType: TextInputType.text,
+                                      validator: (value) {
+                                        if (value.isEmpty) {
+                                          return "name cannot be empty";
+                                        } else
+                                          return null;
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "Item name",
+                                        hintStyle: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1
+                                            .copyWith(
+                                                color: context.theme.textColor,
+                                                fontSize: 16.flexibleFontSize),
+                                        labelStyle: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1
+                                            .copyWith(
+                                                color: context.theme.textColor,
+                                                fontSize: 16.flexibleFontSize),
+                                      ),
+                                      inputFormatters: [],
+                                    ),
+                                  ),
+                                  Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 15, vertical: 15),
                                     child: Button(
@@ -134,12 +171,15 @@ class AddFundBottomSheet {
                                       message: "Confirm",
                                       onPressed: () {
                                         if (_formKey.currentState.validate()) {
-                                          final request = AddFundRequest(
+                                          final request = PaymentRequest(
+                                              narration:
+                                                  nameController.text.trim(),
+                                              recipient: 1593962036483,
                                               amount: int.parse(
                                                   amountController.text));
 
-                                          inject<AddFundBloc>()
-                                              .add(AddFundToAccount(request));
+                                          inject<PayFundBloc>()
+                                              .add(PayFundToAccount(request));
                                         } else {
                                           if (state is AddFundFailure) {
                                             context.showMessage(

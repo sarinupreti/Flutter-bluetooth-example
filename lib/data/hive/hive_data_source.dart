@@ -1,6 +1,7 @@
 import 'package:bots_demo/data/hive/hive_const.dart';
 import 'package:bots_demo/data/hive/hive_setup.dart';
 import 'package:bots_demo/data/local_data_source.dart';
+import 'package:bots_demo/modal/transaction/transaction.dart';
 import 'package:bots_demo/modal/user/user.dart';
 import 'package:bots_demo/modal/wallet/wallet.dart';
 
@@ -57,5 +58,28 @@ class HiveDataSource implements LocalDataSource {
     final cachedProductList = await getHiveBoxData<Wallet>(HIVE_WALLET_BOX);
 
     return cachedProductList;
+  }
+
+  @override
+  Future<List<TransactionHistory>> getTransactionFromHistory() async {
+    final cachedTransactionList =
+        await getListFromHiveBox<TransactionHistory>(HIVE_TRANSACTION_BOX);
+
+    return cachedTransactionList.toList();
+  }
+
+  @override
+  Future<List<TransactionHistory>> cachedTransactionHistory(
+      {List<TransactionHistory> history}) async {
+    final hiveProductBox = await openBox(HIVE_TRANSACTION_BOX);
+    final cachedTransactionHistory =
+        await getListFromHiveBox<TransactionHistory>(HIVE_TRANSACTION_BOX);
+
+    history.asMap().forEach((index, data) {
+      if (!cachedTransactionHistory.contains(data))
+        hiveProductBox.put(data.id, data);
+    });
+    final cachedTransactionList = await getTransactionFromHistory();
+    return cachedTransactionList;
   }
 }

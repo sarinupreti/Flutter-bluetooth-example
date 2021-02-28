@@ -1,4 +1,5 @@
 import 'package:bots_demo/data/hive/hive_const.dart';
+import 'package:bots_demo/modal/transaction/transaction.dart';
 import 'package:bots_demo/modal/user/user.dart';
 import 'package:bots_demo/modal/wallet/wallet.dart';
 
@@ -18,6 +19,7 @@ class HiveSetup {
 
     Hive.registerAdapter(UserAdapter());
     Hive.registerAdapter(WalletAdapter());
+    Hive.registerAdapter(TransactionHistoryAdapter());
 
     //
     //

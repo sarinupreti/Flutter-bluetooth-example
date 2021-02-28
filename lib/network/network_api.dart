@@ -4,7 +4,7 @@ import 'package:bots_demo/data/local_data_source.dart';
 import 'package:bots_demo/globals/navigation.dart';
 import 'package:bots_demo/modal/base_response.dart';
 import 'package:bots_demo/modal/login/request/login_request.dart';
-import 'package:bots_demo/modal/wallet/add_wallet_fund.dart';
+import 'package:bots_demo/modal/transaction/request/payment_request.dart';
 import 'package:bots_demo/modal/wallet/request/add_refund_request.dart';
 import 'package:bots_demo/utils/dependency_injection.dart';
 import "package:dio/dio.dart" hide Headers;
@@ -35,6 +35,15 @@ abstract class BotsNetworkApi {
   @POST("$fundWalletUrl")
   Future<BaseResponse> postAddFund(
     @Body() AddFundRequest body,
+  );
+
+  @GET("$transactionHistory")
+  Future<BaseResponse> getTransactionHistory();
+
+  //
+  @POST("$tranferMoney")
+  Future<BaseResponse> payFund(
+    @Body() PaymentRequest body,
   );
 }
 
@@ -69,12 +78,15 @@ Dio buildDio() {
           },
           onResponse: (Response response) async {},
           onError: (DioError e) async {
-            inject<AuthenticationBloc>().add(UserLoggedOut());
+            if (e.response.statusCode == 404) {
+              inject<AuthenticationBloc>().add(UserLoggedOut());
 
-            globalNavigatorKey.currentState.context.showStatusBar(
-              message: "Your session has been expired. Please login again.",
-              icon: null,
-            );
+              globalNavigatorKey.currentState.context.showStatusBar(
+                message: "Your session has been expired. Please login again.",
+                icon: null,
+              );
+            }
+
             // }
           },
         ),

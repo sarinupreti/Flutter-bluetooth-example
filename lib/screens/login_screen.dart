@@ -6,7 +6,6 @@ import 'package:bots_demo/blocs/login_bloc/login_state.dart';
 import 'package:bots_demo/components/button.dart';
 import 'package:bots_demo/globals/exveptions/login_error_modal.dart';
 import 'package:bots_demo/globals/throttle.dart';
-import 'package:bots_demo/network/urls.dart';
 import 'package:bots_demo/utils/dependency_injection.dart';
 import 'package:bots_demo/utils/theme.dart';
 import 'package:clippy_flutter/clippy_flutter.dart';
