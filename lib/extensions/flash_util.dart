@@ -1,4 +1,4 @@
-import 'package:bell_delivery_hub/theme/theme.dart';
+import 'package:bell_delivery_hub/utils/theme.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';

@@ -3,9 +3,9 @@ import 'dart:convert';
 
 import 'package:intl/intl.dart';
 
-final password = "swipecomm@2020";
-final key = Key.fromUtf8('thisisakeyforswipecomm@2020.inc.'); //32 chars
-final iv = IV.fromUtf8('swipecomm@2020..'); //16 chars
+final password = "";
+final key = Key.fromUtf8(''); //32 chars
+final iv = IV.fromUtf8(''); //16 chars
 
 extension StringExtension on String {
   String capitalize() {
@@ -26,6 +26,17 @@ extension StringExtension on String {
     final e = Encrypter(AES(key, mode: AESMode.cbc));
     final decryptedData = e.decrypt(Encrypted.fromBase64(this), iv: iv);
     return decryptedData;
+  }
+
+  String moneyFormat() {
+    if (this.length > 2) {
+      var value = this;
+      value = value.replaceAll(RegExp(r'\D'), '');
+      value = value.replaceAll(RegExp(r'\B(?=(\d{3})+(?!\d))'), ',');
+      return value;
+    } else {
+      return this;
+    }
   }
 
   convertTimeStamp() {

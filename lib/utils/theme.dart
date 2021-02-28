@@ -7,8 +7,8 @@ import 'package:bell_delivery_hub/extensions/number_extensions.dart';
 class AppColors {
   const AppColors();
 
-  static const Color primaryColor = const Color(0xFFE3A383);
-  static const Color primaryColorAccent = const Color(0xFFE3A383);
+  static const Color primaryColor = const Color(0xFF00C2D7);
+  static const Color primaryColorAccent = const Color(0xFF009AAB);
   static const Color notificationIconColor = const Color(0xFFB7C1D3);
   static const Color notificationbackgroundColor = const Color(0xFFFD655C);
   static const Color notificationSennColor = const Color(0xFF212121);

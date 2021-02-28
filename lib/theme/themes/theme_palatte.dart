@@ -40,8 +40,8 @@ class ThemePalatte {
     @required this.onError,
     @required this.textColor,
     this.corePalatte: const CorePalatte(
-        primaryColor: Color(0xFFE3A383),
-        secondaryColor: Color(0xFF000000),
+        primaryColor: Color(0xFF00C2D7),
+        secondaryColor: Color(0xFF009AAB),
         primaryColorAccent: Color(0xFFEFE6FF),
         notificationIconColor: Color(0xFFB7C1D3),
         notificationbackgroundColor: Color(0xFFFD655C),

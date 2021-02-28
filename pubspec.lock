@@ -197,13 +197,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0-nullsafety.3"
-  color:
-    dependency: transitive
-    description:
-      name: color
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.1"
   connectivity:
     dependency: "direct main"
     description:
@@ -239,6 +232,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  cross_connectivity:
+    dependency: "direct main"
+    description:
+      name: cross_connectivity
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   crypto:
     dependency: transitive
     description:
@@ -323,27 +323,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.2.1"
-  firebase_core:
-    dependency: "direct main"
-    description:
-      name: firebase_core
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.5.3"
-  firebase_core_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_core_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.0"
-  firebase_core_web:
-    dependency: transitive
-    description:
-      name: firebase_core_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.1+1"
   fixnum:
     dependency: transitive
     description:
@@ -391,13 +370,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
-  flutter_launcher_icons:
-    dependency: "direct dev"
+  flutter_inappwebview:
+    dependency: "direct main"
     description:
-      name: flutter_launcher_icons
+      name: flutter_inappwebview
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.1"
+    version: "4.0.0+4"
   flutter_local_notifications:
     dependency: "direct main"
     description:
@@ -412,13 +391,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0+1"
-  flutter_native_splash:
-    dependency: "direct dev"
-    description:
-      name: flutter_native_splash
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.9"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -458,7 +430,7 @@ packages:
     source: hosted
     version: "0.12.7"
   freezed_annotation:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: freezed_annotation
       url: "https://pub.dartlang.org"
@@ -786,13 +758,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.7"
-  qr_code_scanner:
-    dependency: "direct main"
-    description:
-      name: qr_code_scanner
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.2"
   quiver:
     dependency: transitive
     description:

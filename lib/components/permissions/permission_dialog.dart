@@ -1,4 +1,4 @@
-import 'package:bell_delivery_hub/theme/theme.dart';
+import 'package:bell_delivery_hub/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:bell_delivery_hub/extensions/number_extensions.dart';
@@ -49,8 +49,8 @@ class _PermissionDialogState extends State<PermissionDialog>
   @override
   Widget build(BuildContext context) {
     final message = widget.permissionFor == 'camera'
-        ? 'SwipeComm needs permission to access your device camera to take a photos, scan barcode & SKU. Please go to Settings > Privacy > Camera, and enable SwipeComm.'
-        : 'SwipeComm needs permission to access your photo library to select images. Please go to Settings > Privacy > Photos, and enable SwipeComm.';
+        ? 'Bots Demo needs permission to access your device camera to take a photos, scan barcode & SKU. Please go to Settings > Privacy > Camera, and enable Bots Demo.'
+        : 'Bots Demo needs permission to access your photo library to select images. Please go to Settings > Privacy > Photos, and enable Bots Demo.';
 
     return Container(
       height: MediaQuery.of(context).size.height,

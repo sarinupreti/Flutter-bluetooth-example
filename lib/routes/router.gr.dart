@@ -7,15 +7,12 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../components/qr_scanner/scanner.dart';
-import '../connect_store_screen.dart';
-import '../error_screen.dart';
-import '../home_page.dart';
-import '../modal/order/order.dart';
-import '../modal/website_data.dart';
-import '../order_details.dart';
+import '../components/error_screen.dart';
+import '../screens/home/home_page.dart';
+import '../screens/login_screen.dart';
 import '../splash_screen.dart';
 
 class Routes {
@@ -23,19 +20,15 @@ class Routes {
   static const String splashScreen = '/';
   static const String errorScreen = 'ErrorScreen';
   static const String homePage = 'HomePage';
-  static const String userQRScannerPage = 'UserQRScannerPage';
-  static const String orderDetailsScreens = 'OrderDetailsScreens';
   static const all = <String>{
     connectStoreScreen,
     splashScreen,
     errorScreen,
     homePage,
-    userQRScannerPage,
-    orderDetailsScreens,
   };
 }
 
-class SwipeCommRouter extends RouterBase {
+class BotsDemomRouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
@@ -43,8 +36,6 @@ class SwipeCommRouter extends RouterBase {
     RouteDef(Routes.splashScreen, page: SplashScreen),
     RouteDef(Routes.errorScreen, page: ErrorScreen),
     RouteDef(Routes.homePage, page: HomePage),
-    RouteDef(Routes.userQRScannerPage, page: UserQRScannerPage),
-    RouteDef(Routes.orderDetailsScreens, page: OrderDetailsScreens),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -91,36 +82,7 @@ class SwipeCommRouter extends RouterBase {
         orElse: () => HomePageArguments(),
       );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => HomePage(
-          key: args.key,
-          websiteData: args.websiteData,
-          context: args.context,
-        ),
-        settings: data,
-      );
-    },
-    UserQRScannerPage: (data) {
-      final args = data.getArgs<UserQRScannerPageArguments>(
-        orElse: () => UserQRScannerPageArguments(),
-      );
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => UserQRScannerPage(
-          key: args.key,
-          barcodeValue: args.barcodeValue,
-        ),
-        settings: data,
-      );
-    },
-    OrderDetailsScreens: (data) {
-      final args = data.getArgs<OrderDetailsScreensArguments>(
-        orElse: () => OrderDetailsScreensArguments(),
-      );
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => OrderDetailsScreens(
-          key: args.key,
-          orderId: args.orderId,
-          data: args.data,
-        ),
+        builder: (context) => HomePage(key: args.key),
         settings: data,
       );
     },
@@ -131,7 +93,7 @@ class SwipeCommRouter extends RouterBase {
 /// Navigation helper methods extension
 /// *************************************************************************
 
-extension SwipeCommRouterExtendedNavigatorStateX on ExtendedNavigatorState {
+extension BotsDemomRouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushConnectStoreScreen({
     Key key,
     BuildContext context,
@@ -163,34 +125,10 @@ extension SwipeCommRouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushHomePage({
     Key key,
-    WebsiteData websiteData,
-    BuildContext context,
   }) =>
       push<dynamic>(
         Routes.homePage,
-        arguments: HomePageArguments(
-            key: key, websiteData: websiteData, context: context),
-      );
-
-  Future<dynamic> pushUserQRScannerPage({
-    Key key,
-    String barcodeValue,
-  }) =>
-      push<dynamic>(
-        Routes.userQRScannerPage,
-        arguments:
-            UserQRScannerPageArguments(key: key, barcodeValue: barcodeValue),
-      );
-
-  Future<dynamic> pushOrderDetailsScreens({
-    Key key,
-    int orderId,
-    Order data,
-  }) =>
-      push<dynamic>(
-        Routes.orderDetailsScreens,
-        arguments: OrderDetailsScreensArguments(
-            key: key, orderId: orderId, data: data),
+        arguments: HomePageArguments(key: key),
       );
 }
 
@@ -223,22 +161,5 @@ class ErrorScreenArguments {
 /// HomePage arguments holder class
 class HomePageArguments {
   final Key key;
-  final WebsiteData websiteData;
-  final BuildContext context;
-  HomePageArguments({this.key, this.websiteData, this.context});
-}
-
-/// UserQRScannerPage arguments holder class
-class UserQRScannerPageArguments {
-  final Key key;
-  final String barcodeValue;
-  UserQRScannerPageArguments({this.key, this.barcodeValue});
-}
-
-/// OrderDetailsScreens arguments holder class
-class OrderDetailsScreensArguments {
-  final Key key;
-  final int orderId;
-  final Order data;
-  OrderDetailsScreensArguments({this.key, this.orderId, this.data});
+  HomePageArguments({this.key});
 }

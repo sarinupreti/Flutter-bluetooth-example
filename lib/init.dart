@@ -1,7 +1,5 @@
-import 'package:bell_delivery_hub/authentication_bloc/authentication_bloc.dart';
-import 'package:bell_delivery_hub/authentication_bloc/authentication_event.dart';
-
-import 'package:firebase_core/firebase_core.dart';
+import 'package:bell_delivery_hub/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:bell_delivery_hub/blocs/authentication_bloc/authentication_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +13,6 @@ class AppInit {
     WidgetsFlutterBinding.ensureInitialized();
 
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    await Firebase.initializeApp();
     await HiveSetup.initHive;
     await _externalSetup();
 
@@ -27,6 +24,6 @@ class AppInit {
   static Future<void> _externalSetup() async {
     WidgetsFlutterBinding.ensureInitialized();
     await initDependencyInjection();
-    Bloc.observer = SwipeCommBlocObserver();
+    Bloc.observer = CustomBlocObserver();
   }
 }

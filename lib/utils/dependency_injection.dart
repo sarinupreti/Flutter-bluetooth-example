@@ -1,12 +1,13 @@
-import 'package:bell_delivery_hub/authentication_bloc/authentication_bloc.dart';
-import 'package:bell_delivery_hub/authentication_bloc/repository/authentication_service.dart';
+import 'package:bell_delivery_hub/blocs/add_fund_bloc/bloc/add_fund_bloc.dart';
+import 'package:bell_delivery_hub/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:bell_delivery_hub/data/repo/authentication_service.dart';
+import 'package:bell_delivery_hub/blocs/login_bloc/login_bloc.dart';
+import 'package:bell_delivery_hub/data/repo/wallet_repository.dart';
+import 'package:bell_delivery_hub/blocs/wallet_bloc/wallet_bloc.dart';
 import 'package:bell_delivery_hub/data/hive/hive_data_source.dart';
 import 'package:bell_delivery_hub/data/local_data_source.dart';
-import 'package:bell_delivery_hub/login_bloc/login.dart';
 import 'package:bell_delivery_hub/network/interceptors/dio_connectivity_request_retrier.dart';
-import 'package:bell_delivery_hub/network/swipecomm_api.dart';
-import 'package:bell_delivery_hub/order_bloc/order_bloc.dart';
-import 'package:bell_delivery_hub/order_bloc/repository/order_repository.dart';
+import 'package:bell_delivery_hub/network/network_api.dart';
 import 'package:bell_delivery_hub/theme/themes/theme_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -22,15 +23,12 @@ Future<void> initDependencyInjection() async {
 }
 
 void _registerNetworkAndLocalDatabase() {
-  // inject.registerLazySingleton(() => Dio());
   inject.registerSingleton(buildDio());
 
   inject.registerSingleton(SharedPreferences.getInstance());
 
-  inject.registerSingleton(SwipeCommApi(inject.get<Dio>()));
-  // inject.registerSingleton(SwipeCommApi(
-  //   inject(),
-  // ));
+  inject.registerSingleton(BotsNetworkApi(inject.get<Dio>()));
+
   inject.registerLazySingleton<LocalDataSource>(() => HiveDataSource());
 
   inject.registerLazySingleton(
@@ -40,18 +38,17 @@ void _registerNetworkAndLocalDatabase() {
 
 void _registerBlocs() {
   inject.registerLazySingleton(() => ThemeCubit());
-
   inject.registerLazySingleton(() => AuthenticationRepository(
       networkApi: inject(), localDataSource: inject()));
+  inject.registerLazySingleton(
+      () => WalletRepository(networkApi: inject(), localDataSource: inject()));
+
+  //BLOCS//
 
   inject.registerLazySingleton(() => AuthenticationBloc(inject()));
-
   inject.registerLazySingleton(() => LoginBloc(inject(), inject()));
-
-  inject.registerLazySingleton(() => OrderBloc(inject()));
-
-  inject.registerLazySingleton(
-      () => OrderRepository(networkApi: inject(), localDataSource: inject()));
+  inject.registerLazySingleton(() => WalletBloc(walletRepository: inject()));
+  inject.registerLazySingleton(() => AddFundBloc(walletRepository: inject()));
 }
 
 void _registerRepository() {}

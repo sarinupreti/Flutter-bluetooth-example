@@ -1,12 +1,8 @@
 import 'package:auto_route/auto_route_annotations.dart';
-// import 'package:bell_delivery_hub/components/qr_scanner/qr_scanner.dart';
-import 'package:bell_delivery_hub/components/qr_scanner/scanner.dart';
-import 'package:bell_delivery_hub/connect_store_screen.dart';
-import 'package:bell_delivery_hub/error_screen.dart';
-import 'package:bell_delivery_hub/home_page.dart';
-import 'package:bell_delivery_hub/order_details.dart';
+import 'package:bell_delivery_hub/screens/login_screen.dart';
+import 'package:bell_delivery_hub/components/error_screen.dart';
+import 'package:bell_delivery_hub/screens/home/home_page.dart';
 import 'package:bell_delivery_hub/splash_screen.dart';
-import 'package:flutter/material.dart';
 
 @MaterialRouter(generateNavigationHelperExtension: true, routes: <AutoRoute>[
   MaterialRoute(
@@ -29,10 +25,5 @@ import 'package:flutter/material.dart';
   //   page: QRScannerPage,
   //   path: "QRScannerPage",
   // ),
-  MaterialRoute(
-    page: UserQRScannerPage,
-    path: "UserQRScannerPage",
-  ),
-  MaterialRoute(page: OrderDetailsScreens, path: 'OrderDetailsScreens')
 ])
-class $SwipeCommRouter {}
+class $BotsDemomRouter {}
