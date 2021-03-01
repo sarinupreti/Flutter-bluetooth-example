@@ -16,7 +16,7 @@ import 'package:bots_demo/extensions/flash_util.dart';
 
 part 'network_api.g.dart';
 
-const DEFAULT_CONNECTION_TIMEOUT = const Duration(seconds: 10);
+const DEFAULT_CONNECTION_TIMEOUT = const Duration(seconds: 20);
 const DEFAULT_RECEIVE_TIMEOUT = const Duration(seconds: 10);
 
 CancelToken cancelToken = CancelToken();

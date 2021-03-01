@@ -14,7 +14,6 @@ import 'package:bots_demo/network/network_api.dart';
 import 'package:bots_demo/theme/themes/theme_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final GetIt inject = GetIt.instance;
 
@@ -27,8 +26,6 @@ Future<void> initDependencyInjection() async {
 
 void _registerNetworkAndLocalDatabase() {
   inject.registerSingleton(buildDio());
-
-  inject.registerSingleton(SharedPreferences.getInstance());
 
   inject.registerSingleton(BotsNetworkApi(inject.get<Dio>()));
 
