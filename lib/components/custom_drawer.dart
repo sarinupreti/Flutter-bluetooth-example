@@ -5,7 +5,6 @@ import 'package:bots_demo/utils/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'package:bots_demo/extensions/number_extensions.dart';
 import 'package:bots_demo/extensions/context_extension.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({

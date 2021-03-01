@@ -1,4 +1,5 @@
 import 'package:bots_demo/components/add_fund_bottomsheet.dart';
+import 'package:bots_demo/components/connectivity_scaffold.dart';
 import 'package:bots_demo/components/custom_drawer.dart';
 import 'package:bots_demo/components/custom_shimmer.dart';
 import 'package:bots_demo/blocs/authentication_bloc/authentication.dart';
@@ -49,33 +50,14 @@ class _HomePageState extends State<HomePage> {
 
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       cubit: inject<AuthenticationBloc>(),
-      listener: (context, state) {},
+      listener: (context, state) async {},
       builder: (context, state) {
         return state is AuthenticationAuthenticated
-            ? Scaffold(
+            ? ConnectivityScaffold(
                 drawer: CustomDrawer(screenWidth: screenWidth),
-                appBar: AppBar(
-                  automaticallyImplyLeading: false,
-                  centerTitle: false,
-                  elevation: 0,
-                  title: Text(
-                    "Hello ${state.user.name}, ",
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
-                ),
-                floatingActionButton: FloatingActionButton(
-                  backgroundColor: context.theme.corePalatte.primaryColor,
-                  onPressed: () {
-                    return TransferMoneyBottomSheet.showSheet(context: context);
-                  },
-                  child: Text(
-                    "Pay",
-                    style: Theme.of(context).textTheme.subtitle1.copyWith(
-                        color: context.theme.themeType
-                            ? context.theme.textColor
-                            : context.theme.success),
-                  ),
-                ),
+                backgroundColor: context.theme.surface,
+                appBar: appBarWidget(state, context),
+                floatingActionButton: floatingActionButton(context),
                 body: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -83,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       walletView(screenWidth, screenHeight),
                       TitleWidget(
-                        title: "Add money to wallet",
+                        title: "Add money to wallet".toUpperCase(),
                         titleAlignment: Alignment.centerRight,
                         onTap: () {
                           AddFundBottomSheet.showSheet(context: context);
@@ -91,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       30.verticalSpace,
                       TitleWidget(
-                        title: "Transactions this week",
+                        title: "Transactions this week".toUpperCase(),
                       ),
                       30.verticalSpace,
                       simpleLineChart(screenHeight, screenWidth),
@@ -101,6 +83,34 @@ class _HomePageState extends State<HomePage> {
               )
             : CircularProgressIndicator();
       },
+    );
+  }
+
+  FloatingActionButton floatingActionButton(BuildContext context) {
+    return FloatingActionButton(
+      backgroundColor: context.theme.corePalatte.primaryColor,
+      onPressed: () {
+        return TransferMoneyBottomSheet.showSheet(context: context);
+      },
+      child: Text(
+        "Pay",
+        style: Theme.of(context).textTheme.subtitle1.copyWith(
+            color: context.theme.themeType
+                ? context.theme.textColor
+                : context.theme.success),
+      ),
+    );
+  }
+
+  AppBar appBarWidget(AuthenticationAuthenticated state, BuildContext context) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      centerTitle: false,
+      elevation: 0,
+      title: Text(
+        "Hello ${state.user.name}, ",
+        style: Theme.of(context).textTheme.subtitle1,
+      ),
     );
   }
 
@@ -119,17 +129,160 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
             success: (value) => Container(
-                height: screenHeight / 2,
+                height: screenHeight / 1.1,
                 child: GestureDetector(
                   onTap: () {
                     context.showMessage(value.toString(), false);
                   },
-                  child: SimpleLineChart(
-                    lineChartData(value.history),
-                    animate: true,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                        child: SimpleLineChart(
+                          lineChartData(value.history),
+                          animate: true,
+                        ),
+                      ),
+                      40.verticalSpace,
+                      TitleWidget(
+                        title: "Recent transactions".toUpperCase(),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: ListView.separated(
+                            separatorBuilder: (context, index) {
+                              return Divider();
+                            },
+                            shrinkWrap: true,
+                            itemCount: value.history.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final latestList =
+                                  value.history.reversed.toList();
+
+                              final data = latestList[index];
+
+                              return Container(
+                                decoration: BoxDecoration(
+                                  color: context.theme.background,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: context.theme.themeType
+                                          ? Colors.transparent
+                                          : Colors.grey[300].withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 20,
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 15),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text("${data.narration}",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle1
+                                                .copyWith(
+                                                    color:
+                                                        context.theme.textColor,
+                                                    fontSize:
+                                                        14.flexibleFontSize)),
+                                        Text("USD  ${data.amount}",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle1
+                                                .copyWith(
+                                                    color: context.theme
+                                                        .corePalatte.greyColor,
+                                                    fontSize:
+                                                        14.flexibleFontSize)),
+                                      ],
+                                    ),
+                                    5.verticalSpace,
+                                    Text("Type : ${data.type}".toUpperCase(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1
+                                            .copyWith(
+                                                color: data.type == "credit"
+                                                    ? context.theme.corePalatte
+                                                        .errorColor
+                                                    : context.theme.corePalatte
+                                                        .seaGreenColor,
+                                                fontSize: 12.flexibleFontSize)),
+                                    5.verticalSpace,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                            "STATUS : ${data.status}"
+                                                .toUpperCase(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle1
+                                                .copyWith(
+                                                    color:
+                                                        context.theme.textColor,
+                                                    fontSize:
+                                                        12.flexibleFontSize)),
+                                        Text(
+                                            "Balance : USD ${data.walletBalance}"
+                                                .toUpperCase(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle1
+                                                .copyWith(
+                                                    color: context
+                                                        .theme
+                                                        .corePalatte
+                                                        .greyFontColor,
+                                                    fontSize:
+                                                        12.flexibleFontSize)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 )),
-            failure: (value) => Text(value.message));
+            failure: (value) => Center(
+                    child: Column(
+                  children: [
+                    SizedBox(
+                        height: screenHeight * 10 / 100,
+                        child: Center(
+                            child: Icon(
+                          Icons.error_outline,
+                          size: 24.flexibleFontSize,
+                        ))),
+                    Text(
+                      value.message,
+                      style: Theme.of(context).textTheme.subtitle1.copyWith(
+                          color: context.theme.textColor,
+                          fontSize: 11.flexibleFontSize),
+                    ),
+                  ],
+                )));
       },
     );
   }
@@ -205,13 +358,34 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               )
-            : Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: CustomShimmer(
-                  width: screenWidth,
-                  height: screenHeight / 8,
-                ),
-              );
+            : state is WalletFailure
+                ? SizedBox(
+                    height: screenHeight * 10 / 100,
+                    child: Center(
+                        child: Icon(
+                      Icons.error_outline,
+                      size: 24.flexibleFontSize,
+                    )))
+                : state is WalletLoading
+                    ? Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: CustomShimmer(
+                          width: screenWidth,
+                          height: screenHeight / 8,
+                        ),
+                      )
+                    : SizedBox(
+                        height: screenHeight * 10 / 100,
+                        child: Center(
+                          child: Text("No data found.",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1
+                                  .copyWith(
+                                      color:
+                                          context.theme.corePalatte.greyColor,
+                                      fontSize: 11.flexibleFontSize)),
+                        ));
       },
     );
   }

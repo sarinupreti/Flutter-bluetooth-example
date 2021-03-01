@@ -132,6 +132,11 @@ class _$NetworkExceptionsTearOff {
   WebsiteAlreadyExists websiteAlreadyExists() {
     return const WebsiteAlreadyExists();
   }
+
+// ignore: unused_element
+  InternetException internetException() {
+    return const InternetException();
+  }
 }
 
 /// @nodoc
@@ -164,6 +169,7 @@ mixin _$NetworkExceptions {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
@@ -189,6 +195,7 @@ mixin _$NetworkExceptions {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -215,6 +222,7 @@ mixin _$NetworkExceptions {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
@@ -240,6 +248,7 @@ mixin _$NetworkExceptions {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   });
 }
@@ -322,6 +331,7 @@ class _$RequestCancelled implements RequestCancelled {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -345,6 +355,7 @@ class _$RequestCancelled implements RequestCancelled {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return requestCancelled();
   }
 
@@ -373,6 +384,7 @@ class _$RequestCancelled implements RequestCancelled {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -407,6 +419,7 @@ class _$RequestCancelled implements RequestCancelled {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -430,6 +443,7 @@ class _$RequestCancelled implements RequestCancelled {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return requestCancelled(this);
   }
 
@@ -458,6 +472,7 @@ class _$RequestCancelled implements RequestCancelled {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -533,6 +548,7 @@ class _$UnauthorisedRequest implements UnauthorisedRequest {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -556,6 +572,7 @@ class _$UnauthorisedRequest implements UnauthorisedRequest {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return unauthorisedRequest();
   }
 
@@ -584,6 +601,7 @@ class _$UnauthorisedRequest implements UnauthorisedRequest {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -618,6 +636,7 @@ class _$UnauthorisedRequest implements UnauthorisedRequest {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -641,6 +660,7 @@ class _$UnauthorisedRequest implements UnauthorisedRequest {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return unauthorisedRequest(this);
   }
 
@@ -669,6 +689,7 @@ class _$UnauthorisedRequest implements UnauthorisedRequest {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -743,6 +764,7 @@ class _$BadRequest implements BadRequest {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -766,6 +788,7 @@ class _$BadRequest implements BadRequest {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return badRequest();
   }
 
@@ -794,6 +817,7 @@ class _$BadRequest implements BadRequest {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -828,6 +852,7 @@ class _$BadRequest implements BadRequest {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -851,6 +876,7 @@ class _$BadRequest implements BadRequest {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return badRequest(this);
   }
 
@@ -879,6 +905,7 @@ class _$BadRequest implements BadRequest {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -973,6 +1000,7 @@ class _$NotFound implements NotFound {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -996,6 +1024,7 @@ class _$NotFound implements NotFound {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return notFound(reason);
   }
 
@@ -1024,6 +1053,7 @@ class _$NotFound implements NotFound {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -1058,6 +1088,7 @@ class _$NotFound implements NotFound {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -1081,6 +1112,7 @@ class _$NotFound implements NotFound {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return notFound(this);
   }
 
@@ -1109,6 +1141,7 @@ class _$NotFound implements NotFound {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -1188,6 +1221,7 @@ class _$MethodNotAllowed implements MethodNotAllowed {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -1211,6 +1245,7 @@ class _$MethodNotAllowed implements MethodNotAllowed {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return methodNotAllowed();
   }
 
@@ -1239,6 +1274,7 @@ class _$MethodNotAllowed implements MethodNotAllowed {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -1273,6 +1309,7 @@ class _$MethodNotAllowed implements MethodNotAllowed {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -1296,6 +1333,7 @@ class _$MethodNotAllowed implements MethodNotAllowed {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return methodNotAllowed(this);
   }
 
@@ -1324,6 +1362,7 @@ class _$MethodNotAllowed implements MethodNotAllowed {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -1399,6 +1438,7 @@ class _$NotAcceptable implements NotAcceptable {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -1422,6 +1462,7 @@ class _$NotAcceptable implements NotAcceptable {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return notAcceptable();
   }
 
@@ -1450,6 +1491,7 @@ class _$NotAcceptable implements NotAcceptable {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -1484,6 +1526,7 @@ class _$NotAcceptable implements NotAcceptable {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -1507,6 +1550,7 @@ class _$NotAcceptable implements NotAcceptable {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return notAcceptable(this);
   }
 
@@ -1535,6 +1579,7 @@ class _$NotAcceptable implements NotAcceptable {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -1610,6 +1655,7 @@ class _$RequestTimeout implements RequestTimeout {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -1633,6 +1679,7 @@ class _$RequestTimeout implements RequestTimeout {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return requestTimeout();
   }
 
@@ -1661,6 +1708,7 @@ class _$RequestTimeout implements RequestTimeout {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -1695,6 +1743,7 @@ class _$RequestTimeout implements RequestTimeout {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -1718,6 +1767,7 @@ class _$RequestTimeout implements RequestTimeout {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return requestTimeout(this);
   }
 
@@ -1746,6 +1796,7 @@ class _$RequestTimeout implements RequestTimeout {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -1821,6 +1872,7 @@ class _$SendTimeout implements SendTimeout {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -1844,6 +1896,7 @@ class _$SendTimeout implements SendTimeout {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return sendTimeout();
   }
 
@@ -1872,6 +1925,7 @@ class _$SendTimeout implements SendTimeout {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -1906,6 +1960,7 @@ class _$SendTimeout implements SendTimeout {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -1929,6 +1984,7 @@ class _$SendTimeout implements SendTimeout {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return sendTimeout(this);
   }
 
@@ -1957,6 +2013,7 @@ class _$SendTimeout implements SendTimeout {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -2029,6 +2086,7 @@ class _$Conflict implements Conflict {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -2052,6 +2110,7 @@ class _$Conflict implements Conflict {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return conflict();
   }
 
@@ -2080,6 +2139,7 @@ class _$Conflict implements Conflict {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -2114,6 +2174,7 @@ class _$Conflict implements Conflict {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -2137,6 +2198,7 @@ class _$Conflict implements Conflict {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return conflict(this);
   }
 
@@ -2165,6 +2227,7 @@ class _$Conflict implements Conflict {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -2240,6 +2303,7 @@ class _$InternalServerError implements InternalServerError {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -2263,6 +2327,7 @@ class _$InternalServerError implements InternalServerError {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return internalServerError();
   }
 
@@ -2291,6 +2356,7 @@ class _$InternalServerError implements InternalServerError {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -2325,6 +2391,7 @@ class _$InternalServerError implements InternalServerError {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -2348,6 +2415,7 @@ class _$InternalServerError implements InternalServerError {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return internalServerError(this);
   }
 
@@ -2376,6 +2444,7 @@ class _$InternalServerError implements InternalServerError {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -2451,6 +2520,7 @@ class _$NotImplemented implements NotImplemented {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -2474,6 +2544,7 @@ class _$NotImplemented implements NotImplemented {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return notImplemented();
   }
 
@@ -2502,6 +2573,7 @@ class _$NotImplemented implements NotImplemented {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -2536,6 +2608,7 @@ class _$NotImplemented implements NotImplemented {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -2559,6 +2632,7 @@ class _$NotImplemented implements NotImplemented {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return notImplemented(this);
   }
 
@@ -2587,6 +2661,7 @@ class _$NotImplemented implements NotImplemented {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -2662,6 +2737,7 @@ class _$ServiceUnavailable implements ServiceUnavailable {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -2685,6 +2761,7 @@ class _$ServiceUnavailable implements ServiceUnavailable {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return serviceUnavailable();
   }
 
@@ -2713,6 +2790,7 @@ class _$ServiceUnavailable implements ServiceUnavailable {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -2747,6 +2825,7 @@ class _$ServiceUnavailable implements ServiceUnavailable {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -2770,6 +2849,7 @@ class _$ServiceUnavailable implements ServiceUnavailable {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return serviceUnavailable(this);
   }
 
@@ -2798,6 +2878,7 @@ class _$ServiceUnavailable implements ServiceUnavailable {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -2873,6 +2954,7 @@ class _$NoInternetConnection implements NoInternetConnection {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -2896,6 +2978,7 @@ class _$NoInternetConnection implements NoInternetConnection {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return noInternetConnection();
   }
 
@@ -2924,6 +3007,7 @@ class _$NoInternetConnection implements NoInternetConnection {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -2958,6 +3042,7 @@ class _$NoInternetConnection implements NoInternetConnection {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -2981,6 +3066,7 @@ class _$NoInternetConnection implements NoInternetConnection {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return noInternetConnection(this);
   }
 
@@ -3009,6 +3095,7 @@ class _$NoInternetConnection implements NoInternetConnection {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -3106,6 +3193,7 @@ class _$DefaultException implements DefaultException {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -3129,6 +3217,7 @@ class _$DefaultException implements DefaultException {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return defaultException(message);
   }
 
@@ -3157,6 +3246,7 @@ class _$DefaultException implements DefaultException {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -3191,6 +3281,7 @@ class _$DefaultException implements DefaultException {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -3214,6 +3305,7 @@ class _$DefaultException implements DefaultException {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return defaultException(this);
   }
 
@@ -3242,6 +3334,7 @@ class _$DefaultException implements DefaultException {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -3321,6 +3414,7 @@ class _$FormatException implements FormatException {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -3344,6 +3438,7 @@ class _$FormatException implements FormatException {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return formatException();
   }
 
@@ -3372,6 +3467,7 @@ class _$FormatException implements FormatException {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -3406,6 +3502,7 @@ class _$FormatException implements FormatException {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -3429,6 +3526,7 @@ class _$FormatException implements FormatException {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return formatException(this);
   }
 
@@ -3457,6 +3555,7 @@ class _$FormatException implements FormatException {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -3532,6 +3631,7 @@ class _$UnableToProcess implements UnableToProcess {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -3555,6 +3655,7 @@ class _$UnableToProcess implements UnableToProcess {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return unableToProcess();
   }
 
@@ -3583,6 +3684,7 @@ class _$UnableToProcess implements UnableToProcess {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -3617,6 +3719,7 @@ class _$UnableToProcess implements UnableToProcess {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -3640,6 +3743,7 @@ class _$UnableToProcess implements UnableToProcess {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return unableToProcess(this);
   }
 
@@ -3668,6 +3772,7 @@ class _$UnableToProcess implements UnableToProcess {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -3765,6 +3870,7 @@ class _$DefaultError implements DefaultError {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -3788,6 +3894,7 @@ class _$DefaultError implements DefaultError {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return defaultError(error);
   }
 
@@ -3816,6 +3923,7 @@ class _$DefaultError implements DefaultError {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -3850,6 +3958,7 @@ class _$DefaultError implements DefaultError {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -3873,6 +3982,7 @@ class _$DefaultError implements DefaultError {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return defaultError(this);
   }
 
@@ -3901,6 +4011,7 @@ class _$DefaultError implements DefaultError {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -3980,6 +4091,7 @@ class _$UnexpectedError implements UnexpectedError {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -4003,6 +4115,7 @@ class _$UnexpectedError implements UnexpectedError {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return unexpectedError();
   }
 
@@ -4031,6 +4144,7 @@ class _$UnexpectedError implements UnexpectedError {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -4065,6 +4179,7 @@ class _$UnexpectedError implements UnexpectedError {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -4088,6 +4203,7 @@ class _$UnexpectedError implements UnexpectedError {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return unexpectedError(this);
   }
 
@@ -4116,6 +4232,7 @@ class _$UnexpectedError implements UnexpectedError {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -4214,6 +4331,7 @@ class _$WoocommerceLoginError implements WoocommerceLoginError {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -4237,6 +4355,7 @@ class _$WoocommerceLoginError implements WoocommerceLoginError {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return woocommerceLoginError(message);
   }
 
@@ -4265,6 +4384,7 @@ class _$WoocommerceLoginError implements WoocommerceLoginError {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -4299,6 +4419,7 @@ class _$WoocommerceLoginError implements WoocommerceLoginError {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -4322,6 +4443,7 @@ class _$WoocommerceLoginError implements WoocommerceLoginError {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return woocommerceLoginError(this);
   }
 
@@ -4350,6 +4472,7 @@ class _$WoocommerceLoginError implements WoocommerceLoginError {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -4429,6 +4552,7 @@ class _$InvalidUrlAddress implements InvalidUrlAddress {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -4452,6 +4576,7 @@ class _$InvalidUrlAddress implements InvalidUrlAddress {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return invalidUrlAddress();
   }
 
@@ -4480,6 +4605,7 @@ class _$InvalidUrlAddress implements InvalidUrlAddress {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -4514,6 +4640,7 @@ class _$InvalidUrlAddress implements InvalidUrlAddress {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -4537,6 +4664,7 @@ class _$InvalidUrlAddress implements InvalidUrlAddress {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return invalidUrlAddress(this);
   }
 
@@ -4565,6 +4693,7 @@ class _$InvalidUrlAddress implements InvalidUrlAddress {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -4662,6 +4791,7 @@ class _$InvalidAppPassword implements InvalidAppPassword {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -4685,6 +4815,7 @@ class _$InvalidAppPassword implements InvalidAppPassword {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return invalidAppPassword(message);
   }
 
@@ -4713,6 +4844,7 @@ class _$InvalidAppPassword implements InvalidAppPassword {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -4747,6 +4879,7 @@ class _$InvalidAppPassword implements InvalidAppPassword {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -4770,6 +4903,7 @@ class _$InvalidAppPassword implements InvalidAppPassword {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return invalidAppPassword(this);
   }
 
@@ -4798,6 +4932,7 @@ class _$InvalidAppPassword implements InvalidAppPassword {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -4877,6 +5012,7 @@ class _$WebsiteAlreadyExists implements WebsiteAlreadyExists {
     @required TResult invalidUrlAddress(),
     @required TResult invalidAppPassword(String message),
     @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -4900,6 +5036,7 @@ class _$WebsiteAlreadyExists implements WebsiteAlreadyExists {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return websiteAlreadyExists();
   }
 
@@ -4928,6 +5065,7 @@ class _$WebsiteAlreadyExists implements WebsiteAlreadyExists {
     TResult invalidUrlAddress(),
     TResult invalidAppPassword(String message),
     TResult websiteAlreadyExists(),
+    TResult internetException(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -4962,6 +5100,7 @@ class _$WebsiteAlreadyExists implements WebsiteAlreadyExists {
     @required TResult invalidUrlAddress(InvalidUrlAddress value),
     @required TResult invalidAppPassword(InvalidAppPassword value),
     @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
   }) {
     assert(requestCancelled != null);
     assert(unauthorisedRequest != null);
@@ -4985,6 +5124,7 @@ class _$WebsiteAlreadyExists implements WebsiteAlreadyExists {
     assert(invalidUrlAddress != null);
     assert(invalidAppPassword != null);
     assert(websiteAlreadyExists != null);
+    assert(internetException != null);
     return websiteAlreadyExists(this);
   }
 
@@ -5013,6 +5153,7 @@ class _$WebsiteAlreadyExists implements WebsiteAlreadyExists {
     TResult invalidUrlAddress(InvalidUrlAddress value),
     TResult invalidAppPassword(InvalidAppPassword value),
     TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -5025,4 +5166,221 @@ class _$WebsiteAlreadyExists implements WebsiteAlreadyExists {
 
 abstract class WebsiteAlreadyExists implements NetworkExceptions {
   const factory WebsiteAlreadyExists() = _$WebsiteAlreadyExists;
+}
+
+/// @nodoc
+abstract class $InternetExceptionCopyWith<$Res> {
+  factory $InternetExceptionCopyWith(
+          InternetException value, $Res Function(InternetException) then) =
+      _$InternetExceptionCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$InternetExceptionCopyWithImpl<$Res>
+    extends _$NetworkExceptionsCopyWithImpl<$Res>
+    implements $InternetExceptionCopyWith<$Res> {
+  _$InternetExceptionCopyWithImpl(
+      InternetException _value, $Res Function(InternetException) _then)
+      : super(_value, (v) => _then(v as InternetException));
+
+  @override
+  InternetException get _value => super._value as InternetException;
+}
+
+/// @nodoc
+class _$InternetException implements InternetException {
+  const _$InternetException();
+
+  @override
+  String toString() {
+    return 'NetworkExceptions.internetException()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is InternetException);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult requestCancelled(),
+    @required TResult unauthorisedRequest(),
+    @required TResult badRequest(),
+    @required TResult notFound(String reason),
+    @required TResult methodNotAllowed(),
+    @required TResult notAcceptable(),
+    @required TResult requestTimeout(),
+    @required TResult sendTimeout(),
+    @required TResult conflict(),
+    @required TResult internalServerError(),
+    @required TResult notImplemented(),
+    @required TResult serviceUnavailable(),
+    @required TResult noInternetConnection(),
+    @required TResult defaultException(String message),
+    @required TResult formatException(),
+    @required TResult unableToProcess(),
+    @required TResult defaultError(String error),
+    @required TResult unexpectedError(),
+    @required TResult woocommerceLoginError(String message),
+    @required TResult invalidUrlAddress(),
+    @required TResult invalidAppPassword(String message),
+    @required TResult websiteAlreadyExists(),
+    @required TResult internetException(),
+  }) {
+    assert(requestCancelled != null);
+    assert(unauthorisedRequest != null);
+    assert(badRequest != null);
+    assert(notFound != null);
+    assert(methodNotAllowed != null);
+    assert(notAcceptable != null);
+    assert(requestTimeout != null);
+    assert(sendTimeout != null);
+    assert(conflict != null);
+    assert(internalServerError != null);
+    assert(notImplemented != null);
+    assert(serviceUnavailable != null);
+    assert(noInternetConnection != null);
+    assert(defaultException != null);
+    assert(formatException != null);
+    assert(unableToProcess != null);
+    assert(defaultError != null);
+    assert(unexpectedError != null);
+    assert(woocommerceLoginError != null);
+    assert(invalidUrlAddress != null);
+    assert(invalidAppPassword != null);
+    assert(websiteAlreadyExists != null);
+    assert(internetException != null);
+    return internetException();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult requestCancelled(),
+    TResult unauthorisedRequest(),
+    TResult badRequest(),
+    TResult notFound(String reason),
+    TResult methodNotAllowed(),
+    TResult notAcceptable(),
+    TResult requestTimeout(),
+    TResult sendTimeout(),
+    TResult conflict(),
+    TResult internalServerError(),
+    TResult notImplemented(),
+    TResult serviceUnavailable(),
+    TResult noInternetConnection(),
+    TResult defaultException(String message),
+    TResult formatException(),
+    TResult unableToProcess(),
+    TResult defaultError(String error),
+    TResult unexpectedError(),
+    TResult woocommerceLoginError(String message),
+    TResult invalidUrlAddress(),
+    TResult invalidAppPassword(String message),
+    TResult websiteAlreadyExists(),
+    TResult internetException(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (internetException != null) {
+      return internetException();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult requestCancelled(RequestCancelled value),
+    @required TResult unauthorisedRequest(UnauthorisedRequest value),
+    @required TResult badRequest(BadRequest value),
+    @required TResult notFound(NotFound value),
+    @required TResult methodNotAllowed(MethodNotAllowed value),
+    @required TResult notAcceptable(NotAcceptable value),
+    @required TResult requestTimeout(RequestTimeout value),
+    @required TResult sendTimeout(SendTimeout value),
+    @required TResult conflict(Conflict value),
+    @required TResult internalServerError(InternalServerError value),
+    @required TResult notImplemented(NotImplemented value),
+    @required TResult serviceUnavailable(ServiceUnavailable value),
+    @required TResult noInternetConnection(NoInternetConnection value),
+    @required TResult defaultException(DefaultException value),
+    @required TResult formatException(FormatException value),
+    @required TResult unableToProcess(UnableToProcess value),
+    @required TResult defaultError(DefaultError value),
+    @required TResult unexpectedError(UnexpectedError value),
+    @required TResult woocommerceLoginError(WoocommerceLoginError value),
+    @required TResult invalidUrlAddress(InvalidUrlAddress value),
+    @required TResult invalidAppPassword(InvalidAppPassword value),
+    @required TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    @required TResult internetException(InternetException value),
+  }) {
+    assert(requestCancelled != null);
+    assert(unauthorisedRequest != null);
+    assert(badRequest != null);
+    assert(notFound != null);
+    assert(methodNotAllowed != null);
+    assert(notAcceptable != null);
+    assert(requestTimeout != null);
+    assert(sendTimeout != null);
+    assert(conflict != null);
+    assert(internalServerError != null);
+    assert(notImplemented != null);
+    assert(serviceUnavailable != null);
+    assert(noInternetConnection != null);
+    assert(defaultException != null);
+    assert(formatException != null);
+    assert(unableToProcess != null);
+    assert(defaultError != null);
+    assert(unexpectedError != null);
+    assert(woocommerceLoginError != null);
+    assert(invalidUrlAddress != null);
+    assert(invalidAppPassword != null);
+    assert(websiteAlreadyExists != null);
+    assert(internetException != null);
+    return internetException(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult requestCancelled(RequestCancelled value),
+    TResult unauthorisedRequest(UnauthorisedRequest value),
+    TResult badRequest(BadRequest value),
+    TResult notFound(NotFound value),
+    TResult methodNotAllowed(MethodNotAllowed value),
+    TResult notAcceptable(NotAcceptable value),
+    TResult requestTimeout(RequestTimeout value),
+    TResult sendTimeout(SendTimeout value),
+    TResult conflict(Conflict value),
+    TResult internalServerError(InternalServerError value),
+    TResult notImplemented(NotImplemented value),
+    TResult serviceUnavailable(ServiceUnavailable value),
+    TResult noInternetConnection(NoInternetConnection value),
+    TResult defaultException(DefaultException value),
+    TResult formatException(FormatException value),
+    TResult unableToProcess(UnableToProcess value),
+    TResult defaultError(DefaultError value),
+    TResult unexpectedError(UnexpectedError value),
+    TResult woocommerceLoginError(WoocommerceLoginError value),
+    TResult invalidUrlAddress(InvalidUrlAddress value),
+    TResult invalidAppPassword(InvalidAppPassword value),
+    TResult websiteAlreadyExists(WebsiteAlreadyExists value),
+    TResult internetException(InternetException value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (internetException != null) {
+      return internetException(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InternetException implements NetworkExceptions {
+  const factory InternetException() = _$InternetException;
 }

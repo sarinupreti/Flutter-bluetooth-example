@@ -12,6 +12,7 @@ import 'package:bots_demo/data/local_data_source.dart';
 import 'package:bots_demo/network/interceptors/dio_connectivity_request_retrier.dart';
 import 'package:bots_demo/network/network_api.dart';
 import 'package:bots_demo/theme/themes/theme_cubit.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -31,6 +32,8 @@ void _registerNetworkAndLocalDatabase() {
 
   inject.registerLazySingleton<LocalDataSource>(() => HiveDataSource());
 
+  inject.registerLazySingleton(() => Connectivity());
+
   inject.registerLazySingleton(
     () => DioConnectivityRequestRetrier(connectivity: inject(), dio: inject()),
   );
@@ -40,8 +43,10 @@ void _registerBlocs() {
   inject.registerLazySingleton(() => ThemeCubit());
   inject.registerLazySingleton(() => AuthenticationRepository(
       networkApi: inject(), localDataSource: inject()));
-  inject.registerLazySingleton(
-      () => WalletRepository(networkApi: inject(), localDataSource: inject()));
+  inject.registerLazySingleton(() => WalletRepository(
+        networkApi: inject(),
+        localDataSource: inject(),
+      ));
 
   inject.registerLazySingleton(() =>
       TransactionRepository(networkApi: inject(), localDataSource: inject()));

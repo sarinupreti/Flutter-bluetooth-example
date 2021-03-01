@@ -20,7 +20,7 @@ class CustomShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: context.theme.corePalatte.greyColor.withOpacity(0.2),
+      baseColor: context.theme.corePalatte.greyColor.withOpacity(0.1),
       highlightColor: context.theme.background.withOpacity(0.1),
       child: Container(
         width: this.width,

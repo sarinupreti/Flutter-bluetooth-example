@@ -54,6 +54,8 @@ abstract class NetworkExceptions with _$NetworkExceptions {
 
   const factory NetworkExceptions.websiteAlreadyExists() = WebsiteAlreadyExists;
 
+  const factory NetworkExceptions.internetException() = InternetException;
+
   static NetworkExceptions getDioException(error) {
     if (error is Exception) {
       try {
@@ -80,18 +82,6 @@ abstract class NetworkExceptions with _$NetworkExceptions {
             case DioErrorType.RESPONSE:
               if (error.response.statusCode == 400) {
                 networkExceptions = NetworkExceptions.unauthorisedRequest();
-              } else if (error.response.statusCode == 401 &&
-                      error.response.data["code"] ==
-                          "woocommerce_rest_cannot_view" ||
-                  error.response.data["code"] ==
-                      "woocommerce_rest_authentication_error") {
-                networkExceptions = NetworkExceptions.woocommerceLoginError(
-                    error.response.data["message"]);
-              } else if (error.response.statusCode == 401 &&
-                      error.response.data["code"] == "incorrect_password" ||
-                  error.response.data["code"] == "invalid_username") {
-                networkExceptions = NetworkExceptions.invalidAppPassword(
-                    error.response.data["message"]);
               } else if (error.response.statusCode == 401) {
                 networkExceptions = NetworkExceptions.unauthorisedRequest();
               } else if (error.response.statusCode == 403) {
@@ -188,6 +178,8 @@ abstract class NetworkExceptions with _$NetworkExceptions {
       errorMessage = message ?? "Invalid application password.";
     }, websiteAlreadyExists: () {
       errorMessage = "Website already exists or linked with this account.";
+    }, internetException: () {
+      errorMessage = "Something is wrong with your connection.";
     });
     return errorMessage;
   }

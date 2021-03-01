@@ -203,7 +203,7 @@ packages:
       name: connectivity
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "0.4.9+5"
   connectivity_for_web:
     dependency: transitive
     description:
@@ -232,13 +232,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
-  cross_connectivity:
-    dependency: "direct main"
-    description:
-      name: cross_connectivity
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
   crypto:
     dependency: transitive
     description:
@@ -323,6 +316,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.10.11"
+  flare_dart:
+    dependency: transitive
+    description:
+      name: flare_dart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.3.4"
+  flare_flutter:
+    dependency: "direct main"
+    description:
+      name: flare_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.6"
   flash:
     dependency: "direct main"
     description:
@@ -363,6 +370,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0+4"
+  flutter_offline:
+    dependency: "direct main"
+    description:
+      name: flutter_offline
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
   flutter_screenutil:
     dependency: "direct main"
     description:

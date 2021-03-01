@@ -1,3 +1,5 @@
+import 'package:bots_demo/network/interceptors/dio_connectivity_request_retrier.dart';
+import 'package:bots_demo/network/interceptors/retry_interceptor.dart';
 import 'package:bots_demo/network/urls.dart';
 import 'package:bots_demo/blocs/authentication_bloc/authentication.dart';
 import 'package:bots_demo/blocs/authentication_bloc/authentication_bloc.dart';
@@ -13,6 +15,7 @@ import 'package:flutter/material.dart';
 import "package:retrofit/retrofit.dart";
 import 'urls.dart';
 import 'package:bots_demo/extensions/flash_util.dart';
+import 'package:connectivity/connectivity.dart' as connectivity;
 
 part 'network_api.g.dart';
 
@@ -65,6 +68,12 @@ Dio buildDio() {
           requestHeader: true,
           responseBody: true,
           responseHeader: true,
+        ),
+        RetryOnConnectionChangeInterceptor(
+          requestRetrier: DioConnectivityRequestRetrier(
+            dio: Dio(),
+            connectivity: connectivity.Connectivity(),
+          ),
         ),
         InterceptorsWrapper(
           onRequest: (RequestOptions request) async {
