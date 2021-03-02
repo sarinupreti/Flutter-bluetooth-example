@@ -81,7 +81,7 @@ class _BotsNetworkApi implements BotsNetworkApi {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.request<Map<String, dynamic>>(
-        'api/v1/transactions/history',
+        'api/v1/transactions/history?sort=-date',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',

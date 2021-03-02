@@ -33,7 +33,7 @@ class TransferMoneyBottomSheet {
               builder: (context, setState) {
                 return BlocConsumer<PayFundBloc, PayFundState>(
                   cubit: inject<PayFundBloc>(),
-                  listener: (context, state) {
+                  listener: (context, state) async {
                     if (state is AddFundSuccess &&
                         state.transactionHistory != null &&
                         state.transactionHistory.createdAt != null) {
@@ -46,6 +46,8 @@ class TransferMoneyBottomSheet {
                       context.showMessage(
                           "Payment sucessful to merchant. Response: ${state.transactionHistory.toJson()} ",
                           false);
+
+                      return;
                     }
 
                     if (state is AddFundFailure) {

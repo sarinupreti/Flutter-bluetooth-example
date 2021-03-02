@@ -10,7 +10,7 @@ const String changePassword = "$authUrl/change-password";
 const String transactionUrl = "api/v1/transactions";
 
 const String tranferMoney = "$transactionUrl/transfer";
-const String transactionHistory = "$transactionUrl/history";
+const String transactionHistory = "$transactionUrl/history?sort=-date";
 
 //
 const String walletUrl = "api/v1/wallet";

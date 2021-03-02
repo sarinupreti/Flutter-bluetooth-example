@@ -186,8 +186,7 @@ class _HomePageState extends State<HomePage> {
                             scrollDirection: Axis.vertical,
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) {
-                              final latestList =
-                                  value.history.reversed.toList();
+                              final latestList = value.history.toList();
 
                               final data = latestList[index];
 
@@ -247,7 +246,7 @@ class _HomePageState extends State<HomePage> {
                                             .textTheme
                                             .subtitle1
                                             .copyWith(
-                                                color: data.type == "credit"
+                                                color: data.type == "debit"
                                                     ? context.theme.corePalatte
                                                         .errorColor
                                                     : context.theme.corePalatte
