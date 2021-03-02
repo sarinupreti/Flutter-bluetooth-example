@@ -9,6 +9,7 @@ class ConnectivityScaffold extends StatelessWidget {
   final Widget appBar;
   final Widget drawer;
   final Widget floatingActionButton;
+  final Key key;
 
   final Widget bottomNavigationBar;
   final Widget bottomSheet;
@@ -16,6 +17,7 @@ class ConnectivityScaffold extends StatelessWidget {
       {@required this.body,
       @required this.backgroundColor,
       this.appBar,
+      this.key,
       this.drawer,
       this.floatingActionButton,
       this.bottomNavigationBar,
@@ -36,6 +38,7 @@ class ConnectivityScaffold extends StatelessWidget {
       ) {
         connected = connectivity != ConnectivityResult.none;
         return Scaffold(
+          key: key,
           backgroundColor: this.backgroundColor,
           bottomSheet: this.bottomSheet,
           resizeToAvoidBottomInset: false,

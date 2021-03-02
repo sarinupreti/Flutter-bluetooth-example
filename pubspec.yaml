@@ -46,6 +46,7 @@ dependencies:
   pretty_dio_logger: ^1.1.1
   retrofit: ^1.3.4+1
   shimmer: ^1.1.2
+  syncfusion_flutter_charts: ^18.4.44+1
   timeago: ^2.0.28
   websafe_svg: ^1.1.4
 

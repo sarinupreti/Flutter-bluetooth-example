@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bots_demo/components/add_fund_bottomsheet.dart';
 import 'package:bots_demo/components/connectivity_scaffold.dart';
 import 'package:bots_demo/components/custom_drawer.dart';
@@ -8,7 +10,6 @@ import 'package:bots_demo/blocs/wallet_bloc/wallet_bloc.dart';
 import 'package:bots_demo/components/title_widget.dart';
 import 'package:bots_demo/components/transfer_money_bottomsheet.dart';
 import 'package:bots_demo/modal/transaction/transaction.dart';
-import 'package:bots_demo/screens/chart/simple_line_chart.dart';
 import 'package:bots_demo/utils/dependency_injection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ import 'package:bots_demo/extensions/context_extension.dart';
 import 'package:bots_demo/extensions/flash_util.dart';
 
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -28,6 +30,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<_ChartData> _chartData = [];
+
+  // final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     getWalletData();
@@ -36,11 +42,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   getWalletData() {
-    inject<WalletBloc>().add(GetWalletBalance());
+    return inject<WalletBloc>().add(GetWalletBalance());
   }
 
   getTransactionHistory() {
-    inject<TransactionBloc>().add(TransactionEvent.fetchHistory());
+    return inject<TransactionBloc>().add(TransactionEvent.fetchHistory());
   }
 
   @override
@@ -107,6 +113,9 @@ class _HomePageState extends State<HomePage> {
       automaticallyImplyLeading: false,
       centerTitle: false,
       elevation: 0,
+      leading: GestureDetector(
+          onTap: () {},
+          child: Icon(Icons.menu, color: context.theme.textColor)),
       title: Text(
         "Hello ${state.user.name}, ",
         style: Theme.of(context).textTheme.subtitle1,
@@ -132,17 +141,12 @@ class _HomePageState extends State<HomePage> {
                 height: screenHeight / 1.1,
                 child: GestureDetector(
                   onTap: () {
-                    context.showMessage(value.toString(), false);
+                    context.showMessage(value.history.toString(), false);
                   },
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Expanded(
-                        child: SimpleLineChart(
-                          lineChartData(value.history),
-                          animate: true,
-                        ),
-                      ),
+                      animatedLineChart(value.history),
                       40.verticalSpace,
                       TitleWidget(
                         title: "Recent transactions".toUpperCase(),
@@ -164,7 +168,9 @@ class _HomePageState extends State<HomePage> {
 
                               return Container(
                                 decoration: BoxDecoration(
-                                  color: context.theme.background,
+                                  color: context.theme.themeType
+                                      ? context.theme.background
+                                      : context.theme.surface,
                                   borderRadius: BorderRadius.circular(10),
                                   boxShadow: [
                                     BoxShadow(
@@ -287,21 +293,59 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  static List<charts.Series<LinearSales, int>> lineChartData(
-      List<TransactionHistory> transactionData) {
-    final data = transactionData
-        .map((e) => LinearSales(e.createdAt.returnMonth(), e.walletBalance))
-        .toList();
+  // static List<charts.Series<LinearSales, int>> lineChartData(
+  //     List<TransactionHistory> transactionData) {
+  //   final data = transactionData
+  //       .map((e) => LinearSales(e.createdAt.returnMonth(), e.walletBalance))
+  //       .toList();
 
-    return [
-      new charts.Series<LinearSales, int>(
-        id: 'Sales',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (LinearSales sales, _) => int.parse(sales.year),
-        measureFn: (LinearSales sales, _) => sales.sales,
-        data: data,
-      )
+  //   return [
+  //     new charts.Series<LinearSales, int>(
+  //       id: "",
+  //       colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+  //       domainFn: (LinearSales sales, _) => int.parse(sales.year),
+  //       measureFn: (LinearSales sales, _) => sales.sales,
+  //       data: data,
+  //     )
+  //   ];
+  // }
+
+  animatedLineChart(List<TransactionHistory> transactionData) {
+    return SfCartesianChart(
+        plotAreaBorderWidth: 0,
+        primaryXAxis: NumericAxis(majorGridLines: MajorGridLines(width: 0)),
+        primaryYAxis: NumericAxis(
+            majorTickLines: MajorTickLines(color: Colors.transparent),
+            axisLine: AxisLine(width: 2),
+            minimum: 0,
+            maximum: 250000),
+        series: _getDefaultLineSeries(transactionData));
+  }
+
+  List<LineSeries<_ChartData, num>> _getDefaultLineSeries(
+      List<TransactionHistory> transactionData) {
+    transactionData.forEach((e) {
+      _chartData.add(_ChartData(
+          int.parse(e.createdAt.returnDayNumber()), e.walletBalance));
+    });
+
+    _chartData.sort((a, b) => a.x.compareTo(b.x));
+
+    return <LineSeries<_ChartData, num>>[
+      LineSeries<_ChartData, num>(
+          dataSource: _chartData.toSet().toList(),
+          dataLabelMapper: (datum, index) {
+            return datum.x.toString();
+          },
+          xValueMapper: (_ChartData sales, _) => sales.x,
+          yValueMapper: (_ChartData sales, _) => sales.y,
+          markerSettings: MarkerSettings(isVisible: true))
     ];
+  }
+
+  num _getRandomInt(num min, num max) {
+    final Random random = Random();
+    return min + random.nextInt(max - min);
   }
 
   walletView(double screenWidth, double screenHeight) {
@@ -389,4 +433,10 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
+}
+
+class _ChartData {
+  _ChartData(this.x, this.y);
+  final int x;
+  final int y;
 }

@@ -47,12 +47,27 @@ extension StringExtension on String {
     return date;
   }
 
-  String returnMonth() {
+  String returnDay() {
     final removeTFromString = this.replaceFirst("T", " ");
 
     var formattedDate =
         DateFormat('yyyy-MM-dd H:mm:ss').parse(removeTFromString);
 
-    return DateFormat.d().format(formattedDate);
+    final data = DateFormat.d().format(formattedDate);
+
+    print(data);
+
+    return data;
+  }
+
+  String returnDayNumber() {
+    final removeTFromString = this.replaceFirst("T", " ");
+
+    var formattedDate =
+        DateFormat('yyyy-MM-dd H:mm:ss').parse(removeTFromString);
+
+    final data = DateFormat.d().format(formattedDate);
+
+    return data;
   }
 }

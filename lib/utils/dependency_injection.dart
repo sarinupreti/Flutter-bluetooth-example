@@ -27,13 +27,9 @@ Future<void> initDependencyInjection() async {
 
 void _registerNetworkAndLocalDatabase() {
   inject.registerSingleton(buildDio());
-
   inject.registerSingleton(BotsNetworkApi(inject.get<Dio>()));
-
   inject.registerLazySingleton<LocalDataSource>(() => HiveDataSource());
-
   inject.registerLazySingleton(() => Connectivity());
-
   inject.registerLazySingleton(
     () => DioConnectivityRequestRetrier(connectivity: inject(), dio: inject()),
   );
@@ -43,22 +39,19 @@ void _registerBlocs() {
   inject.registerLazySingleton(() => ThemeCubit());
   inject.registerLazySingleton(() => AuthenticationRepository(
       networkApi: inject(), localDataSource: inject()));
+  inject.registerLazySingleton(() =>
+      TransactionRepository(networkApi: inject(), localDataSource: inject()));
   inject.registerLazySingleton(() => WalletRepository(
         networkApi: inject(),
         localDataSource: inject(),
       ));
 
-  inject.registerLazySingleton(() =>
-      TransactionRepository(networkApi: inject(), localDataSource: inject()));
-
   //BLOCS//
-
+  inject.registerLazySingleton(() => AddFundBloc(walletRepository: inject()));
   inject.registerLazySingleton(() => AuthenticationBloc(inject()));
   inject.registerLazySingleton(() => LoginBloc(inject(), inject()));
-  inject.registerLazySingleton(() => WalletBloc(walletRepository: inject()));
-  inject.registerLazySingleton(() => AddFundBloc(walletRepository: inject()));
   inject.registerLazySingleton(() => PayFundBloc(walletRepository: inject()));
-
+  inject.registerLazySingleton(() => WalletBloc(walletRepository: inject()));
   inject.registerLazySingleton(
       () => TransactionBloc(transactionRepository: inject()));
 }

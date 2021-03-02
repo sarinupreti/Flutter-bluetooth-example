@@ -1,3 +1,4 @@
+import 'package:bots_demo/blocs/transaction_bloc/transaction_bloc.dart';
 import 'package:bots_demo/blocs/wallet_bloc/wallet_bloc.dart';
 import 'package:bots_demo/blocs/pay_fund_bloc/pay_fund_bloc.dart';
 import 'package:bots_demo/components/button.dart';
@@ -37,6 +38,8 @@ class TransferMoneyBottomSheet {
                         state.transactionHistory != null &&
                         state.transactionHistory.createdAt != null) {
                       inject<WalletBloc>().add(GetWalletBalance());
+                      inject<TransactionBloc>()
+                          .add(TransactionEvent.fetchHistory());
 
                       Navigator.pop(context);
 

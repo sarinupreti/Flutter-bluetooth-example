@@ -55,7 +55,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                         message: state.message,
                       ));
             } else
-              return CircularProgressIndicator();
+              return ExtendedNavigator.root.pushAndRemoveUntilIfNotCurrent(
+                Routes.connectStoreScreen,
+              );
           },
           child: Builder(
             builder: (context) {

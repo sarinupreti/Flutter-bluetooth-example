@@ -28,6 +28,8 @@ class HiveSetup {
 
 Future<void> clearHive() async {
   await Hive.deleteBoxFromDisk(HIVE_USER_BOX);
+  await Hive.deleteBoxFromDisk(HIVE_WALLET_BOX);
+  await Hive.deleteBoxFromDisk(HIVE_TRANSACTION_BOX);
 }
 
 Future<void> clearAuthHive() async {
