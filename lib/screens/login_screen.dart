@@ -18,22 +18,22 @@ import 'package:flutter/foundation.dart';
 import 'package:bots_demo/extensions/context_extension.dart';
 import 'package:bots_demo/extensions/number_extensions.dart';
 
-class ConnectStoreScreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   final BuildContext context;
 
-  ConnectStoreScreen({Key key, this.context}) : super(key: key);
+  LoginScreen({Key key, this.context}) : super(key: key);
 
   @override
-  _ConnectStoreScreenState createState() => _ConnectStoreScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  TextEditingController consumerKeyController = TextEditingController(
-      text: kReleaseMode ? "" : "sarin.upreti01@gmail.com");
+  TextEditingController consumerKeyController =
+      TextEditingController(text: kReleaseMode ? "" : "");
   TextEditingController consumerSecretController =
-      TextEditingController(text: kReleaseMode ? "" : "sarin123");
+      TextEditingController(text: kReleaseMode ? "" : "");
 
   FocusNode consumerKeyFocusNode = FocusNode();
   FocusNode consumerSecretFocusNode = FocusNode();

@@ -46,11 +46,12 @@ class HiveDataSource implements LocalDataSource {
 
   @override
   Future<Wallet> cacheWallet(Wallet wallet) async {
-    final hiveProductBox = await openBox(HIVE_WALLET_BOX);
+    final hiveWalletBox = await openBox(HIVE_WALLET_BOX);
 
-    hiveProductBox.put(wallet.id, wallet);
-    final cachedProductList = await getLocalDataWallet();
-    return cachedProductList;
+    await hiveWalletBox.put(wallet.id, wallet);
+
+    final cachedWalletList = await getLocalDataWallet();
+    return cachedWalletList;
   }
 
   @override

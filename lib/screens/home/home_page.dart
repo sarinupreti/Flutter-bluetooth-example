@@ -61,29 +61,33 @@ class _HomePageState extends State<HomePage> {
         if (state is AuthenticationAuthenticated) {
           return ConnectivityScaffold(
               drawer: CustomDrawer(screenWidth: screenWidth),
-              backgroundColor: context.theme.surface,
+              backgroundColor: context.theme.themeType
+                  ? context.theme.surface
+                  : context.theme.background,
               appBar: appBarWidget(state, context),
               floatingActionButton: floatingActionButton(context),
               body: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    walletView(screenWidth, screenHeight),
-                    TitleWidget(
-                      title: "Add money to wallet".toUpperCase(),
-                      titleAlignment: Alignment.centerRight,
-                      onTap: () {
-                        AddFundBottomSheet.showSheet(context: context);
-                      },
-                    ),
-                    30.verticalSpace,
-                    TitleWidget(
-                      title: "Transactions this week".toUpperCase(),
-                    ),
-                    30.verticalSpace,
-                    simpleLineChart(screenHeight, screenWidth),
-                  ],
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      walletView(screenWidth, screenHeight),
+                      TitleWidget(
+                        title: "Add money to wallet".toUpperCase(),
+                        titleAlignment: Alignment.centerRight,
+                        onTap: () {
+                          AddFundBottomSheet.showSheet(context: context);
+                        },
+                      ),
+                      30.verticalSpace,
+                      TitleWidget(
+                        title: "Transactions this week".toUpperCase(),
+                      ),
+                      30.verticalSpace,
+                      simpleLineChart(screenHeight, screenWidth),
+                    ],
+                  ),
                 ),
               ));
         } else if ((state is AuthenticationLoading ||
@@ -104,7 +108,7 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         } else {
-          return ConnectStoreScreen();
+          return LoginScreen();
         }
       },
     );
@@ -153,15 +157,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
             success: (value) => Container(
-                height: screenHeight,
-                child: GestureDetector(
+                    child: GestureDetector(
                   onTap: () {
                     final data = value.history.map((e) => e).toList();
 
                     context.showMessage(data.toString(), false);
                   },
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
+                  child: Wrap(
                     children: [
                       animatedLineChart(value.history),
                       40.verticalSpace,
@@ -182,6 +184,7 @@ class _HomePageState extends State<HomePage> {
                             shrinkWrap: true,
                             itemCount: value.history.length,
                             scrollDirection: Axis.vertical,
+                            physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) {
                               final latestList =
                                   value.history.reversed.toList();
@@ -290,11 +293,13 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
+                      40.verticalSpace,
                       TitleWidget(
-                        title: "Recent transactions".toUpperCase(),
+                        title: "Income/Expenses GRAPH".toUpperCase(),
                       ),
+                      40.verticalSpace,
                       animatedColumnData(value.history),
-                      20.verticalSpace,
+                      40.verticalSpace,
                     ],
                   ),
                 )),

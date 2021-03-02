@@ -6,8 +6,8 @@ import 'package:bots_demo/splash_screen.dart';
 
 @MaterialRouter(generateNavigationHelperExtension: true, routes: <AutoRoute>[
   MaterialRoute(
-    page: ConnectStoreScreen,
-    path: "ConnectStoreScreen",
+    page: LoginScreen,
+    path: "LoginScreen",
   ),
   MaterialRoute(
     page: SplashScreen,

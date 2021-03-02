@@ -15,12 +15,12 @@ import '../screens/login_screen.dart';
 import '../splash_screen.dart';
 
 class Routes {
-  static const String connectStoreScreen = 'ConnectStoreScreen';
+  static const String loginScreen = 'LoginScreen';
   static const String splashScreen = '/';
   static const String errorScreen = 'ErrorScreen';
   static const String homePage = 'HomePage';
   static const all = <String>{
-    connectStoreScreen,
+    loginScreen,
     splashScreen,
     errorScreen,
     homePage,
@@ -31,7 +31,7 @@ class BotsDemomRouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
-    RouteDef(Routes.connectStoreScreen, page: ConnectStoreScreen),
+    RouteDef(Routes.loginScreen, page: LoginScreen),
     RouteDef(Routes.splashScreen, page: SplashScreen),
     RouteDef(Routes.errorScreen, page: ErrorScreen),
     RouteDef(Routes.homePage, page: HomePage),
@@ -39,12 +39,12 @@ class BotsDemomRouter extends RouterBase {
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
-    ConnectStoreScreen: (data) {
-      final args = data.getArgs<ConnectStoreScreenArguments>(
-        orElse: () => ConnectStoreScreenArguments(),
+    LoginScreen: (data) {
+      final args = data.getArgs<LoginScreenArguments>(
+        orElse: () => LoginScreenArguments(),
       );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => ConnectStoreScreen(
+        builder: (context) => LoginScreen(
           key: args.key,
           context: args.context,
         ),
@@ -93,13 +93,13 @@ class BotsDemomRouter extends RouterBase {
 /// *************************************************************************
 
 extension BotsDemomRouterExtendedNavigatorStateX on ExtendedNavigatorState {
-  Future<dynamic> pushConnectStoreScreen({
+  Future<dynamic> pushLoginScreen({
     Key key,
     BuildContext context,
   }) =>
       push<dynamic>(
-        Routes.connectStoreScreen,
-        arguments: ConnectStoreScreenArguments(key: key, context: context),
+        Routes.loginScreen,
+        arguments: LoginScreenArguments(key: key, context: context),
       );
 
   Future<dynamic> pushSplashScreen({
@@ -135,11 +135,11 @@ extension BotsDemomRouterExtendedNavigatorStateX on ExtendedNavigatorState {
 /// Arguments holder classes
 /// *************************************************************************
 
-/// ConnectStoreScreen arguments holder class
-class ConnectStoreScreenArguments {
+/// LoginScreen arguments holder class
+class LoginScreenArguments {
   final Key key;
   final BuildContext context;
-  ConnectStoreScreenArguments({this.key, this.context});
+  LoginScreenArguments({this.key, this.context});
 }
 
 /// SplashScreen arguments holder class

@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           cubit: inject<AuthenticationBloc>(),
           listener: (context, state) async {
             if (state is AuthenticationAuthenticated) {
-              ExtendedNavigator.root.pushAndRemoveUntilIfNotCurrent(
+              return ExtendedNavigator.root.pushAndRemoveUntilIfNotCurrent(
                 Routes.homePage,
               );
             } else if (state is AuthenticationLoading) {
@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
               );
             } else if (state is AuthenticationNotAuthenticated) {
               return ExtendedNavigator.root.pushAndRemoveUntilIfNotCurrent(
-                Routes.connectStoreScreen,
+                Routes.loginScreen,
               );
             } else if (state is AuthenticationFailure) {
               return ExtendedNavigator.root
@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                       ));
             } else
               return ExtendedNavigator.root.pushAndRemoveUntilIfNotCurrent(
-                Routes.connectStoreScreen,
+                Routes.loginScreen,
               );
           },
           child: Builder(
