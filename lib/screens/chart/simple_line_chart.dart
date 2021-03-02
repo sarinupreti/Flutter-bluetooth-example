@@ -1,22 +1,22 @@
-import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:flutter/material.dart';
+// import 'package:charts_flutter/flutter.dart' as charts;
+// import 'package:flutter/material.dart';
 
-class SimpleLineChart extends StatelessWidget {
-  final List<charts.Series> seriesList;
-  final bool animate;
+// class SimpleLineChart extends StatelessWidget {
+//   final List<charts.Series> seriesList;
+//   final bool animate;
 
-  SimpleLineChart(this.seriesList, {this.animate});
+//   SimpleLineChart(this.seriesList, {this.animate});
 
-  @override
-  Widget build(BuildContext context) {
-    return new charts.LineChart(seriesList, animate: animate);
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return new charts.LineChart(seriesList, animate: animate);
+//   }
+// }
 
-/// Sample linear data type.
-class LinearSales {
-  final String year;
-  final int sales;
+// /// Sample linear data type.
+// class LinearSales {
+//   final String year;
+//   final int sales;
 
-  LinearSales(this.year, this.sales);
-}
+//   LinearSales(this.year, this.sales);
+// }

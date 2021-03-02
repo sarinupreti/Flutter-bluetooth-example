@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bots_demo/components/add_fund_bottomsheet.dart';
 import 'package:bots_demo/components/connectivity_scaffold.dart';
 import 'package:bots_demo/components/custom_drawer.dart';
@@ -19,7 +17,6 @@ import 'package:bots_demo/extensions/number_extensions.dart';
 import 'package:bots_demo/extensions/context_extension.dart';
 import 'package:bots_demo/extensions/flash_util.dart';
 
-import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,6 +28,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<_ChartData> _chartData = [];
+  List<_ChartData> _chartIncomeData = [];
+  List<_ChartData> _chartExpenseData = [];
 
   // final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -138,10 +137,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
             success: (value) => Container(
-                height: screenHeight / 1.1,
+                height: screenHeight,
                 child: GestureDetector(
                   onTap: () {
-                    context.showMessage(value.history.toString(), false);
+                    final data = value.history.map((e) => e).toList();
+
+                    context.showMessage(data.toString(), false);
                   },
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -156,10 +157,15 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.all(15.0),
                           child: ListView.separated(
                             separatorBuilder: (context, index) {
-                              return Divider();
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Divider(),
+                              );
                             },
                             shrinkWrap: true,
                             itemCount: value.history.length,
+                            scrollDirection: Axis.vertical,
                             itemBuilder: (BuildContext context, int index) {
                               final latestList =
                                   value.history.reversed.toList();
@@ -268,6 +274,11 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
+                      TitleWidget(
+                        title: "Recent transactions".toUpperCase(),
+                      ),
+                      animatedColumnData(value.history),
+                      20.verticalSpace,
                     ],
                   ),
                 )),
@@ -293,33 +304,81 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // static List<charts.Series<LinearSales, int>> lineChartData(
-  //     List<TransactionHistory> transactionData) {
-  //   final data = transactionData
-  //       .map((e) => LinearSales(e.createdAt.returnMonth(), e.walletBalance))
-  //       .toList();
-
-  //   return [
-  //     new charts.Series<LinearSales, int>(
-  //       id: "",
-  //       colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-  //       domainFn: (LinearSales sales, _) => int.parse(sales.year),
-  //       measureFn: (LinearSales sales, _) => sales.sales,
-  //       data: data,
-  //     )
-  //   ];
-  // }
-
   animatedLineChart(List<TransactionHistory> transactionData) {
     return SfCartesianChart(
         plotAreaBorderWidth: 0,
-        primaryXAxis: NumericAxis(majorGridLines: MajorGridLines(width: 0)),
+        primaryXAxis:
+            NumericAxis(interval: 5, majorGridLines: MajorGridLines(width: 0)),
         primaryYAxis: NumericAxis(
             majorTickLines: MajorTickLines(color: Colors.transparent),
             axisLine: AxisLine(width: 2),
             minimum: 0,
             maximum: 250000),
         series: _getDefaultLineSeries(transactionData));
+  }
+
+  animatedColumnData(List<TransactionHistory> transactionData) {
+    transactionData.forEach((e) {
+      if (e.type == "credit") {
+        _chartExpenseData.add(
+            _ChartData(int.parse(e.createdAt.returnDay()), e.walletBalance));
+      } else {
+        _chartIncomeData.add(
+            _ChartData(int.parse(e.createdAt.returnDay()), e.walletBalance));
+      }
+    });
+
+    _chartExpenseData.sort((a, b) => a.x.compareTo(b.x));
+
+    _chartIncomeData.sort((a, b) => a.x.compareTo(b.x));
+
+    return SfCartesianChart(
+        plotAreaBorderWidth: 0,
+        primaryXAxis: NumericAxis(
+            majorGridLines: MajorGridLines(width: 0),
+            interactiveTooltip: InteractiveTooltip(
+              enable: true,
+            ),
+            labelAlignment: LabelAlignment.end,
+            majorTickLines: MajorTickLines(color: Colors.transparent),
+            axisLine: AxisLine(width: 0),
+            minimum: 0,
+            maximum: 31),
+        primaryYAxis: NumericAxis(
+            interactiveTooltip: InteractiveTooltip(
+              enable: true,
+            ),
+            labelAlignment: LabelAlignment.end,
+            majorTickLines: MajorTickLines(color: Colors.transparent),
+            axisLine: AxisLine(width: 0),
+            minimum: 0,
+            maximum: 250000),
+        series: <ColumnSeries<_ChartData, num>>[
+          ColumnSeries<_ChartData, num>(
+              enableTooltip: true,
+              markerSettings: MarkerSettings(
+                  isVisible: false,
+                  height: 4,
+                  width: 4,
+                  shape: DataMarkerType.circle,
+                  borderWidth: 3,
+                  borderColor: Colors.red),
+              dataLabelSettings: DataLabelSettings(
+                isVisible: false,
+              ),
+              dataSource: _chartIncomeData,
+              sortingOrder: SortingOrder.ascending,
+              xValueMapper: (_ChartData data, _) => data.x,
+              yValueMapper: (_ChartData data, _) => data.y,
+              name: 'Income'),
+          ColumnSeries<_ChartData, num>(
+              dataSource: _chartExpenseData,
+              isTrackVisible: false,
+              sortingOrder: SortingOrder.ascending,
+              xValueMapper: (_ChartData data, _) => data.x,
+              yValueMapper: (_ChartData data, _) => data.y,
+              name: 'Expense')
+        ]);
   }
 
   List<LineSeries<_ChartData, num>> _getDefaultLineSeries(
@@ -341,11 +400,6 @@ class _HomePageState extends State<HomePage> {
           yValueMapper: (_ChartData sales, _) => sales.y,
           markerSettings: MarkerSettings(isVisible: true))
     ];
-  }
-
-  num _getRandomInt(num min, num max) {
-    final Random random = Random();
-    return min + random.nextInt(max - min);
   }
 
   walletView(double screenWidth, double screenHeight) {
