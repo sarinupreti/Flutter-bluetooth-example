@@ -67,20 +67,21 @@ class AuthenticationRepository extends AuthenticationService {
         );
       } else {}
     } on DioError catch (error) {
-      await clearAuthHive();
-
-      if (error != null && error.response != null) {
+      if (error != null &&
+          error.response != null &&
+          error.response.data != null &&
+          error.response.data["error"] != null &&
+          error.response.data["error"]["message"] != null) {
         return ApiResponseStatus(
             isSuccessful: false,
-            error: NetworkExceptions.getDioException(error));
+            error: NetworkExceptions.woocommerceLoginError(
+                error.response.data["error"]["message"]));
       } else {
         return ApiResponseStatus(
             isSuccessful: false,
             error: NetworkExceptions.getDioException(error));
       }
     } on SocketException catch (error) {
-      await clearAuthHive();
-
       return ApiResponseStatus(
           isSuccessful: false, error: NetworkExceptions.getDioException(error));
     }
