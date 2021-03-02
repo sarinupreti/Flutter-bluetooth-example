@@ -16,7 +16,6 @@ class HiveSetup {
         await path_provider.getApplicationDocumentsDirectory();
 
     Hive.init(appDocumentDir.path);
-
     Hive.registerAdapter(UserAdapter());
     Hive.registerAdapter(WalletAdapter());
     Hive.registerAdapter(TransactionHistoryAdapter());

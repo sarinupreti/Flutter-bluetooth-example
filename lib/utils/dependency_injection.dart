@@ -39,12 +39,13 @@ void _registerBlocs() {
   inject.registerLazySingleton(() => ThemeCubit());
   inject.registerLazySingleton(() => AuthenticationRepository(
       networkApi: inject(), localDataSource: inject()));
-  inject.registerLazySingleton(() =>
-      TransactionRepository(networkApi: inject(), localDataSource: inject()));
+
   inject.registerLazySingleton(() => WalletRepository(
         networkApi: inject(),
         localDataSource: inject(),
       ));
+  inject.registerLazySingleton(() =>
+      TransactionRepository(networkApi: inject(), localDataSource: inject()));
 
   //BLOCS//
   inject.registerLazySingleton(() => AddFundBloc(walletRepository: inject()));

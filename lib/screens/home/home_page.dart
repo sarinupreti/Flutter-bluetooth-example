@@ -8,6 +8,7 @@ import 'package:bots_demo/blocs/wallet_bloc/wallet_bloc.dart';
 import 'package:bots_demo/components/title_widget.dart';
 import 'package:bots_demo/components/transfer_money_bottomsheet.dart';
 import 'package:bots_demo/modal/transaction/transaction.dart';
+import 'package:bots_demo/screens/login_screen.dart';
 import 'package:bots_demo/utils/dependency_injection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -57,36 +58,54 @@ class _HomePageState extends State<HomePage> {
       cubit: inject<AuthenticationBloc>(),
       listener: (context, state) async {},
       builder: (context, state) {
-        return state is AuthenticationAuthenticated
-            ? ConnectivityScaffold(
-                drawer: CustomDrawer(screenWidth: screenWidth),
-                backgroundColor: context.theme.surface,
-                appBar: appBarWidget(state, context),
-                floatingActionButton: floatingActionButton(context),
-                body: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      walletView(screenWidth, screenHeight),
-                      TitleWidget(
-                        title: "Add money to wallet".toUpperCase(),
-                        titleAlignment: Alignment.centerRight,
-                        onTap: () {
-                          AddFundBottomSheet.showSheet(context: context);
-                        },
-                      ),
-                      30.verticalSpace,
-                      TitleWidget(
-                        title: "Transactions this week".toUpperCase(),
-                      ),
-                      30.verticalSpace,
-                      simpleLineChart(screenHeight, screenWidth),
-                    ],
-                  ),
+        if (state is AuthenticationAuthenticated) {
+          return ConnectivityScaffold(
+              drawer: CustomDrawer(screenWidth: screenWidth),
+              backgroundColor: context.theme.surface,
+              appBar: appBarWidget(state, context),
+              floatingActionButton: floatingActionButton(context),
+              body: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    walletView(screenWidth, screenHeight),
+                    TitleWidget(
+                      title: "Add money to wallet".toUpperCase(),
+                      titleAlignment: Alignment.centerRight,
+                      onTap: () {
+                        AddFundBottomSheet.showSheet(context: context);
+                      },
+                    ),
+                    30.verticalSpace,
+                    TitleWidget(
+                      title: "Transactions this week".toUpperCase(),
+                    ),
+                    30.verticalSpace,
+                    simpleLineChart(screenHeight, screenWidth),
+                  ],
                 ),
-              )
-            : CircularProgressIndicator();
+              ));
+        } else if ((state is AuthenticationLoading ||
+            state is AuthenticationInitial)) {
+          return ConnectivityScaffold(
+            drawer: CustomDrawer(screenWidth: screenWidth),
+            backgroundColor: context.theme.surface,
+            appBar: appBarWidget(state, context),
+            floatingActionButton: floatingActionButton(context),
+            body: CircularProgressIndicator(),
+          );
+        } else if (state is AuthenticationFailure) {
+          return Scaffold(
+            body: Container(
+              height: screenHeight,
+              width: screenWidth,
+              child: Text(state.message.toString()),
+            ),
+          );
+        } else {
+          return ConnectStoreScreen();
+        }
       },
     );
   }
@@ -112,9 +131,6 @@ class _HomePageState extends State<HomePage> {
       automaticallyImplyLeading: false,
       centerTitle: false,
       elevation: 0,
-      leading: GestureDetector(
-          onTap: () {},
-          child: Icon(Icons.menu, color: context.theme.textColor)),
       title: Text(
         "Hello ${state.user.name}, ",
         style: Theme.of(context).textTheme.subtitle1,
@@ -405,7 +421,11 @@ class _HomePageState extends State<HomePage> {
   walletView(double screenWidth, double screenHeight) {
     return BlocConsumer<WalletBloc, WalletState>(
       cubit: inject<WalletBloc>(),
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is WalletFailure) {
+          context.showStatusBar(message: state.error, icon: null);
+        }
+      },
       builder: (context, state) {
         return state is WalletSuccess
             ? Container(

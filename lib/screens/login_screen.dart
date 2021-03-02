@@ -6,6 +6,7 @@ import 'package:bots_demo/blocs/login_bloc/login_state.dart';
 import 'package:bots_demo/components/button.dart';
 import 'package:bots_demo/globals/exveptions/login_error_modal.dart';
 import 'package:bots_demo/globals/throttle.dart';
+import 'package:bots_demo/globals/validators/field_validators.dart';
 import 'package:bots_demo/utils/dependency_injection.dart';
 import 'package:bots_demo/utils/theme.dart';
 import 'package:clippy_flutter/clippy_flutter.dart';
@@ -209,12 +210,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
             focusNode: consumerKeyFocusNode,
             style: Theme.of(context).textTheme.subtitle1.copyWith(
                 fontWeight: FontWeight.normal, fontSize: 15.flexibleFontSize),
-            validator: (String value) {
-              if (value.isEmpty) {
-                return "username cannot be empty";
-              } else
-                return null;
-            },
+            validator: FieldValidators.validateEmail,
             inputFormatters: [FilteringTextInputFormatter.deny(" ")],
             onFieldSubmitted: (value) {
               consumerKeyFocusNode.unfocus();
@@ -270,12 +266,7 @@ class _ConnectStoreScreenState extends State<ConnectStoreScreen> {
             focusNode: consumerSecretFocusNode,
             style: Theme.of(context).textTheme.subtitle1.copyWith(
                 fontWeight: FontWeight.normal, fontSize: 15.flexibleFontSize),
-            validator: (String value) {
-              if (value.isEmpty) {
-                return 'password cannot be empty.';
-              } else
-                return null;
-            },
+            validator: FieldValidators.validatePassword,
             onFieldSubmitted: (value) {
               consumerSecretFocusNode.unfocus();
             },

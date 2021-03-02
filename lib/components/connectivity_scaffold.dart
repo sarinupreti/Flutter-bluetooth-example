@@ -30,6 +30,10 @@ class ConnectivityScaffold extends StatelessWidget {
         statusBarBrightness: context.theme.brightness,
         statusBarIconBrightness: context.theme.brightness,
         statusBarColor: Colors.transparent));
+
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
+
     return OfflineBuilder(
       connectivityBuilder: (
         BuildContext context,
@@ -38,7 +42,7 @@ class ConnectivityScaffold extends StatelessWidget {
       ) {
         connected = connectivity != ConnectivityResult.none;
         return Scaffold(
-          key: key,
+          key: _scaffoldKey,
           backgroundColor: this.backgroundColor,
           bottomSheet: this.bottomSheet,
           resizeToAvoidBottomInset: false,
@@ -48,6 +52,16 @@ class ConnectivityScaffold extends StatelessWidget {
               ? PreferredSize(
                   preferredSize: Size.fromHeight(0.0),
                   child: AppBar(
+                    leading: GestureDetector(
+                        onTap: () {
+                          if (_scaffoldKey.currentState.isDrawerOpen) {
+                            _scaffoldKey.currentState.openEndDrawer();
+                          } else {
+                            _scaffoldKey.currentState.openDrawer();
+                          }
+                        },
+                        child:
+                            Icon(Icons.menu, color: context.theme.textColor)),
                     elevation: 0,
                     automaticallyImplyLeading: false,
                     backgroundColor: Colors.transparent,
