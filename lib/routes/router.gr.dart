@@ -10,7 +10,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
-import '../screens/device_details.dart';
+import '../screens/device/device_details.dart';
 import '../screens/index/index.dart';
 
 class Routes {

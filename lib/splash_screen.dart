@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:bots_demo/extensions/context_extension.dart';
-import 'package:bots_demo/extensions/number_extensions.dart';
+import 'package:bluetooth_demo/extensions/context_extension.dart';
+import 'package:bluetooth_demo/extensions/number_extensions.dart';
 
 class SplashScreen extends StatefulWidget {
   final BuildContext context;

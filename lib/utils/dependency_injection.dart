@@ -1,4 +1,4 @@
-import 'package:bots_demo/theme/themes/theme_cubit.dart';
+import 'package:bluetooth_demo/theme/themes/theme_cubit.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:get_it/get_it.dart';
 

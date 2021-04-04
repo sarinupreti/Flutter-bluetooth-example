@@ -1,16 +1,16 @@
-import 'package:bots_demo/globals/navigation.dart';
-import 'package:bots_demo/globals/scree_util_setup.dart';
-import 'package:bots_demo/init.dart';
-import 'package:bots_demo/routes/router.gr.dart';
-import 'package:bots_demo/theme/theme_builder.dart';
-import 'package:bots_demo/theme/themes/theme_cubit.dart';
-import 'package:bots_demo/theme/themes/theme_palatte.dart';
-import 'package:bots_demo/utils/dependency_injection.dart';
+import 'package:bluetooth_demo/globals/navigation.dart';
+import 'package:bluetooth_demo/globals/scree_util_setup.dart';
+import 'package:bluetooth_demo/init.dart';
+import 'package:bluetooth_demo/routes/router.gr.dart';
+import 'package:bluetooth_demo/theme/theme_builder.dart';
+import 'package:bluetooth_demo/theme/themes/theme_cubit.dart';
+import 'package:bluetooth_demo/theme/themes/theme_palatte.dart';
+import 'package:bluetooth_demo/utils/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:bots_demo/extensions/number_extensions.dart';
+import 'package:bluetooth_demo/extensions/number_extensions.dart';
 
 void main() async {
   await AppInit.initialize();

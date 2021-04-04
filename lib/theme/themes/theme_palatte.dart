@@ -1,4 +1,4 @@
-import 'package:bots_demo/theme/themes/core_palatte.dart';
+import 'package:bluetooth_demo/theme/themes/core_palatte.dart';
 import 'package:flutter/material.dart';
 
 class ThemePalatte {

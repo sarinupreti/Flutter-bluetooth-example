@@ -1,8 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bots_demo/components/scan_result_tile.dart';
-import 'package:bots_demo/screens/bluetooth_off_screen.dart';
+import 'package:bluetooth_demo/screens/bluetooth_status/bluetooth_off_screen.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:bots_demo/routes/router.gr.dart';
+import 'package:bluetooth_demo/routes/router.gr.dart';
 
 import 'package:flutter/material.dart' hide Router;
 
@@ -34,7 +33,7 @@ class FindDevicesScreen extends StatelessWidget {
       ),
       body: RefreshIndicator(
         onRefresh: () =>
-            FlutterBlue.instance.startScan(timeout: Duration(seconds: 4)),
+            FlutterBlue.instance.startScan(timeout: Duration(seconds: 10)),
         child: SingleChildScrollView(
           child: StreamBuilder<List<ScanResult>>(
               stream: FlutterBlue.instance.scanResults,
@@ -97,7 +96,7 @@ class FindDevicesScreen extends StatelessWidget {
             return FloatingActionButton(
                 child: Icon(Icons.search),
                 onPressed: () => FlutterBlue.instance
-                    .startScan(timeout: Duration(seconds: 4)));
+                    .startScan(timeout: Duration(seconds: 10)));
           }
         },
       ),

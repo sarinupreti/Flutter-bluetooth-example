@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:bots_demo/extensions/number_extensions.dart';
-import 'package:bots_demo/extensions/context_extension.dart';
+import 'package:bluetooth_demo/extensions/number_extensions.dart';
+import 'package:bluetooth_demo/extensions/context_extension.dart';
 
 class DeviceScreen extends StatelessWidget {
   final BluetoothDevice device;
