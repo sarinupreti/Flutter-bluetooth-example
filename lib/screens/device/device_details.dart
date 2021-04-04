@@ -20,39 +20,39 @@ class DeviceScreen extends StatelessWidget {
             .textTheme
             .bodyText1
             .copyWith(color: context.theme.textColor),
-        actions: <Widget>[
-          StreamBuilder<BluetoothDeviceState>(
-            stream: device.state,
-            initialData: BluetoothDeviceState.connecting,
-            builder: (c, snapshot) {
-              VoidCallback onPressed;
-              String text;
-              switch (snapshot.data) {
-                case BluetoothDeviceState.connected:
-                  onPressed = () => device.disconnect();
-                  text = 'DISCONNECT';
-                  break;
-                case BluetoothDeviceState.disconnected:
-                  onPressed = () => device.connect();
-                  text = 'CONNECT';
-                  break;
-                default:
-                  onPressed = null;
-                  text = snapshot.data.toString().substring(21).toUpperCase();
-                  break;
-              }
-              return TextButton(
-                  onPressed: onPressed,
-                  child: Text(
-                    text,
-                    style: Theme.of(context)
-                        .textTheme
-                        .button
-                        ?.copyWith(color: context.theme.textColor),
-                  ));
-            },
-          )
-        ],
+        // actions: <Widget>[
+        //   StreamBuilder<BluetoothDeviceState>(
+        //     stream: device.state,
+        //     initialData: BluetoothDeviceState.connecting,
+        //     builder: (c, snapshot) {
+        //       VoidCallback onPressed;
+        //       String text;
+        //       switch (snapshot.data) {
+        //         case BluetoothDeviceState.connected:
+        //           onPressed = () => device.disconnect();
+        //           text = 'DISCONNECT';
+        //           break;
+        //         case BluetoothDeviceState.disconnected:
+        //           onPressed = () => device.connect();
+        //           text = 'CONNECT';
+        //           break;
+        //         default:
+        //           onPressed = null;
+        //           text = snapshot.data.toString().substring(21).toUpperCase();
+        //           break;
+        //       }
+        //       return TextButton(
+        //           onPressed: onPressed,
+        //           child: Text(
+        //             text,
+        //             style: Theme.of(context)
+        //                 .textTheme
+        //                 .button
+        //                 ?.copyWith(color: context.theme.textColor),
+        //           ));
+        //     },
+        //   )
+        // ],
       ),
       body: Container(
         color: context.theme.background,
