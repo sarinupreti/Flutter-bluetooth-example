@@ -1,7 +1,4 @@
 import 'package:bots_demo/data/hive/hive_const.dart';
-import 'package:bots_demo/modal/transaction/transaction.dart';
-import 'package:bots_demo/modal/user/user.dart';
-import 'package:bots_demo/modal/wallet/wallet.dart';
 
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
@@ -16,9 +13,6 @@ class HiveSetup {
         await path_provider.getApplicationDocumentsDirectory();
 
     Hive.init(appDocumentDir.path);
-    Hive.registerAdapter(UserAdapter());
-    Hive.registerAdapter(WalletAdapter());
-    Hive.registerAdapter(TransactionHistoryAdapter());
 
     //
     //
@@ -46,17 +40,6 @@ Future<LazyBox> openBox(String name) async {
       : await Hive.openLazyBox(name);
 }
 
-Future<User> getHiveUserBox() async {
-  final userBox = await openBox(HIVE_USER_BOX);
-  if (userBox.isNotEmpty) {
-    return await userBox.getAt(0);
-  } else {
-    final hiveUser = User();
-    await userBox.add(hiveUser);
-    return await userBox.getAt(0);
-  }
-}
-
 Future<T> getHiveBoxData<T>(String name) async {
   final userBox = await openBox(name);
   if (userBox.isNotEmpty) {
@@ -70,7 +53,7 @@ Future<T> getHiveBoxData<T>(String name) async {
 
 Future<List<T>> getListFromHiveBox<T>(String hiveBoxName) async {
   final hiveBox = await openBox(hiveBoxName);
-  final List<T> list = List();
+  final List<T> list = [];
   for (var i = 0; i < hiveBox.length; i++) {
     list.add(await hiveBox.getAt(i) as T);
   }

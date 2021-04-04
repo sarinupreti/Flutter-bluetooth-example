@@ -8,22 +8,17 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 
-import '../components/error_screen.dart';
-import '../screens/home/home_page.dart';
-import '../screens/login_screen.dart';
-import '../splash_screen.dart';
+import '../screens/device_details.dart';
+import '../screens/index/index.dart';
 
 class Routes {
-  static const String loginScreen = 'LoginScreen';
-  static const String splashScreen = '/';
-  static const String errorScreen = 'ErrorScreen';
-  static const String homePage = 'HomePage';
+  static const String indexScreen = '/';
+  static const String deviceScreen = 'DeviceScreen';
   static const all = <String>{
-    loginScreen,
-    splashScreen,
-    errorScreen,
-    homePage,
+    indexScreen,
+    deviceScreen,
   };
 }
 
@@ -31,57 +26,25 @@ class BotsDemomRouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
-    RouteDef(Routes.loginScreen, page: LoginScreen),
-    RouteDef(Routes.splashScreen, page: SplashScreen),
-    RouteDef(Routes.errorScreen, page: ErrorScreen),
-    RouteDef(Routes.homePage, page: HomePage),
+    RouteDef(Routes.indexScreen, page: IndexScreen),
+    RouteDef(Routes.deviceScreen, page: DeviceScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
-    LoginScreen: (data) {
-      final args = data.getArgs<LoginScreenArguments>(
-        orElse: () => LoginScreenArguments(),
-      );
+    IndexScreen: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => LoginScreen(
-          key: args.key,
-          context: args.context,
-        ),
+        builder: (context) => IndexScreen(),
         settings: data,
       );
     },
-    SplashScreen: (data) {
-      final args = data.getArgs<SplashScreenArguments>(
-        orElse: () => SplashScreenArguments(),
-      );
+    DeviceScreen: (data) {
+      final args = data.getArgs<DeviceScreenArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => SplashScreen(
+        builder: (context) => DeviceScreen(
           key: args.key,
-          context: args.context,
+          device: args.device,
         ),
-        settings: data,
-      );
-    },
-    ErrorScreen: (data) {
-      final args = data.getArgs<ErrorScreenArguments>(
-        orElse: () => ErrorScreenArguments(),
-      );
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => ErrorScreen(
-          key: args.key,
-          context: args.context,
-          message: args.message,
-        ),
-        settings: data,
-      );
-    },
-    HomePage: (data) {
-      final args = data.getArgs<HomePageArguments>(
-        orElse: () => HomePageArguments(),
-      );
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => HomePage(key: args.key),
         settings: data,
       );
     },
@@ -93,41 +56,15 @@ class BotsDemomRouter extends RouterBase {
 /// *************************************************************************
 
 extension BotsDemomRouterExtendedNavigatorStateX on ExtendedNavigatorState {
-  Future<dynamic> pushLoginScreen({
-    Key key,
-    BuildContext context,
-  }) =>
-      push<dynamic>(
-        Routes.loginScreen,
-        arguments: LoginScreenArguments(key: key, context: context),
-      );
+  Future<dynamic> pushIndexScreen() => push<dynamic>(Routes.indexScreen);
 
-  Future<dynamic> pushSplashScreen({
+  Future<dynamic> pushDeviceScreen({
     Key key,
-    BuildContext context,
+    @required BluetoothDevice device,
   }) =>
       push<dynamic>(
-        Routes.splashScreen,
-        arguments: SplashScreenArguments(key: key, context: context),
-      );
-
-  Future<dynamic> pushErrorScreen({
-    Key key,
-    BuildContext context,
-    String message,
-  }) =>
-      push<dynamic>(
-        Routes.errorScreen,
-        arguments:
-            ErrorScreenArguments(key: key, context: context, message: message),
-      );
-
-  Future<dynamic> pushHomePage({
-    Key key,
-  }) =>
-      push<dynamic>(
-        Routes.homePage,
-        arguments: HomePageArguments(key: key),
+        Routes.deviceScreen,
+        arguments: DeviceScreenArguments(key: key, device: device),
       );
 }
 
@@ -135,30 +72,9 @@ extension BotsDemomRouterExtendedNavigatorStateX on ExtendedNavigatorState {
 /// Arguments holder classes
 /// *************************************************************************
 
-/// LoginScreen arguments holder class
-class LoginScreenArguments {
+/// DeviceScreen arguments holder class
+class DeviceScreenArguments {
   final Key key;
-  final BuildContext context;
-  LoginScreenArguments({this.key, this.context});
-}
-
-/// SplashScreen arguments holder class
-class SplashScreenArguments {
-  final Key key;
-  final BuildContext context;
-  SplashScreenArguments({this.key, this.context});
-}
-
-/// ErrorScreen arguments holder class
-class ErrorScreenArguments {
-  final Key key;
-  final BuildContext context;
-  final String message;
-  ErrorScreenArguments({this.key, this.context, this.message});
-}
-
-/// HomePage arguments holder class
-class HomePageArguments {
-  final Key key;
-  HomePageArguments({this.key});
+  final BluetoothDevice device;
+  DeviceScreenArguments({this.key, @required this.device});
 }

@@ -1,5 +1,3 @@
-import 'package:bots_demo/blocs/authentication_bloc/authentication_bloc.dart';
-import 'package:bots_demo/blocs/authentication_bloc/authentication_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,9 +13,7 @@ class AppInit {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     await HiveSetup.initHive;
     await _externalSetup();
-
     await inject<ThemeCubit>().fetchTheme();
-    inject<AuthenticationBloc>().add(IsLoggedIn());
   }
 
   /// Startup initialization
